@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Shrimali | Coming Soon</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Bodoni Moda (Elegant Serif) & Manrope (Clean Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
+        }
+
+        .serif-font {
+            font-family: 'Bodoni Moda', serif;
+        }
+
+        /* Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+
+        #cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-color: white;
+            mix-blend-mode: difference;
+        }
+
+        /* Noise Texture Background */
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(255, 255, 255, 0.06) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Elegant Lines */
+        .line-separator {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #333, transparent);
+            margin: 0 20px;
+        }
+
+        /* Magnetic Button Hover Effect */
+        .magnetic-btn {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Glitch effect on hover for Name */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #dedede;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Utilities */
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center relative">
+
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Background Elements -->
+    <canvas id="bg-canvas"></canvas>
+    <div class="noise-bg"></div>
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Top Badge -->
+    <div class="absolute top-8 left-0 w-full flex justify-center z-20 opacity-0 intro-fade">
+        <div class="glass-panel px-5 py-2 rounded-full flex items-center gap-2">
+            <div class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-gray-400">Site Under Construction</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 container mx-auto px-6 py-12 flex flex-col items-center text-center">
+        
+        <!-- Identity Section -->
+        <div class="mb-16 relative">
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter mb-2 leading-none overflow-hidden">
+                <span class="inline-block transform translate-y-full title-reveal glitch-hover cursor-pointer">Dev</span>
+                <span class="inline-block transform translate-y-full title-reveal text-gray-500">Shrimali</span>
+            </h1>
+            
+            <div class="flex items-center justify-center gap-4 mt-6 opacity-0 intro-fade">
+                <div class="h-[1px] w-12 bg-gray-800"></div>
+                <p class="text-sm md:text-base uppercase tracking-[0.3em] font-light text-gray-400">
+                    UI / UX Designer Portfolio
+                </p>
+                <div class="h-[1px] w-12 bg-gray-800"></div>
+            </div>
+        </div>
+
+        <!-- Countdown Section -->
+        <div class="glass-panel p-8 md:p-12 rounded-sm max-w-4xl w-full mx-auto border-t border-b border-white/10 opacity-0 intro-scale">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 relative">
+                
+                <!-- Counter Item -->
+                <div class="flex flex-col items-center">
+                    <span id="days" class="serif-font text-5xl md:text-6xl text-white font-light">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mt-2">Days</span>
+                </div>
+                
+                <!-- Counter Item -->
+                <div class="flex flex-col items-center">
+                    <span id="hours" class="serif-font text-5xl md:text-6xl text-white font-light">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mt-2">Hours</span>
+                </div>
+                
+                <!-- Counter Item -->
+                <div class="flex flex-col items-center">
+                    <span id="minutes" class="serif-font text-5xl md:text-6xl text-white font-light">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mt-2">Minutes</span>
+                </div>
+                
+                <!-- Counter Item -->
+                <div class="flex flex-col items-center">
+                    <span id="seconds" class="serif-font text-5xl md:text-6xl text-white font-light">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mt-2">Seconds</span>
+                </div>
+
+            </div>
+            
+            <div class="mt-10 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs text-gray-500 tracking-wider">
+                    LAUNCHING SUNDAY • 12:00 PM IST
+                </div>
+                
+                <!-- Micro-interaction Socials -->
+                <div class="flex gap-6">
+                    <a href="#" class="magnetic-btn group relative p-2">
+                        <i class="fab fa-behance text-gray-400 group-hover:text-white transition-colors duration-300"></i>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                    </a>
+                    <a href="#" class="magnetic-btn group relative p-2">
+                        <i class="fab fa-dribbble text-gray-400 group-hover:text-white transition-colors duration-300"></i>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                    </a>
+                    <a href="#" class="magnetic-btn group relative p-2">
+                        <i class="fab fa-linkedin-in text-gray-400 group-hover:text-white transition-colors duration-300"></i>
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Button -->
+        <div class="mt-16 opacity-0 intro-fade">
+            <button class="group relative px-8 py-3 overflow-hidden rounded-full bg-white text-black transition-all duration-300 hover:bg-gray-200">
+                <div class="absolute inset-0 w-3 bg-black transition-all duration-[250ms] ease-out group-hover:w-full opacity-5"></div>
+                <span class="relative flex items-center gap-3 text-xs font-bold tracking-widest uppercase">
+                    Notify Me
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="absolute bottom-6 w-full text-center z-10 opacity-0 intro-fade">
+        <p class="text-[10px] text-gray-600 tracking-widest">
+            &copy; <span id="year"></span> DEV SHRIMALI. CRAFTED WITH PRECISION.
+        </p>
+    </footer>
+
+    <script>
+        // --- Shared Mouse Object ---
+        const mouse = {
+            x: undefined,
+            y: undefined
+        }
+
+        // --- Custom Cursor Logic ---
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            // Update shared mouse object
+            mouse.x = e.x;
+            mouse.y = e.y;
+
+            // Update DOM Cursor
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            // Update Spotlight
+            const spotlight = document.getElementById('spotlight');
+            spotlight.style.setProperty('--x', e.clientX + 'px');
+            spotlight.style.setProperty('--y', e.clientY + 'px');
+        });
+
+        // Hover Effect for Cursor
+        const hoverElements = document.querySelectorAll('a, button, .glitch-hover');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- Background Particle Animation ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            // Draw individual particle
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = '#444444'; // Dark grey particles
+                ctx.fill();
+            }
+            // Update particle position
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            // Calculate number of particles based on screen area (less density for cleaner look)
+            let numberOfParticles = (canvas.height * canvas.width) / 15000; 
+            
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 0.5;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 0.4) - 0.2; // Very slow
+                let directionY = (Math.random() * 0.4) - 0.2;
+                let color = '#444444';
+
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connectParticles();
+        }
+
+        function connectParticles() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    
+                    // Connection distance
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        opacityValue = 1 - (distance/20000);
+                        ctx.strokeStyle = 'rgba(100, 100, 100,' + opacityValue * 0.15 + ')'; // Subtle lines
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+                
+                // Connect to Mouse
+                if (mouse.x && mouse.y) {
+                    let mouseDistance = ((particlesArray[a].x - mouse.x) * (particlesArray[a].x - mouse.x)) +
+                                        ((particlesArray[a].y - mouse.y) * (particlesArray[a].y - mouse.y));
+                    
+                    if (mouseDistance < 20000) { // Mouse connection radius
+                         ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                         ctx.lineWidth = 1;
+                         ctx.beginPath();
+                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                         ctx.lineTo(mouse.x, mouse.y);
+                         ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        initParticles();
+        animateParticles();
+
+        // --- GSAP Animations ---
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+
+            // Reveal Name
+            tl.to('.title-reveal', {
+                y: 0,
+                duration: 1.2,
+                ease: 'power4.out',
+                stagger: 0.1
+            })
+            // Fade in Subtitle and Badge
+            .to('.intro-fade', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power2.out'
+            }, "-=0.8")
+            // Scale in Timer Card
+            .to('.intro-scale', {
+                opacity: 1,
+                scale: 1,
+                duration: 1,
+                ease: 'expo.out'
+            }, "-=0.8");
+
+            // Magnetic Button Effect using GSAP
+            const buttons = document.querySelectorAll('.magnetic-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    gsap.to(btn, {
+                        x: x * 0.3,
+                        y: y * 0.3,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                });
+
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.5,
+                        ease: 'elastic.out(1, 0.3)'
+                    });
+                });
+            });
+        });
+
+        // --- Countdown Logic ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        function getNextSunday12PM() {
+            const now = new Date();
+            const resultDate = new Date(now);
+            
+            const dayOfWeek = now.getDay();
+            let daysUntilSunday = 7 - dayOfWeek;
+            
+            if (dayOfWeek === 0 && now.getHours() < 12) {
+                daysUntilSunday = 0;
+            } else if (dayOfWeek === 0 && now.getHours() >= 12) {
+                daysUntilSunday = 7;
+            }
+
+            resultDate.setDate(now.getDate() + daysUntilSunday);
+            resultDate.setHours(12, 0, 0, 0); 
+            return resultDate.getTime();
+        }
+
+        const launchDate = getNextSunday12PM();
+
+        const countdownTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("days").innerHTML = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
