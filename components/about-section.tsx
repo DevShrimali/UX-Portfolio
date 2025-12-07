@@ -1,7 +1,6 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
-import { Briefcase, MapPin, Download, ChevronLeft, ChevronRight } from "lucide-react"
+import { Briefcase, MapPin, Download } from "lucide-react"
 import { AnimateOnScroll } from "./animate-on-scroll"
 
 const aboutCards = [
@@ -24,34 +23,6 @@ const aboutCards = [
 ]
 
 export function AboutSection() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(true)
-
-  const updateScrollButtons = () => {
-    if (scrollRef.current) {
-      setCanScrollLeft(scrollRef.current.scrollLeft > 0)
-      setCanScrollRight(
-        scrollRef.current.scrollLeft < scrollRef.current.scrollWidth - scrollRef.current.clientWidth - 10,
-      )
-    }
-  }
-
-  useEffect(() => {
-    updateScrollButtons()
-  }, [])
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = 300
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
-      setTimeout(updateScrollButtons, 300)
-    }
-  }
-
   return (
     <section id="about" className="py-24 px-6 md:px-20 lg:px-40 bg-[#080808] border-b border-white/5">
       <AnimateOnScroll animation="fade-in-up">
@@ -76,35 +47,16 @@ export function AboutSection() {
         </AnimateOnScroll>
       </div>
 
-      <div className="relative">
-        <div className="flex md:hidden justify-end gap-2 mb-4">
-          <button
-            onClick={() => scroll("left")}
-            disabled={!canScrollLeft}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => scroll("right")}
-            disabled={!canScrollRight}
-            className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
 
-        <div
-          ref={scrollRef}
-          className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto scrollbar-hide py-4 md:py-8"
-          onScroll={updateScrollButtons}
-        >
+
+      <div className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-4 md:py-8">
           {aboutCards.map((card, index) => (
             <AnimateOnScroll key={card.title} animation="fade-in-up" delay={0.3 + index * 0.1}>
               {card.isLink ? (
                 <a
                   href="#"
-                  className="flex-shrink-0 w-[280px] md:w-auto p-6 border border-white/10 rounded-xl bg-card card-hover flex flex-col justify-center group"
+                  className="w-full p-6 border border-white/10 rounded-xl bg-card card-hover flex flex-col justify-center group"
                 >
                   <h4 className="text-white font-bold mb-2 flex items-center gap-2">
                     <card.icon className="w-4 h-4 text-accent group-hover:animate-bounce" /> {card.title}
@@ -112,7 +64,7 @@ export function AboutSection() {
                   <p className="text-gray-500 text-sm group-hover:text-accent transition-colors">{card.description}</p>
                 </a>
               ) : (
-                <div className="flex-shrink-0 w-[280px] md:w-auto p-6 border border-white/10 rounded-xl bg-card card-hover">
+                <div className="w-full p-6 border border-white/10 rounded-xl bg-card card-hover">
                   <h4 className="text-white font-bold mb-2 flex items-center gap-2">
                     <card.icon className="w-4 h-4 text-accent" /> {card.title}
                   </h4>

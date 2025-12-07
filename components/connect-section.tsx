@@ -1,6 +1,6 @@
 "use client"
 
-import { Linkedin, ImageIcon, Mail, Youtube, Dribbble, Phone } from "lucide-react"
+import { Linkedin, ImageIcon, Mail, Youtube, Dribbble, Github, MessageCircle } from "lucide-react"
 import { AnimateOnScroll } from "./animate-on-scroll"
 
 export function ConnectSection() {
@@ -35,7 +35,7 @@ export function ConnectSection() {
           </a>
 
           <a
-            href="#"
+            href="https://www.youtube.com/@dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
             className="p-8 bg-card border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-[#ff0000] hover:bg-[#ff0000]/10 transition-all duration-300 group"
@@ -47,7 +47,19 @@ export function ConnectSection() {
           </a>
 
           <a
-            href="https://dribbble.com/dev-shrimali"
+            href="https://github.com/DevShrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-8 bg-card border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-[#333333] hover:bg-[#333333]/10 transition-all duration-300 group"
+          >
+            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Github className="w-5 h-5 text-gray-300 group-hover:text-white" />
+            </div>
+            <span className="font-bold text-lg">GitHub</span>
+          </a>
+
+          <a
+            href="https://dribbble.com/devshrimali"
             target="_blank"
             rel="noopener noreferrer"
             className="p-8 bg-card border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-[#ea4c89] hover:bg-[#ea4c89]/10 transition-all duration-300 group"
@@ -69,13 +81,15 @@ export function ConnectSection() {
           </a>
 
           <a
-            href="tel:+919876543210"
-            className="p-8 bg-card border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-[#34c759] hover:bg-[#34c759]/10 transition-all duration-300 group"
+            href="https://wa.me/918758084842"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-8 bg-card border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-[#25D366] hover:bg-[#25D366]/10 transition-all duration-300 group"
           >
             <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Phone className="w-5 h-5 text-gray-300 group-hover:text-[#34c759]" />
+              <MessageCircle className="w-5 h-5 text-gray-300 group-hover:text-[#25D366]" />
             </div>
-            <span className="font-bold text-lg">Call</span>
+            <span className="font-bold text-lg">WhatsApp</span>
           </a>
         </div>
       </AnimateOnScroll>

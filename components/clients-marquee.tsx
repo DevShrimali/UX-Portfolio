@@ -27,7 +27,7 @@ export function ClientsMarquee() {
           {[...clients, ...clients].map((client, index) => (
             <div
               key={`${client}-${index}`}
-              className="flex-shrink-0 px-12 py-4 text-2xl md:text-3xl font-bold text-gray-700 hover:text-accent transition-colors duration-300 cursor-default font-[family-name:var(--font-syne)]"
+              className="flex-shrink-0 px-8 py-4 text-xl md:text-3xl font-bold text-gray-700 hover:text-accent transition-colors duration-300 cursor-default font-[family-name:var(--font-syne)]"
             >
               {client}
             </div>

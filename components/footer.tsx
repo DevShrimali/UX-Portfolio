@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Github, Youtube } from "lucide-react"
 import Link from "next/link"
 import { AnimateOnScroll } from "./animate-on-scroll"
 import { BehanceIcon } from "./behance-icon"
@@ -64,12 +64,30 @@ export function Footer() {
           </a>
           <span className="text-gray-800 hidden md:inline">|</span>
           <a
-            href="https://dribbble.com/dev-shrimali"
+            href="https://dribbble.com/devshrimali"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors flex items-center gap-2"
           >
             <DribbbleIcon className="w-4 h-4" /> Dribbble
+          </a>
+          <span className="text-gray-800 hidden md:inline">|</span>
+          <a
+            href="https://github.com/DevShrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors flex items-center gap-2"
+          >
+            <Github className="w-4 h-4" /> GitHub
+          </a>
+          <span className="text-gray-800 hidden md:inline">|</span>
+          <a
+            href="https://www.youtube.com/@dev-shrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors flex items-center gap-2"
+          >
+            <Youtube className="w-4 h-4" /> YouTube
           </a>
           <span className="text-gray-800 hidden md:inline">|</span>
           <a

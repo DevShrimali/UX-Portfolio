@@ -29,11 +29,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/brush-icon.svg', type: 'image/svg+xml' },
-      { url: '/dev-pro.png' }, // Fallback
+      { url: '/icon.png', type: 'image/png' },
     ],
-    shortcut: '/brush-icon.svg',
-    apple: '/apple-icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
   openGraph: {
     title: "Dev Shrimali | Creative UX/UI Portfolio",

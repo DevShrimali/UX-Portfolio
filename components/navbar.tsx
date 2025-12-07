@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Linkedin } from "lucide-react"
+import { Menu, X, Linkedin, Github, Youtube } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { BehanceIcon } from "./behance-icon"
 import { DribbbleIcon } from "./dribbble-icon"
@@ -80,12 +80,28 @@ export function Navbar() {
               <BehanceIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://dribbble.com/dev-shrimali"
+              href="https://dribbble.com/devshrimali"
               target="_blank"
               rel="noopener noreferrer"
               className="mix-blend-difference hover:opacity-50 transition-opacity"
             >
               <DribbbleIcon className="w-5 h-5" />
+            </a>
+            <a
+              href="https://github.com/DevShrimali"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mix-blend-difference hover:opacity-50 transition-opacity"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.youtube.com/@dev-shrimali"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mix-blend-difference hover:opacity-50 transition-opacity"
+            >
+              <Youtube className="w-5 h-5" />
             </a>
           </div>
 
@@ -159,12 +175,28 @@ export function Navbar() {
             <BehanceIcon className="w-6 h-6" />
           </a>
           <a
-            href="https://dribbble.com/dev-shrimali"
+            href="https://dribbble.com/devshrimali"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition-colors"
           >
             <DribbbleIcon className="w-6 h-6" />
+          </a>
+          <a
+            href="https://github.com/DevShrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <Github className="w-6 h-6" />
+          </a>
+          <a
+            href="https://www.youtube.com/@dev-shrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors"
+          >
+            <Youtube className="w-6 h-6" />
           </a>
         </div>
       </div>

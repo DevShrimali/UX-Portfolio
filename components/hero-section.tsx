@@ -12,7 +12,7 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-background">
+    <section className="relative h-screen w-full overflow-hidden bg-background flex flex-col md:block">
       {/* 1. Full Screen Noise Background (z-0) */}
       <div className="absolute inset-0 z-0">
         <NoiseBackground />
@@ -22,7 +22,7 @@ export function HeroSection() {
       <div className="absolute inset-0 grid-bg scanline opacity-30 pointer-events-none z-10" />
 
       {/* 3. Layout Container for Image (z-10) */}
-      <div className="absolute inset-0 flex flex-col md:flex-row pointer-events-none z-10">
+      <div className="relative h-[35vh] w-full pt-20 md:pt-0 md:absolute md:inset-0 md:h-full flex flex-col md:flex-row pointer-events-none z-10">
         {/* Left spacer - transparent */}
         <div className="hidden md:block w-1/2 h-full" />
 
@@ -31,7 +31,7 @@ export function HeroSection() {
           <img
             src="/dev-pro.png"
             alt="INTERFACE_V1.0"
-            className={`w-full h-full object-cover object-top opacity-100 md:opacity-90 mix-blend-overlay hover:mix-blend-normal transition-all duration-500 ${isLoaded ? "scale-100" : "scale-110"
+            className={`w-full h-full object-contain md:object-cover object-bottom md:object-top opacity-100 md:opacity-90 mix-blend-overlay hover:mix-blend-normal transition-all duration-500 ${isLoaded ? "scale-100" : "scale-110"
               }`}
             style={{ transition: "transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), mix-blend-mode 0.5s" }}
           />
@@ -42,7 +42,7 @@ export function HeroSection() {
       </div>
 
       {/* 4. Content - Above All (z-30) */}
-      <div className="relative z-30 h-full flex flex-col justify-center px-6 md:px-20 lg:px-40 pointer-events-none">
+      <div className="relative z-30 h-[65vh] md:h-full flex flex-col justify-center px-6 md:px-20 lg:px-40 pointer-events-none">
         <div className="max-w-4xl pointer-events-auto">
           <div className="overflow-hidden mb-2">
             <h2
