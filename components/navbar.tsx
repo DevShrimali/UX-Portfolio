@@ -2,16 +2,20 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Linkedin, Github, Youtube } from "lucide-react"
+import { Menu, X, Linkedin, Github, Youtube, Download } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { BehanceIcon } from "./behance-icon"
 import { DribbbleIcon } from "./dribbble-icon"
 
+import { ThemeToggle } from "./theme-toggle"
+
 const navLinks = [
   { href: "/#about", label: "About" },
+  { href: "/#services", label: "Skills" },
   { href: "/#process", label: "Process" },
   { href: "/work", label: "Work" },
   { href: "/#experience", label: "Experience" },
+  { href: "/#contact", label: "Connect" },
 ]
 
 export function Navbar() {
@@ -46,15 +50,15 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="text-2xl font-bold tracking-tighter font-[family-name:var(--font-syne)] z-50 mix-blend-difference hover:tracking-widest transition-all duration-300"
+          className="text-2xl font-bold tracking-tighter font-[family-name:var(--font-syne)] z-50 text-foreground hover:tracking-widest transition-all duration-300"
         >
           DEV.
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex gap-12 text-sm uppercase tracking-widest font-medium mix-blend-difference">
+        <div className="hidden lg:flex gap-12 text-sm uppercase tracking-widest font-medium text-foreground">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-gray-400 transition-colors">
+            <Link key={link.href} href={link.href} className="hover:text-muted-foreground transition-colors">
               {link.label}
             </Link>
           ))}
@@ -62,12 +66,12 @@ export function Navbar() {
 
         <div className="flex items-center gap-4 z-50">
           {/* Social Icons - Added Dribbble icon */}
-          <div className="hidden sm:flex gap-4">
+          <div className="hidden sm:flex gap-4 items-center">
             <a
               href="https://www.linkedin.com/in/dev-shrimali/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mix-blend-difference hover:opacity-50 transition-opacity"
+              className="text-foreground hover:opacity-50 transition-opacity"
             >
               <Linkedin className="w-5 h-5" />
             </a>
@@ -75,7 +79,7 @@ export function Navbar() {
               href="https://www.behance.net/dev-shrimali"
               target="_blank"
               rel="noopener noreferrer"
-              className="mix-blend-difference hover:opacity-50 transition-opacity"
+              className="text-foreground hover:opacity-50 transition-opacity"
             >
               <BehanceIcon className="w-5 h-5" />
             </a>
@@ -83,7 +87,7 @@ export function Navbar() {
               href="https://dribbble.com/devshrimali"
               target="_blank"
               rel="noopener noreferrer"
-              className="mix-blend-difference hover:opacity-50 transition-opacity"
+              className="text-foreground hover:opacity-50 transition-opacity"
             >
               <DribbbleIcon className="w-5 h-5" />
             </a>
@@ -91,7 +95,7 @@ export function Navbar() {
               href="https://github.com/DevShrimali"
               target="_blank"
               rel="noopener noreferrer"
-              className="mix-blend-difference hover:opacity-50 transition-opacity"
+              className="text-foreground hover:opacity-50 transition-opacity"
             >
               <Github className="w-5 h-5" />
             </a>
@@ -99,23 +103,30 @@ export function Navbar() {
               href="https://www.youtube.com/@dev-shrimali"
               target="_blank"
               rel="noopener noreferrer"
-              className="mix-blend-difference hover:opacity-50 transition-opacity"
+              className="text-foreground hover:opacity-50 transition-opacity"
             >
               <Youtube className="w-5 h-5" />
             </a>
           </div>
 
+          <ThemeToggle />
+
           <Link
-            href="/#contact"
-            className="hidden lg:inline-block text-xs font-bold border border-white/20 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all uppercase tracking-widest mix-blend-difference"
+            href="https://drive.google.com/file/d/13tq82Ju293V6cpKx9NS5kK8YQ0N5EcTU/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden xl:inline-flex items-center gap-2 text-xs font-bold border border-foreground/20 px-6 py-3 rounded-full hover:bg-foreground hover:text-background transition-all uppercase tracking-widest text-foreground"
           >
-            Contact Me
+            <Download className="w-4 h-4" />
+            Resume
           </Link>
+
+
 
           {/* Hamburger Button */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden text-white mix-blend-difference focus:outline-none p-2"
+            className="lg:hidden text-foreground focus:outline-none p-2"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}

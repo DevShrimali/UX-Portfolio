@@ -8,6 +8,9 @@ import { Footer } from "@/components/footer"
 import { CustomCursor } from "@/components/custom-cursor"
 
 import { SmoothScroller } from "@/components/smooth-scroller"
+import { BackgroundMusic } from "@/components/background-music"
+import { SoundEffects } from "@/components/sound-effects"
+import { ThemeProvider } from "@/components/theme-provider"
 
 const syne = Syne({ subsets: ["latin"], variable: "--font-syne" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" })
@@ -77,14 +80,23 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${syne.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
-        <SmoothScroller />
-        <CustomCursor />
-        <Navbar />
-        {children}
-        <Footer />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SmoothScroller />
+          <CustomCursor />
+          <Navbar />
+          <BackgroundMusic />
+          <SoundEffects />
+          {children}
+          <Footer />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="py-24 md:py-32 px-6 md:px-20 lg:px-40 bg-background relative overflow-hidden text-center border-t border-white/5"
+      className="py-24 md:py-32 px-6 md:px-20 lg:px-40 bg-background relative overflow-hidden text-center border-t border-border"
     >
       {/* Background decorations form CTA */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-accent/10 rounded-full blur-[100px] pointer-events-none" />
@@ -26,7 +26,7 @@ export function Footer() {
         </AnimateOnScroll>
 
         <AnimateOnScroll animation="fade-in-up" delay={0.2}>
-          <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             I&apos;m currently available for freelance projects and full-time opportunities. Let&apos;s create something
             amazing together.
           </p>
@@ -36,14 +36,14 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="mailto:devuxstudio@gmail.com"
-              className="group px-8 py-4 bg-accent text-black rounded-full font-bold uppercase tracking-wider text-sm hover:scale-105 hover:shadow-[0_0_30px_rgba(190,242,100,0.4)] transition-all flex items-center gap-2"
+              className="group px-8 py-4 bg-[#ddf2ff] dark:bg-accent text-[#33a3ff] dark:text-black border border-[#33a3ff] dark:border-transparent rounded-full font-bold uppercase tracking-wider text-sm hover:scale-105 hover:bg-[#33a3ff] hover:text-white dark:hover:bg-accent dark:hover:text-black hover:shadow-[0_0_30px_rgba(51,163,255,0.4)] dark:hover:shadow-[0_0_30px_rgba(190,242,100,0.4)] transition-all flex items-center gap-2"
             >
               devuxstudio@gmail.com
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/work"
-              className="px-8 py-4 bg-white text-black rounded-full font-bold uppercase tracking-wider text-sm hover:bg-[#bef264] transition-all"
+              className="px-8 py-4 bg-foreground text-background rounded-full font-bold uppercase tracking-wider text-sm hover:bg-accent transition-all"
             >
               View All Work
             </Link>
@@ -53,52 +53,52 @@ export function Footer() {
 
       {/* Footer Links */}
       <div className="relative z-10">
-        <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-gray-500 uppercase tracking-widest border-t border-white/10 pt-12">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-sm text-muted-foreground uppercase tracking-widest border-t border-border pt-12">
           <a
             href="https://www.behance.net/dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-2"
+            className="hover:text-foreground transition-colors flex items-center gap-2"
           >
             <BehanceIcon className="w-4 h-4" /> Behance
           </a>
-          <span className="text-gray-800 hidden md:inline">|</span>
+          <span className="text-muted hidden md:inline">|</span>
           <a
             href="https://dribbble.com/devshrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-2"
+            className="hover:text-foreground transition-colors flex items-center gap-2"
           >
             <DribbbleIcon className="w-4 h-4" /> Dribbble
           </a>
-          <span className="text-gray-800 hidden md:inline">|</span>
+          <span className="text-muted hidden md:inline">|</span>
           <a
             href="https://github.com/DevShrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-2"
+            className="hover:text-foreground transition-colors flex items-center gap-2"
           >
             <Github className="w-4 h-4" /> GitHub
           </a>
-          <span className="text-gray-800 hidden md:inline">|</span>
+          <span className="text-muted hidden md:inline">|</span>
           <a
             href="https://www.youtube.com/@dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors flex items-center gap-2"
+            className="hover:text-foreground transition-colors flex items-center gap-2"
           >
             <Youtube className="w-4 h-4" /> YouTube
           </a>
-          <span className="text-gray-800 hidden md:inline">|</span>
+          <span className="text-muted hidden md:inline">|</span>
           <a
             href="https://www.linkedin.com/in/dev-shrimali/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
+            className="hover:text-foreground transition-colors"
           >
             LinkedIn
           </a>
-          <span className="text-gray-800 hidden md:inline">|</span>
+          <span className="text-muted hidden md:inline">|</span>
           <span className="text-gray-500">Ahmedabad, India</span>
         </div>
         <div className="mt-12 text-xs text-gray-700">© 2025 Dev Shrimali. All rights reserved.</div>

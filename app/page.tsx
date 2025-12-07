@@ -16,7 +16,6 @@ export default function HomePage() {
       <HeroSection />
       <ClientsMarquee />
       <AboutSection />
-      <StatsSection />
       <ServicesSection />
       <ProcessSection />
       <WorkSection />

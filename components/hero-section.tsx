@@ -14,7 +14,7 @@ export function HeroSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-background flex flex-col md:block">
       {/* 1. Full Screen Noise Background (z-0) */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 hidden dark:block">
         <NoiseBackground />
       </div>
 
@@ -46,7 +46,7 @@ export function HeroSection() {
         <div className="max-w-4xl pointer-events-auto">
           <div className="overflow-hidden mb-2">
             <h2
-              className={`text-xs md:text-sm font-bold font-mono text-gray-400 md:text-gray-500 uppercase tracking-[0.2em] ${isLoaded ? "animate-fade-in-up" : "opacity-0"
+              className={`text-xs md:text-sm font-bold font-mono text-muted-foreground uppercase tracking-[0.2em] ${isLoaded ? "animate-fade-in-up" : "opacity-0"
                 }`}
               style={{ animationDelay: "0.2s" }}
             >
@@ -56,7 +56,7 @@ export function HeroSection() {
 
           <div className="overflow-hidden">
             <h1
-              className={`text-5xl md:text-8xl lg:text-[9rem] font-bold leading-[0.9] font-[family-name:var(--font-syne)] mb-8 mix-blend-difference text-white ${isLoaded ? "animate-fade-in-up" : "opacity-0"
+              className={`text-5xl md:text-8xl lg:text-[9rem] font-bold leading-[0.9] font-[family-name:var(--font-syne)] mb-8 mix-blend-difference text-foreground ${isLoaded ? "animate-fade-in-up" : "opacity-0"
                 }`}
               style={{ animationDelay: "0.4s" }}
             >
@@ -66,7 +66,7 @@ export function HeroSection() {
           </div>
 
           <p
-            className={`text-lg md:text-xl text-gray-300 md:text-gray-400 max-w-2xl mb-12 font-light leading-relaxed ${isLoaded ? "animate-fade-in-up" : "opacity-0"
+            className={`text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 font-light leading-relaxed ${isLoaded ? "animate-fade-in-up" : "opacity-0"
               }`}
             style={{ animationDelay: "0.6s" }}
           >
@@ -80,19 +80,19 @@ export function HeroSection() {
           >
             <Link
               href="#work"
-              className="magnetic-btn px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-full font-bold uppercase tracking-wider text-xs md:text-sm hover:bg-accent hover:scale-105 transition-all"
+              className="magnetic-btn px-6 md:px-8 py-3 md:py-4 bg-primary text-primary-foreground rounded-full font-bold uppercase tracking-wider text-xs md:text-sm hover:bg-accent hover:scale-105 transition-all"
             >
               View Selected Projects
             </Link>
 
             <Link
               href="#work"
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-accent flex items-center justify-center text-black hover:scale-110 hover:rotate-90 transition-all duration-300"
+              className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#ddf2ff] dark:bg-accent flex items-center justify-center text-[#33a3ff] dark:text-accent-foreground hover:bg-[#33a3ff] hover:text-white dark:hover:bg-accent/80 dark:hover:text-accent-foreground hover:scale-110 hover:rotate-90 transition-all duration-300"
             >
               <ArrowDownRight className="w-5 h-5 md:w-6 md:h-6" />
             </Link>
 
-            <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm text-gray-400 md:text-gray-500 uppercase tracking-widest ml-0 md:ml-2 mt-4 md:mt-0 w-full md:w-auto">
+            <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm text-muted-foreground uppercase tracking-widest ml-0 md:ml-2 mt-4 md:mt-0 w-full md:w-auto">
               <span className="link-underline cursor-default">• Figma</span>
               <span className="link-underline cursor-default">• Notion</span>
               <span className="link-underline cursor-default">• Miro</span>

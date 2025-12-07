@@ -43,9 +43,9 @@ export function ProcessSection() {
   return (
     <section id="process" className="py-24 bg-background overflow-hidden relative">
       <div className="px-6 md:px-20 lg:px-40 mb-12">
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2">02 / Process & Stack</h3>
+        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2">03 / Process & Stack</h3>
         <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-syne)]">
-          Workflow <span className="text-[#bef264]">Protocol</span>
+          Workflow <span className="text-accent">Protocol</span>
         </h2>
       </div>
 
@@ -60,9 +60,9 @@ export function ProcessSection() {
                   layout
                   onClick={() => setActiveStep(index)}
                   onMouseEnter={() => setActiveStep(index)}
-                  className={`relative border overflow-hidden cursor-pointer group flex flex-col justify-end backdrop-blur-sm ${isActive
-                      ? "border-[#bef264]/50 bg-[#bef264]/5 flex-[3]"
-                      : "border-white/10 hover:border-white/20 flex-1 bg-card"
+                  className={`relative border overflow-hidden cursor-pointer group flex flex-col justify-end backdrop-blur-sm rounded-3xl ${isActive
+                    ? "border-accent/50 bg-accent/5 flex-[3]"
+                    : "border-border hover:border-primary/20 flex-1 bg-card"
                     }`}
                   initial={false}
                   animate={{
@@ -79,8 +79,8 @@ export function ProcessSection() {
                   <motion.span
                     layout="position"
                     className={`absolute font-bold font-[family-name:var(--font-syne)] leading-none select-none pointer-events-none transition-colors duration-500 ${isActive
-                        ? "-right-4 top-4 text-8xl text-[#bef264]/10"
-                        : "left-4 top-4 text-4xl text-white/5"
+                      ? "-right-4 top-4 text-8xl text-accent/10"
+                      : "left-4 top-4 text-4xl text-foreground/5"
                       }`}
                   >
                     {step.number}
@@ -89,7 +89,7 @@ export function ProcessSection() {
                   {/* Icon */}
                   <motion.div
                     layout="position"
-                    className={`absolute top-8 right-8 z-10 transition-colors duration-300 ${isActive ? "text-[#bef264]" : "text-gray-600"
+                    className={`absolute top-8 right-8 z-10 transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"
                       }`}
                   >
                     <step.icon className="w-8 h-8" />
@@ -101,10 +101,10 @@ export function ProcessSection() {
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="w-1.5 h-1.5 bg-[#bef264] rounded-full"
+                          className="w-1.5 h-1.5 bg-accent rounded-full"
                         />
                       )}
-                      <span className={`text-[10px] font-mono uppercase tracking-widest ${isActive ? "text-[#bef264]" : "text-gray-500"
+                      <span className={`text-[10px] font-mono uppercase tracking-widest ${isActive ? "text-accent" : "text-muted-foreground"
                         }`}>
                         Step_{step.number}
                       </span>
@@ -112,7 +112,7 @@ export function ProcessSection() {
 
                     <motion.h3
                       layout="position"
-                      className={`font-bold font-[family-name:var(--font-syne)] mb-4 text-white whitespace-nowrap origin-left ${isActive ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"
+                      className={`font-bold font-[family-name:var(--font-syne)] mb-4 text-foreground whitespace-nowrap origin-left ${isActive ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"
                         }`}
                     >
                       {step.title}
@@ -126,7 +126,7 @@ export function ProcessSection() {
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.3, delay: 0.1 }}
                         >
-                          <p className="text-gray-400 leading-relaxed max-w-md hidden md:block">
+                          <p className="text-muted-foreground leading-relaxed max-w-md hidden md:block">
                             {step.description}
                           </p>
                         </motion.div>
@@ -135,7 +135,7 @@ export function ProcessSection() {
 
                     {/* Mobile Description */}
                     {isActive && (
-                      <p className="text-gray-400 leading-relaxed max-w-md md:hidden mt-2 text-sm">
+                      <p className="text-muted-foreground leading-relaxed max-w-md md:hidden mt-2 text-sm">
                         {step.description}
                       </p>
                     )}
@@ -145,7 +145,7 @@ export function ProcessSection() {
                   {isActive && (
                     <motion.div
                       layoutId="activeGlow"
-                      className="absolute inset-0 bg-gradient-to-t from-[#bef264]/10 to-transparent pointer-events-none"
+                      className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent pointer-events-none"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}

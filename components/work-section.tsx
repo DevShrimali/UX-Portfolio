@@ -10,10 +10,10 @@ const otherProjects = projects.slice(3, 9)
 
 export function WorkSection() {
   return (
-    <section id="work" className="relative bg-background pt-24 pb-40">
+    <section id="work" className="relative bg-secondary dark:bg-[color-mix(in_oklab,var(--accent)_5%,transparent)] pt-24 pb-40">
       <div className="px-6 md:px-20 lg:px-40 mb-20 flex flex-col md:flex-row justify-between md:items-end gap-6">
         <div>
-          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">03 / Selected Projects</h3>
+          <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-4">04 / Selected Projects</h3>
           <h2 className="text-4xl md:text-6xl font-[family-name:var(--font-syne)] font-bold">
             Featured <span className="text-gray-600">Work</span>
           </h2>
@@ -24,7 +24,7 @@ export function WorkSection() {
           </p>
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black font-bold text-sm rounded-full hover:bg-[#bef264] transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-bold text-sm rounded-full hover:bg-accent transition-colors"
           >
             View All Projects <ArrowUpRight className="w-4 h-4" />
           </Link>
@@ -38,7 +38,7 @@ export function WorkSection() {
             <Link
               href={`/work/${project.id}`}
               scroll={true}
-              className={`block w-[95%] md:w-[85%] h-[60vh] md:h-[75vh] ${project.bgColor} border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden relative group shadow-2xl`}
+              className={`block w-[95%] md:w-[85%] h-[60vh] md:h-[75vh] ${project.bgColor} border border-border rounded-[2rem] md:rounded-[3rem] overflow-hidden relative group shadow-2xl`}
             >
               {/* Image Background */}
               <img
@@ -56,19 +56,19 @@ export function WorkSection() {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 border border-white/30 bg-white/10 backdrop-blur-sm rounded-full text-[10px] md:text-xs uppercase tracking-widest"
+                      className="px-3 py-1 border border-white/30 bg-white/10 backdrop-blur-sm rounded-full text-[10px] md:text-xs uppercase tracking-widest text-white"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h2 className="text-3xl md:text-5xl lg:text-7xl font-[family-name:var(--font-syne)] font-bold mb-4">
+                <h2 className="text-3xl md:text-5xl lg:text-7xl font-[family-name:var(--font-syne)] font-bold mb-4 text-white">
                   {project.title}
                 </h2>
                 <p className="text-gray-300 text-sm md:text-lg max-w-xl leading-relaxed mb-6 line-clamp-2 md:line-clamp-none">
                   {project.description}
                 </p>
-                <span className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-full group-hover:bg-[#bef264] transition-colors">
+                <span className="inline-flex items-center gap-2 px-6 py-3 bg-[#ddf2ff] dark:bg-white text-[#33a3ff] dark:text-black font-bold text-sm rounded-full group-hover:bg-[#33a3ff] group-hover:text-white dark:group-hover:bg-accent dark:group-hover:text-black transition-colors">
                   View Case Study <ArrowUpRight className="w-4 h-4" />
                 </span>
               </div>
@@ -79,7 +79,7 @@ export function WorkSection() {
 
       {/* Additional Projects List - Updated cards with images */}
       <div className="px-6 md:px-20 lg:px-40 mt-32">
-        <h4 className="text-2xl font-[family-name:var(--font-syne)] font-bold mb-12 border-b border-white/10 pb-4">
+        <h4 className="text-2xl font-[family-name:var(--font-syne)] font-bold mb-12 border-b border-border pb-4">
           More Projects
         </h4>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -88,10 +88,10 @@ export function WorkSection() {
               key={project.id}
               href={`/work/${project.id}`}
               scroll={true}
-              className="group bg-[#0A0A0A] rounded-[24px] overflow-hidden border border-white/5 hover:border-white/10 transition-all flex flex-col"
+              className="group bg-card rounded-[24px] overflow-hidden border border-border hover:border-primary/20 transition-all flex flex-col"
             >
               {/* Image Container */}
-              <div className="relative h-[240px] overflow-hidden w-full m-2 mb-0 rounded-[20px] self-center w-[calc(100%-16px)]">
+              <div className="relative h-[240px] w-full overflow-hidden">
                 <img
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
@@ -104,28 +104,23 @@ export function WorkSection() {
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.slice(0, 2).map(tag => (
-                    <span key={tag} className="px-3 py-1 bg-[#1A1A1A] text-[#666] text-[10px] font-bold uppercase tracking-wider rounded-md">
+                    <span key={tag} className="px-3 py-1 bg-muted text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md">
                       {tag}
                     </span>
                   ))}
                 </div>
 
                 {/* Title */}
-                <h5 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-3 text-white">
+                <h5 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-3 text-foreground">
                   {project.title}
                 </h5>
 
                 {/* Description */}
-                <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-0 line-clamp-3">
                   {project.description}
                 </p>
 
-                {/* Button */}
-                <div className="mt-auto">
-                  <span className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-full group-hover:bg-[#bef264] transition-colors duration-300">
-                    View Case Study <ArrowUpRight className="w-4 h-4" />
-                  </span>
-                </div>
+
               </div>
             </Link>
           ))}
@@ -134,7 +129,7 @@ export function WorkSection() {
         <div className="mt-12 text-center">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-[#bef264] transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-accent transition-colors"
           >
             View All Projects <ArrowUpRight className="w-4 h-4" />
           </Link>

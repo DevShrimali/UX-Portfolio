@@ -55,7 +55,7 @@ export function CustomCursor() {
             style={{ willChange: "transform" }}
         >
             <div
-                className={`absolute inset-0 rounded-full bg-[#bef264] opacity-20 blur-sm transition-transform duration-300 ${isHovering ? "scale-[2.5]" : "scale-100"
+                className={`absolute inset-0 rounded-full  transition-transform duration-300 ${isHovering ? "scale-[2.5]" : "scale-100"
                     }`}
             />
         </div>

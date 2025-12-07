@@ -84,8 +84,8 @@ const education = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-24 px-6 md:px-20 lg:px-40 bg-[#080808] border-t border-white/5">
-      <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-16">04 / Journey</h3>
+    <section id="experience" className="py-24 px-6 md:px-20 lg:px-40 bg-background border-t border-border">
+      <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-16">05 / Journey</h3>
 
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
         {/* Work Experience */}
@@ -95,15 +95,15 @@ export function ExperienceSection() {
           </h4>
 
           {workExperience.map((job, index) => (
-            <div key={index} className="relative pl-8 border-l border-white/10">
+            <div key={index} className="relative pl-8 border-l border-border">
               <span
-                className={`absolute -left-1.5 top-2 w-3 h-3 rounded-full ${job.current ? "bg-accent" : "bg-white"}`}
+                className={`absolute -left-1.5 top-2 w-3 h-3 rounded-full ${job.current ? "bg-accent" : "bg-foreground"}`}
               />
               <h5 className="text-xl font-bold">{job.title}</h5>
-              <p className="text-gray-400 text-sm mb-4">
+              <p className="text-muted-foreground text-sm mb-4">
                 {job.company} • {job.period}
               </p>
-              <ul className="list-disc ml-4 text-gray-500 text-sm space-y-2">
+              <ul className="list-disc ml-4 text-muted-foreground text-sm space-y-2">
                 {job.responsibilities.map((resp, i) => (
                   <li key={i}>{resp}</li>
                 ))}
@@ -119,13 +119,13 @@ export function ExperienceSection() {
           </h4>
 
           {education.map((edu, index) => (
-            <div key={index} className="relative pl-8 border-l border-white/10">
-              <span className="absolute -left-1.5 top-2 w-3 h-3 bg-muted rounded-full border border-white/20" />
+            <div key={index} className="relative pl-8 border-l border-border">
+              <span className="absolute -left-1.5 top-2 w-3 h-3 bg-muted rounded-full border border-border" />
               <h5 className="text-xl font-bold">{edu.title}</h5>
-              <p className="text-gray-400 text-sm mb-2">
+              <p className="text-muted-foreground text-sm mb-2">
                 {edu.institution} • {edu.period}
               </p>
-              {edu.description && <p className="text-gray-500 text-sm">{edu.description}</p>}
+              {edu.description && <p className="text-muted-foreground text-sm">{edu.description}</p>}
             </div>
           ))}
         </div>

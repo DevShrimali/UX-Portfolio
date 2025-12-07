@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     <main className="pt-24">
       {/* Back Button */}
       <div className="px-6 md:px-20 lg:px-40 py-8">
-        <Link href="/work" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+        <Link href="/work" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="w-4 h-4" />
           Back to Work
         </Link>
@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 border border-white/20 rounded-full text-[10px] md:text-xs uppercase tracking-widest"
+              className="px-3 py-1 border border-border rounded-full text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground"
             >
               {tag}
             </span>
@@ -60,7 +60,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <h1 className="text-4xl md:text-6xl lg:text-8xl font-[family-name:var(--font-syne)] font-bold mb-8">
           {project.title}
         </h1>
-        <p className="text-lg md:text-xl text-gray-400 max-w-3xl mb-8">{project.description}</p>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">{project.description}</p>
 
         {/* External Links - Added Dribbble option */}
         <div className="flex flex-wrap gap-3 md:gap-4">
@@ -69,7 +69,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-[#bef264] text-black font-bold rounded-full hover:bg-white transition-colors text-sm"
+              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors text-sm"
             >
               <Github className="w-5 h-5" />
               View on GitHub
@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               href={project.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-[#bef264] text-black font-bold rounded-full hover:bg-white transition-colors text-sm"
+              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors text-sm"
             >
               <ExternalLink className="w-5 h-5" />
               Visit Website
@@ -91,7 +91,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               href={project.behanceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-[#bef264] text-black font-bold rounded-full hover:bg-white transition-colors text-sm"
+              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors text-sm"
             >
               <BehanceIcon className="w-5 h-5" />
               View on Behance
@@ -134,7 +134,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <>
             {/* Challenge */}
             <div className="mb-16">
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">The Challenge</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">The Challenge</h3>
               <p className="text-xl md:text-2xl lg:text-3xl font-[family-name:var(--font-syne)] leading-relaxed">
                 {project.challenge}
               </p>
@@ -142,8 +142,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* Solution */}
             <div className="mb-16">
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">The Solution</h3>
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed">{project.solution}</p>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">The Solution</h3>
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">{project.solution}</p>
             </div>
 
             {/* Results */}
@@ -152,11 +152,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">Results</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   {project.results.map((result, i) => (
-                    <div key={i} className="p-5 md:p-6 bg-card rounded-xl border border-white/10 text-center">
-                      <p className="text-xl md:text-2xl font-[family-name:var(--font-syne)] font-bold text-[#bef264]">
+                    <div key={i} className="p-5 md:p-6 bg-card rounded-xl border border-border text-center">
+                      <p className="text-xl md:text-2xl font-[family-name:var(--font-syne)] font-bold text-accent">
                         {result.split(" ")[0]}
                       </p>
-                      <p className="text-gray-500 text-xs md:text-sm mt-2">{result.split(" ").slice(1).join(" ")}</p>
+                      <p className="text-muted-foreground text-xs md:text-sm mt-2">{result.split(" ").slice(1).join(" ")}</p>
                     </div>
                   ))}
                 </div>
@@ -193,7 +193,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 key={relatedProject.id}
                 href={`/work/${relatedProject.id}`}
                 scroll={true}
-                className="group bg-[#0A0A0A] rounded-[24px] overflow-hidden border border-white/5 hover:border-white/10 transition-all flex flex-col"
+                className="group bg-card rounded-[24px] overflow-hidden border border-border hover:border-primary/20 transition-all flex flex-col"
               >
                 {/* Image Container */}
                 <div className="relative h-[240px] overflow-hidden w-full m-2 mb-0 rounded-[20px] self-center w-[calc(100%-16px)]">
@@ -211,7 +211,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     {relatedProject.tags.slice(0, 2).map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 bg-[#1A1A1A] text-[#666] text-[10px] font-bold uppercase tracking-wider rounded-md"
+                        className="px-3 py-1 bg-muted text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md"
                       >
                         {tag}
                       </span>
@@ -219,18 +219,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                   </div>
 
                   {/* Title */}
-                  <h5 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-3 text-white">
+                  <h5 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-3 text-foreground">
                     {relatedProject.title}
                   </h5>
 
                   {/* Description */}
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
                     {relatedProject.description}
                   </p>
 
                   {/* Button */}
                   <div className="mt-auto">
-                    <span className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold text-sm rounded-full group-hover:bg-[#bef264] transition-colors duration-300">
+                    <span className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-bold text-sm rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
                       View Case Study <ArrowUpRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -245,7 +245,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <section className="px-6 md:px-20 lg:px-40 py-16 border-t border-white/10">
         <Link
           href="/work"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-[#bef264] text-black font-bold rounded-full hover:bg-white transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           View All Projects
