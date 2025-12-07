@@ -92,16 +92,16 @@ export function HeroSection() {
               <ArrowDownRight className="w-5 h-5 md:w-6 md:h-6" />
             </Link>
 
-            <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm text-gray-400 md:text-gray-500 uppercase tracking-widest ml-2">
+            <div className="flex items-center gap-3 md:gap-4 text-xs md:text-sm text-gray-400 md:text-gray-500 uppercase tracking-widest ml-0 md:ml-2 mt-4 md:mt-0 w-full md:w-auto">
               <span className="link-underline cursor-default">• Figma</span>
               <span className="link-underline cursor-default">• Notion</span>
-              <span className="link-underline cursor-default">• Webflow</span>
+              <span className="link-underline cursor-default">• Miro</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce z-20 pointer-events-none">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 opacity-50 animate-bounce z-20 pointer-events-none">
         <span className="text-[10px] uppercase tracking-widest">Scroll</span>
         <ArrowDown className="w-4 h-4" />
       </div>

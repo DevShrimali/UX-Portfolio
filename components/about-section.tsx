@@ -19,6 +19,7 @@ const aboutCards = [
     title: "Resume",
     description: "Download PDF",
     isLink: true,
+    link: "https://drive.google.com/file/d/13tq82Ju293V6cpKx9NS5kK8YQ0N5EcTU/view?usp=sharing",
   },
 ]
 
@@ -55,7 +56,9 @@ export function AboutSection() {
             <AnimateOnScroll key={card.title} animation="fade-in-up" delay={0.3 + index * 0.1}>
               {card.isLink ? (
                 <a
-                  href="#"
+                  href={card.link || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full p-6 border border-white/10 rounded-xl bg-card card-hover flex flex-col justify-center group"
                 >
                   <h4 className="text-white font-bold mb-2 flex items-center gap-2">

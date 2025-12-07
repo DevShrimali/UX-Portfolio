@@ -45,7 +45,6 @@ const tools = [
   { name: "After Effects", description: "Motion design and animations" },
   { name: "Miro", description: "Collaborative whiteboarding" },
   { name: "Notion", description: "Documentation and project management" },
-  { name: "Webflow", description: "No-code web development" },
   { name: "Notion", description: "No-code mobile app development" },
 ]
 
