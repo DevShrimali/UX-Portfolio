@@ -72,7 +72,7 @@ export function ConnectSection() {
           </a>
 
           <a
-            href="mailto:devuxstudio@gmail.com"
+            href="mailto:devloper.ds@gmail.com"
             className="p-8 bg-card border border-white/5 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-[#ea4335] hover:bg-[#ea4335]/10 transition-all duration-300 group"
           >
             <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">

@@ -12,7 +12,7 @@ export function CustomCursor() {
         if (!cursor) return
 
         const updateCursor = (e: MouseEvent) => {
-            cursor.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`
+            cursor.style.transform = `translate3d(${e.clientX - 24}px, ${e.clientY - 24}px, 0)`
         }
 
         const handleMouseEnter = () => setIsVisible(true)
@@ -50,9 +50,9 @@ export function CustomCursor() {
     return (
         <div
             ref={cursorRef}
-            className={`fixed top-0 left-0 w-8 h-8 rounded-full border border-white/50 bg-white/10 backdrop-blur-sm pointer-events-none z-[9999] mix-blend-difference hidden md:block transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
+            className={`fixed top-0 left-0 w-12 h-12 rounded-full border border-white/50 pointer-events-none z-[9999] mix-blend-difference hidden md:block transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
                 }`}
-            style={{ willChange: "transform" }}
+            style={{ willChange: "transform", transition: "transform 0.4s ease-out" }}
         >
             <div
                 className={`absolute inset-0 rounded-full  transition-transform duration-300 ${isHovering ? "scale-[2.5]" : "scale-100"

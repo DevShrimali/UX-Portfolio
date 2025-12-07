@@ -29,7 +29,7 @@ export function CTASection() {
         <AnimateOnScroll animation="scale-in" delay={0.4}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="mailto:devuxstudio@gmail.com"
+              href="mailto:devloper.ds@gmail.com"
               className="group px-8 py-4 bg-accent text-black rounded-full font-bold uppercase tracking-wider text-sm hover:scale-105 hover:shadow-[0_0_30px_rgba(190,242,100,0.4)] transition-all flex items-center gap-2"
             >
               Start a Project

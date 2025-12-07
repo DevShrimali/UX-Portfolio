@@ -35,10 +35,10 @@ export function Footer() {
         <AnimateOnScroll animation="scale-in" delay={0.4}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="mailto:devuxstudio@gmail.com"
+              href="mailto:devloper.ds@gmail.com"
               className="group px-8 py-4 bg-[#ddf2ff] dark:bg-accent text-[#33a3ff] dark:text-black border border-[#33a3ff] dark:border-transparent rounded-full font-bold uppercase tracking-wider text-sm hover:scale-105 hover:bg-[#33a3ff] hover:text-white dark:hover:bg-accent dark:hover:text-black hover:shadow-[0_0_30px_rgba(51,163,255,0.4)] dark:hover:shadow-[0_0_30px_rgba(190,242,100,0.4)] transition-all flex items-center gap-2"
             >
-              devuxstudio@gmail.com
+              devloper.ds@gmail.com
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
