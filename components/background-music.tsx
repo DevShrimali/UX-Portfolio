@@ -46,11 +46,34 @@ export function BackgroundMusic() {
         // Slight delay to ensure DOM is ready? Not strictly necessary but safe.
         attemptPlay()
 
+        // Fallback for mobile/browsers blocking autoplay:
+        // Try to play on the very first interaction
+        const enableAudio = () => {
+            if (audioRef.current && audioRef.current.paused) {
+                audioRef.current.play().then(() => {
+                    setIsPlaying(true)
+                    // Fade in logic if needed, or just set volume
+                    if (audioRef.current) audioRef.current.volume = 0.15
+                }).catch(e => console.log("Still blocked or failed", e))
+            }
+            // Remove listeners once tried
+            document.removeEventListener('click', enableAudio)
+            document.removeEventListener('touchstart', enableAudio)
+            document.removeEventListener('keydown', enableAudio)
+        }
+
+        document.addEventListener('click', enableAudio)
+        document.addEventListener('touchstart', enableAudio)
+        document.addEventListener('keydown', enableAudio)
+
         return () => {
             if (audioRef.current) {
                 audioRef.current.pause()
                 audioRef.current = null
             }
+            document.removeEventListener('click', enableAudio)
+            document.removeEventListener('touchstart', enableAudio)
+            document.removeEventListener('keydown', enableAudio)
         }
     }, [])
 

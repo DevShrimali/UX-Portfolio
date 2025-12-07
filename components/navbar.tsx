@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Menu, X, Linkedin, Github, Youtube, Download } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -21,8 +21,12 @@ const navLinks = [
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const menuAudioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
+    menuAudioRef.current = new Audio("/woosh.mp3")
+    menuAudioRef.current.volume = 0.5
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
@@ -33,6 +37,15 @@ export function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
     document.body.style.overflow = isMenuOpen ? "auto" : "hidden"
+
+    // Play sound directly
+    try {
+      const audio = new Audio("/woosh.mp3")
+      audio.volume = 0.5
+      audio.play().catch((e) => console.error("Audio play failed:", e))
+    } catch (error) {
+      console.error("Audio initialization failed:", error)
+    }
   }
 
   const closeMenu = () => {
@@ -153,8 +166,8 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="text-4xl md:text-6xl font-[family-name:var(--font-syne)] font-bold text-transparent hover:text-white transition-colors duration-300"
-              style={{ WebkitTextStroke: "1px rgba(255,255,255,0.5)" }}
+              className="text-4xl md:text-6xl font-[family-name:var(--font-syne)] font-bold text-transparent hover:text-foreground transition-colors duration-300 mobile-menu-link"
+              style={{ WebkitTextStroke: "1px var(--foreground)" }}
             >
               {link.label}
             </Link>
@@ -173,7 +186,7 @@ export function Navbar() {
             href="https://www.linkedin.com/in/dev-shrimali/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <Linkedin className="w-6 h-6" />
           </a>
@@ -181,7 +194,7 @@ export function Navbar() {
             href="https://www.behance.net/dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <BehanceIcon className="w-6 h-6" />
           </a>
@@ -189,7 +202,7 @@ export function Navbar() {
             href="https://dribbble.com/devshrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <DribbbleIcon className="w-6 h-6" />
           </a>
@@ -197,7 +210,7 @@ export function Navbar() {
             href="https://github.com/DevShrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <Github className="w-6 h-6" />
           </a>
@@ -205,7 +218,7 @@ export function Navbar() {
             href="https://www.youtube.com/@dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <Youtube className="w-6 h-6" />
           </a>
