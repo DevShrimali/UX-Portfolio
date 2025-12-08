@@ -11,11 +11,14 @@ import { SmoothScroller } from "@/components/smooth-scroller"
 import { BackgroundMusic } from "@/components/background-music"
 import { SoundEffects } from "@/components/sound-effects"
 import { ThemeProvider } from "@/components/theme-provider"
+import { JsonLd } from "@/components/json-ld"
+
 
 const syne = Syne({ subsets: ["latin"], variable: "--font-syne" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://devshrimali.com"),
   title: {
     default: "Dev Shrimali | Creative UX/UI Designer",
     template: "%s | Dev Shrimali"
@@ -96,6 +99,27 @@ export default function RootLayout({
           {children}
           <Footer />
           <Analytics />
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Dev Shrimali",
+              url: "https://devshrimali.com",
+              jobTitle: "Senior UX/UI Designer",
+              sameAs: [
+                "https://www.linkedin.com/in/dev-shrimali",
+                "https://twitter.com/devshrimali",
+                "https://github.com/devshrimali",
+                "https://dribbble.com/devshrimali",
+                "https://www.behance.net/devshrimali"
+              ],
+              alumniOf: "University Name",
+              worksFor: {
+                "@type": "Organization",
+                name: "EnlightVision Technologies Pvt. Ltd."
+              }
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

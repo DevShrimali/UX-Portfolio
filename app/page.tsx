@@ -1,4 +1,14 @@
+import { Metadata } from "next"
 import { HeroSection } from "@/components/hero-section"
+
+export const metadata: Metadata = {
+  title: "Dev Shrimali | Senior UX/UI Designer Portfolio",
+  description: "Senior UX/UI Designer creating immersive digital products with a focus on user-centered design and modern aesthetics.",
+  alternates: {
+    canonical: "https://devshrimali.com",
+  },
+}
+
 import { ClientsMarquee } from "@/components/clients-marquee"
 import { AboutSection } from "@/components/about-section"
 import { StatsSection } from "@/components/stats-section"

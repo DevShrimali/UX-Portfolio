@@ -1,9 +1,14 @@
 import { projects } from "@/lib/projects-data"
 import { WorkFilters } from "@/components/work-filters"
 
-export const metadata = {
-  title: "Work | Dev - UI/UX Designer",
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Work | Dev Shrimali - UI/UX Designer",
   description: "Explore my portfolio of UI/UX designs, branding, logos, websites, and case studies.",
+  alternates: {
+    canonical: "https://devshrimali.com/work",
+  },
 }
 
 export default function WorkPage() {

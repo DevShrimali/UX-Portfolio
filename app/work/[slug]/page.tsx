@@ -1,8 +1,10 @@
-import { ArrowLeft, Github, ExternalLink, ArrowUpRight } from "lucide-react"
+import { ArrowLeft, Github, ExternalLink, ArrowUpRight, Calendar, User, Wrench } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { projects, getProjectById } from "@/lib/projects-data"
 import { BehanceIcon } from "@/components/behance-icon"
+import { ImageGallery } from "@/components/image-gallery"
+
 
 export async function generateStaticParams() {
   return projects.map((project) => ({ slug: project.id }))
@@ -30,227 +32,230 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   const hasCaseStudy = project.challenge && project.solution
 
-  // Get related projects (same category, excluding current)
+  // Get related projects
   const relatedProjects = projects
     .filter((p) => p.id !== project.id && p.category.some((c) => project.category.includes(c)))
     .slice(0, 3)
 
   return (
-    <main className="pt-24">
-      {/* Back Button */}
-      <div className="px-6 md:px-20 lg:px-40 py-8">
-        <Link href="/work" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Work
-        </Link>
-      </div>
+    <main className="pt-24 pb-24 bg-background min-h-screen">
+      <article className="max-w-screen-2xl mx-auto">
+        {/* Navigation & Header */}
+        <div className="px-6 md:px-12 lg:px-24 xl:px-40 mb-12">
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span className="text-sm font-medium tracking-wide">Back to Projects</span>
+          </Link>
 
-      {/* Hero */}
-      <section className="px-6 md:px-20 lg:px-40 pb-16">
-        <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-6">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 border border-border rounded-full text-[10px] md:text-xs uppercase tracking-widest text-muted-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h1 className="text-4xl md:text-6xl lg:text-8xl font-[family-name:var(--font-syne)] font-bold mb-8">
-          {project.title}
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8">{project.description}</p>
-
-        {/* External Links - Added Dribbble option */}
-        <div className="flex flex-wrap gap-3 md:gap-4">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors text-sm"
-            >
-              <Github className="w-5 h-5" />
-              View on GitHub
-            </a>
-          )}
-          {project.websiteUrl && (
-            <a
-              href={project.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors text-sm"
-            >
-              <ExternalLink className="w-5 h-5" />
-              Visit Website
-            </a>
-          )}
-          {project.behanceUrl && (
-            <a
-              href={project.behanceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors text-sm"
-            >
-              <BehanceIcon className="w-5 h-5" />
-              View on Behance
-            </a>
-          )}
-        </div>
-      </section>
-
-      {/* Hero Image */}
-      <section className="w-full h-[40vh] md:h-[50vh] lg:h-[70vh] relative">
-        <img src={project.image || "/placeholder.svg"} alt={project.title} className="w-full h-full object-cover" />
-      </section>
-
-      {/* Project Details */}
-      <section className="px-6 md:px-20 lg:px-40 py-16 md:py-24">
-        {/* Meta Info */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-16">
-          {project.role && (
-            <div className="p-5 md:p-6 bg-card rounded-xl border border-white/10">
-              <h4 className="text-xs md:text-sm text-gray-500 uppercase tracking-widest mb-2">Role</h4>
-              <p className="text-base md:text-lg font-bold">{project.role}</p>
+          {/* Project Header */}
+          <div className="max-w-4xl">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 bg-secondary/50 border border-border rounded-full text-[11px] font-bold uppercase tracking-widest text-secondary-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
-          )}
-          {project.timeline && (
-            <div className="p-5 md:p-6 bg-card rounded-xl border border-white/10">
-              <h4 className="text-xs md:text-sm text-gray-500 uppercase tracking-widest mb-2">Timeline</h4>
-              <p className="text-base md:text-lg font-bold">{project.timeline}</p>
+
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-[family-name:var(--font-syne)] font-bold mb-6 leading-tight">
+              {project.title}
+            </h1>
+
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
+              {project.description}
+            </p>
+
+            {/* Project Links */}
+            <div className="flex flex-wrap gap-4 mt-8">
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-foreground font-semibold rounded-full hover:bg-white hover:text-black transition-all text-sm"
+                >
+                  <Github className="w-4 h-4" /> View Code
+                </a>
+              )}
+              {project.websiteUrl && (
+                <a
+                  href={project.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-foreground font-semibold rounded-full hover:bg-white hover:text-black transition-all text-sm"
+                >
+                  <ExternalLink className="w-4 h-4" /> Live Site
+                </a>
+              )}
+              {project.behanceUrl && (
+                <a
+                  href={project.behanceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0057ff] text-white font-semibold rounded-full hover:bg-[#0046cc] transition-all text-sm"
+                >
+                  <BehanceIcon className="w-4 h-4" /> Case Study
+                </a>
+              )}
             </div>
-          )}
-          {project.tools && (
-            <div className="p-5 md:p-6 bg-card rounded-xl border border-white/10">
-              <h4 className="text-xs md:text-sm text-gray-500 uppercase tracking-widest mb-2">Tools</h4>
-              <p className="text-base md:text-lg font-bold">{project.tools.join(", ")}</p>
-            </div>
-          )}
+          </div>
         </div>
 
-        {/* Case Study Content */}
-        {hasCaseStudy && (
-          <>
-            {/* Challenge */}
-            <div className="mb-16">
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">The Challenge</h3>
-              <p className="text-xl md:text-2xl lg:text-3xl font-[family-name:var(--font-syne)] leading-relaxed">
-                {project.challenge}
-              </p>
-            </div>
-
-            {/* Solution */}
-            <div className="mb-16">
-              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-6">The Solution</h3>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">{project.solution}</p>
-            </div>
-
-            {/* Results */}
-            {project.results && (
-              <div className="mb-16">
-                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">Results</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                  {project.results.map((result, i) => (
-                    <div key={i} className="p-5 md:p-6 bg-card rounded-xl border border-border text-center">
-                      <p className="text-xl md:text-2xl font-[family-name:var(--font-syne)] font-bold text-accent">
-                        {result.split(" ")[0]}
-                      </p>
-                      <p className="text-muted-foreground text-xs md:text-sm mt-2">{result.split(" ").slice(1).join(" ")}</p>
-                    </div>
-                  ))}
+        {/* Info Grid (Blog Metadata Style) */}
+        <div className="px-6 md:px-12 lg:px-24 xl:px-40 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-border/50">
+            {project.role && (
+              <div>
+                <div className="flex items-center gap-2 text-muted-foreground mb-2">
+                  <User className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-wider">Role</span>
                 </div>
+                <p className="font-semibold">{project.role}</p>
               </div>
             )}
-          </>
-        )}
-
-        {/* Gallery */}
-        {project.gallery && project.gallery.length > 0 && (
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">Gallery</h3>
-            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-              {project.gallery.map((img, i) => (
-                <div key={i} className="rounded-2xl overflow-hidden">
-                  <img
-                    src={img || "/placeholder.svg"}
-                    alt={`${project.title} gallery ${i + 1}`}
-                    className="w-full h-48 md:h-64 object-cover"
-                  />
+            {project.timeline && (
+              <div>
+                <div className="flex items-center gap-2 text-muted-foreground mb-2">
+                  <Calendar className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-wider">Timeline</span>
                 </div>
-              ))}
+                <p className="font-semibold">{project.timeline}</p>
+              </div>
+            )}
+            {project.tools && (
+              <div className="col-span-2 md:col-span-2">
+                <div className="flex items-center gap-2 text-muted-foreground mb-2">
+                  <Wrench className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-wider">Tools</span>
+                </div>
+                <p className="font-semibold">{project.tools.join(", ")}</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Visuals Container */}
+        <div className="px-6 md:px-12 lg:px-24 xl:px-40 mb-24 space-y-12">
+          {/* Main Cover Image */}
+          <div className="w-full relative rounded-3xl overflow-hidden shadow-2xl bg-card border border-border/50">
+            <img
+              src={project.image || "/placeholder.svg"}
+              alt={project.title}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+
+          {/* Interactive Gallery */}
+          {project.gallery && project.gallery.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Project Gallery</h3>
+                <span className="text-xs text-muted-foreground">{project.gallery.length} Images</span>
+              </div>
+              <ImageGallery images={project.gallery} title={project.title} />
+            </div>
+          )}
+        </div>
+
+        {/* Narrative Content (Blog Reading Mode) */}
+        {hasCaseStudy && (
+          <div className="px-6 md:px-12 lg:px-24 xl:px-40 mb-24">
+            <div className="max-w-3xl mx-auto space-y-16">
+              {/* Challenge */}
+              <section className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">The Challenge</h2>
+                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 space-y-6">
+                  <p>{project.challenge}</p>
+                </div>
+              </section>
+
+              <hr className="border-border/50" />
+
+              {/* Solution */}
+              <section className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">The Solution</h2>
+                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 space-y-6">
+                  <p>{project.solution}</p>
+                </div>
+              </section>
+
+              {/* Results Cards */}
+              {project.results && (
+                <section className="pt-8">
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {project.results.map((result, i) => (
+                      <div key={i} className="bg-card p-6 rounded-2xl border border-border/50 hover:border-accent/50 transition-colors">
+                        <p className="text-3xl font-[family-name:var(--font-syne)] font-bold text-accent mb-2">
+                          {result.split(" ")[0]}
+                        </p>
+                        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                          {result.split(" ").slice(1).join(" ")}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
           </div>
         )}
-      </section>
 
-      {relatedProjects.length > 0 && (
-        <section className="px-6 md:px-20 lg:px-40 py-16 border-t border-white/10">
-          <h3 className="text-2xl font-[family-name:var(--font-syne)] font-bold mb-8">More Projects</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {relatedProjects.map((relatedProject) => (
-              <Link
-                key={relatedProject.id}
-                href={`/work/${relatedProject.id}`}
-                scroll={true}
-                className="group bg-card rounded-[24px] overflow-hidden border border-border hover:border-primary/20 transition-all flex flex-col"
-              >
-                {/* Image Container */}
-                <div className="relative h-[240px] overflow-hidden w-full m-2 mb-0 rounded-[20px] self-center w-[calc(100%-16px)]">
-                  <img
-                    src={relatedProject.image || "/placeholder.svg"}
-                    alt={relatedProject.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
+        {/* Related Projects */}
+        {relatedProjects.length > 0 && (
+          <div className="px-6 md:px-12 lg:px-24 xl:px-40 py-24 border-t border-border/40">
+            <div className="flex items-center justify-between mb-12">
+              <h2 className="text-3xl font-[family-name:var(--font-syne)] font-bold">Next Projects</h2>
+              <Link href="/work" className="hidden md:inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider hover:text-accent transition-colors">
+                View All <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
 
-                {/* Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+            <div className="grid md:grid-cols-3 gap-8">
+              {relatedProjects.map((relatedProject) => (
+                <Link
+                  key={relatedProject.id}
+                  href={`/work/${relatedProject.id}`}
+                  className="group block"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-6 bg-card border border-border/50">
+                    <img
+                      src={relatedProject.image || "/placeholder.svg"}
+                      alt={relatedProject.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {/* Overlay badge on hover */}
+                    <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                      View Case
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold font-[family-name:var(--font-syne)] mb-2 group-hover:text-accent transition-colors">
+                    {relatedProject.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
                     {relatedProject.tags.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-muted text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md"
-                      >
+                      <span key={tag} className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
                         {tag}
                       </span>
                     ))}
                   </div>
-
-                  {/* Title */}
-                  <h5 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-3 text-foreground">
-                    {relatedProject.title}
-                  </h5>
-
-                  {/* Description */}
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
-                    {relatedProject.description}
-                  </p>
-
-                  {/* Button */}
-                  <div className="mt-auto">
-                    <span className="inline-flex items-center gap-2 px-6 py-3 bg-secondary text-secondary-foreground font-bold text-sm rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
-                      View Case Study <ArrowUpRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-12 md:hidden text-center">
+              <Link href="/work" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider hover:text-accent transition-colors">
+                View All Projects <ArrowUpRight className="w-4 h-4" />
               </Link>
-            ))}
+            </div>
           </div>
-        </section>
-      )}
-
-      {/* View All Projects */}
-      <section className="px-6 md:px-20 lg:px-40 py-16 border-t border-white/10">
-        <Link
-          href="/work"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-full hover:bg-primary/90 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          View All Projects
-        </Link>
-      </section>
+        )}
+      </article>
     </main>
   )
 }

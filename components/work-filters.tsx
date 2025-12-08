@@ -35,11 +35,10 @@ export function WorkFilters({ projects }: { projects: Project[] }) {
             <button
               key={cat.key}
               onClick={() => setActiveFilter(cat.key)}
-              className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all ${
-                activeFilter === cat.key
+              className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all ${activeFilter === cat.key
                   ? "bg-accent text-background"
                   : "bg-card border border-white/10 text-gray-400 hover:text-white hover:border-white/30"
-              }`}
+                }`}
             >
               {cat.label}
             </button>
@@ -70,7 +69,12 @@ function ProjectCard({ project }: { project: Project }) {
   const hasCaseStudy = project.challenge && project.solution
 
   return (
-    <div className="group bg-card border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all">
+    <div className="group relative bg-card border border-white/5 rounded-2xl overflow-hidden hover:border-white/20 transition-all">
+      {/* Full Card Link */}
+      <Link href={`/work/${project.id}`} className="absolute inset-0 z-0 text-transparent">
+        View Project
+      </Link>
+
       {/* Image */}
       <div className="relative h-48 md:h-56 overflow-hidden">
         <img
@@ -78,17 +82,18 @@ function ProjectCard({ project }: { project: Project }) {
           alt={project.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
 
         {/* External Links Overlay */}
         {hasExternalLink && (
-          <div className="absolute top-4 right-4 flex gap-2">
+          <div className="absolute top-4 right-4 flex gap-2 z-10">
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-accent hover:text-background transition-all"
+                onClick={(e) => e.stopPropagation()}
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -99,6 +104,7 @@ function ProjectCard({ project }: { project: Project }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-accent hover:text-background transition-all"
+                onClick={(e) => e.stopPropagation()}
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
@@ -109,6 +115,7 @@ function ProjectCard({ project }: { project: Project }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-accent hover:text-background transition-all"
+                onClick={(e) => e.stopPropagation()}
               >
                 <BehanceIcon className="w-4 h-4" />
               </a>
@@ -118,7 +125,7 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {/* Content */}
-      <div className="p-5 md:p-6">
+      <div className="p-5 md:p-6 pointer-events-none">
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-3">
           {project.tags.slice(0, 2).map((tag) => (
@@ -132,28 +139,7 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <h3 className="text-lg md:text-xl font-[family-name:var(--font-syne)] font-bold mb-2">{project.title}</h3>
-        <p className="text-sm text-gray-500 line-clamp-2 mb-4">{project.description}</p>
-
-        {/* Action - Made links more visible */}
-        {hasCaseStudy ? (
-          <Link
-            href={`/work/${project.id}`}
-            scroll={true}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-bold rounded-full hover:bg-accent transition-colors"
-          >
-            View Case Study <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        ) : hasExternalLink ? (
-          <span className="inline-flex items-center gap-2 text-sm text-gray-400">External Project</span>
-        ) : (
-          <Link
-            href={`/work/${project.id}`}
-            scroll={true}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black text-sm font-bold rounded-full hover:bg-accent transition-colors"
-          >
-            View Details <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        )}
+        <p className="text-sm text-gray-500 line-clamp-2">{project.description}</p>
       </div>
     </div>
   )

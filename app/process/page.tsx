@@ -1,4 +1,14 @@
 import { Wrench, CheckCircle } from "lucide-react"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "My Process | Dev Shrimali",
+  description: "Discover the design process behind Dev Shrimali's work, from empathy and definition to ideation, prototyping, and testing.",
+  alternates: {
+    canonical: "https://devshrimali.com/process",
+  },
+}
+
 
 const processSteps = [
   {

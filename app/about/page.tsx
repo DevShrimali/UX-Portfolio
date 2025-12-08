@@ -1,5 +1,15 @@
 import { Briefcase, MapPin, Award, Heart } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Me | Dev Shrimali",
+  description: "Learn more about Dev Shrimali, a Senior UX/UI Designer with over 6 years of experience in Fintech, HealthTech, and E-commerce.",
+  alternates: {
+    canonical: "https://devshrimali.com/about",
+  },
+}
 
 export default function AboutPage() {
   return (
@@ -19,7 +29,14 @@ export default function AboutPage() {
       <section className="px-6 md:px-20 lg:px-40 pb-16">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="aspect-[4/5] relative overflow-hidden rounded-3xl">
-            <img src="/professional-portrait-photo-of-a-creative-designer.jpg" alt="Dev Shrimali" className="w-full h-full object-cover" />
+            <Image
+              src="/professional-portrait-photo-of-a-creative-designer.jpg"
+              alt="Dev Shrimali - Professional Portrait"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold mb-6">

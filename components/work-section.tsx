@@ -19,9 +19,6 @@ export function WorkSection() {
           </h2>
         </div>
         <div className="flex flex-col items-start md:items-end gap-4">
-          <p className="text-gray-400 text-sm max-w-xs md:text-right">
-            A selection of e-commerce, healthcare, and fintech solutions.
-          </p>
           <Link
             href="/work"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-bold text-sm rounded-full hover:bg-accent transition-colors"

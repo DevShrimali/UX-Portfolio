@@ -1,4 +1,14 @@
 import { Briefcase, GraduationCap, Award } from "lucide-react"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Experience | Dev Shrimali",
+  description: "Explore the professional journey of Dev Shrimali, detailing 6+ years of UX/UI design experience across various companies and projects.",
+  alternates: {
+    canonical: "https://devshrimali.com/experience",
+  },
+}
+
 
 const workExperience = [
   {
