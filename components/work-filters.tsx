@@ -26,6 +26,13 @@ export function WorkFilters({ projects }: { projects: Project[] }) {
 
   const filteredProjects = activeFilter === "all" ? projects : projects.filter((p) => p.category.includes(activeFilter))
 
+  // Sort projects: Pinned projects first
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    if (a.pinned && !b.pinned) return -1
+    if (!a.pinned && b.pinned) return 1
+    return 0
+  })
+
   return (
     <>
       {/* Filter Tabs */}
@@ -49,12 +56,12 @@ export function WorkFilters({ projects }: { projects: Project[] }) {
       {/* Projects Grid */}
       <section className="px-6 md:px-20 lg:px-40 pb-32">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
+          {sortedProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>
 
-        {filteredProjects.length === 0 && (
+        {sortedProjects.length === 0 && (
           <div className="text-center py-20">
             <p className="text-gray-500">No projects found in this category.</p>
           </div>
@@ -63,6 +70,8 @@ export function WorkFilters({ projects }: { projects: Project[] }) {
     </>
   )
 }
+
+import { Pin } from "lucide-react"
 
 function ProjectCard({ project }: { project: Project }) {
   const hasExternalLink = project.websiteUrl || project.githubUrl || project.behanceUrl
@@ -83,6 +92,15 @@ function ProjectCard({ project }: { project: Project }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
+
+        {/* Pinned Icon */}
+        {project.pinned && (
+          <div className="absolute top-4 left-4 z-10">
+            <div className="p-2 bg-accent text-background rounded-full shadow-lg">
+              <Pin className="w-3 h-3 fill-current" />
+            </div>
+          </div>
+        )}
 
         {/* External Links Overlay */}
         {hasExternalLink && (

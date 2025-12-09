@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, Play } from "lucide-react"
 import Image from "next/image"
 
 interface ImageGalleryProps {
@@ -10,54 +10,104 @@ interface ImageGalleryProps {
     title?: string
 }
 
+
+const isYouTubeUrl = (url: string) => url.includes("youtube.com") || url.includes("youtu.be")
+
+const getYouTubeEmbedUrl = (url: string) => {
+    if (url.includes("youtu.be")) {
+        const id = url.split("youtu.be/")[1].split("?")[0]
+        return `https://www.youtube.com/embed/${id}`
+    }
+    if (url.includes("youtube.com/watch")) {
+        const id = new URLSearchParams(url.split("?")[1]).get("v")
+        return `https://www.youtube.com/embed/${id}`
+    }
+    return url
+}
+
+const getYouTubeThumbnail = (url: string) => {
+    let id = ""
+    if (url.includes("youtu.be")) {
+        id = url.split("youtu.be/")[1].split("?")[0]
+    } else if (url.includes("youtube.com/watch")) {
+        id = new URLSearchParams(url.split("?")[1]).get("v") || ""
+    }
+    return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
+}
+
 export function ImageGallery({ images, title = "Gallery" }: ImageGalleryProps) {
+    // ... (state and handlers remain same)
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
     const openGallery = (index: number) => setSelectedIndex(index)
-    const closeGallery = () => setSelectedIndex(null)
+    const closeGallery = useCallback(() => setSelectedIndex(null), [])
 
-    const showNext = (e?: React.MouseEvent) => {
-        e?.stopPropagation()
-        if (selectedIndex === null) return
-        setSelectedIndex((prev) => (prev !== null && prev < images.length - 1 ? prev + 1 : 0))
-    }
+    const showNext = useCallback(
+        (e?: React.MouseEvent | KeyboardEvent) => {
+            e?.stopPropagation()
+            setSelectedIndex((prev) => (prev !== null && prev < images.length - 1 ? prev + 1 : 0))
+        },
+        [images.length],
+    )
 
-    const showPrev = (e?: React.MouseEvent) => {
-        e?.stopPropagation()
-        if (selectedIndex === null) return
-        setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : images.length - 1))
-    }
+    const showPrev = useCallback(
+        (e?: React.MouseEvent | KeyboardEvent) => {
+            e?.stopPropagation()
+            setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : images.length - 1))
+        },
+        [images.length],
+    )
 
     // Handle keyboard navigation
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    useEffect(() => {
         if (selectedIndex === null) return
-        if (e.key === "Escape") closeGallery()
-        if (e.key === "ArrowRight") showNext()
-        if (e.key === "ArrowLeft") showPrev()
-    }
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") closeGallery()
+            if (e.key === "ArrowRight") showNext(e)
+            if (e.key === "ArrowLeft") showPrev(e)
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+        return () => window.removeEventListener("keydown", handleKeyDown)
+    }, [selectedIndex, closeGallery, showNext, showPrev])
 
     return (
         <>
             {/* Grid View */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {images.map((img, i) => (
-                    <div
-                        key={i}
-                        className="group relative cursor-pointer rounded-2xl overflow-hidden border border-white/10 hover:border-accent/50 transition-colors aspect-[4/3]"
-                        onClick={() => openGallery(i)}
-                    >
-                        <Image
-                            src={img}
-                            alt={`${title} image ${i + 1}`}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <ZoomIn className="w-8 h-8 text-white" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {images.map((item, i) => {
+                    const isVideo = isYouTubeUrl(item)
+                    return (
+                        <div
+                            key={i}
+                            className="group relative cursor-pointer rounded-2xl overflow-hidden border border-white/10 hover:border-accent/50 transition-colors aspect-[4/3]"
+                            onClick={() => openGallery(i)}
+                        >
+                            <Image
+                                src={isVideo ? getYouTubeThumbnail(item) : item}
+                                alt={`${title} ${isVideo ? "video" : "image"} ${i + 1}`}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                            {isVideo && (
+                                <div className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 bg-black/50 backdrop-blur-sm rounded-full border border-white/20 z-10">
+                                    <Play className="w-3 h-3 text-white fill-white" />
+                                </div>
+                            )}
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                {isVideo ? (
+                                    <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                                        <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1" />
+                                    </div>
+                                ) : (
+                                    <ZoomIn className="w-8 h-8 text-white" />
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    )
+                })}
             </div>
 
             {/* Lightbox Modal */}
@@ -69,8 +119,6 @@ export function ImageGallery({ images, title = "Gallery" }: ImageGalleryProps) {
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 md:p-8"
                         onClick={closeGallery}
-                        onKeyDown={handleKeyDown}
-                        tabIndex={0}
                     >
                         {/* Close Button */}
                         <button
@@ -101,14 +149,24 @@ export function ImageGallery({ images, title = "Gallery" }: ImageGalleryProps) {
                             className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center"
                             onClick={(e) => e.stopPropagation()} // Prevent close on image click
                         >
-                            <Image
-                                src={images[selectedIndex]}
-                                alt={`${title} fullscreen image`}
-                                fill
-                                className="object-contain"
-                                sizes="100vw"
-                                priority
-                            />
+                            {isYouTubeUrl(images[selectedIndex]) ? (
+                                <iframe
+                                    src={getYouTubeEmbedUrl(images[selectedIndex])}
+                                    title="YouTube video player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    className="w-full h-full max-h-[80vh] aspect-video rounded-xl"
+                                />
+                            ) : (
+                                <Image
+                                    src={images[selectedIndex]}
+                                    alt={`${title} fullscreen image`}
+                                    fill
+                                    className="object-contain"
+                                    sizes="100vw"
+                                    priority
+                                />
+                            )}
                         </motion.div>
 
                         {/* Counter */}

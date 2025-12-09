@@ -2,6 +2,7 @@
 
 import { AnimateOnScroll } from "./animate-on-scroll"
 import { AnimatedCounter } from "./animated-counter"
+import { projects } from "@/lib/projects-data"
 
 export function AboutSection() {
   return (
@@ -34,7 +35,7 @@ export function AboutSection() {
           <AnimateOnScroll animation="fade-in-up" delay={0.3}>
             <div>
               <div className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-syne)] text-foreground mb-2">
-                <AnimatedCounter end={50} suffix="+" />
+                <AnimatedCounter end={projects.length} suffix="+" />
               </div>
               <h3 className="text-sm font-bold uppercase tracking-wider text-foreground mb-1">Projects Delivered</h3>
               <p className="text-xs text-muted-foreground">Across multiple industries</p>

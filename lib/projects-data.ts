@@ -21,34 +21,43 @@ export interface Project {
   role?: string
   // Gallery images
   gallery?: string[]
+  // Pinned status for top projects
+  pinned?: boolean
 }
 
 export const projects: Project[] = [
   // Creative / Featured Projects
   {
     id: "furniture-decor-app",
-    title: "Furniture & Home Décor App",
+    title: "Furnique - Furniture Store",
     category: ["ui-ux", "behance"],
-    tags: ["E-Commerce", "Furniture", "Mobile App"],
+    tags: ["E-Commerce", "Web Design", "Furniture"],
     description:
-      "A sophisticated shopping experience for furniture and home décor. Focusing on clean aesthetics and seamless user journey for browsing and purchasing high-end items.",
-    image: "/furniture-app.png",
-    bgColor: "bg-[#1C1A17]",
-    behanceUrl: "https://www.behance.net/gallery/237961725/Furniture-Home-Dcor-Shopping-Experience",
-    challenge: "Creating a luxurious yet accessible mobile shopping experience that inspires users while making purchase decisions easy.",
-    solution: "Designed a minimalist interface with immersive product imagery, AR placement features, and a simplified checkout process.",
+      "A modern and minimal web experience designed for seamless furniture and home décor shopping. Focusing on clean UI, strong visual hierarchy, and personalized product recommendations.",
+    image: "/furniture-cover-new.png",
+    bgColor: "bg-[#0B1525]",
+    behanceUrl: "https://www.behance.net/gallery/240056139/Furniture-Home-Dcor-Shopping-Experience",
+    challenge: "To design a cohesive and inspiring online shopping experience that translates the tactile nature of furniture buying into a digital format, ensuring users feel confident in their purchases.",
+    solution: "Developed a comprehensive design system with high-fidelity screens, featuring interactive prototypes, detailed product views, and a streamlined checkout process to enhance user confidence and conversion.",
     results: [
-      "Enhanced product discovery",
-      "Increased average order value",
-      "Seamless mobile checkout flow",
+      "25+ High-fidelity screens",
+      "Complete Design System",
+      "Interactive Prototype",
     ],
-    tools: ["Figma", "Adobe Photoshop"],
-    timeline: "Ongoing",
-    role: "Lead UI/UX Designer",
+    tools: ["Figma", "Prototyping", "Design Systems"],
+    timeline: "2024",
+    role: "UI/UX Designer",
+    gallery: [
+      "/furniture-gallery-3.png",
+      "/furniture-gallery-1.png",
+      "/furniture-gallery-2.png",
+      "https://youtu.be/McOQzo-6PoA?si=CdMz9zttomrNY_gW",
+    ],
   },
   {
     id: "travel-booking-app",
     title: "Flight Ticket Booking App",
+    pinned: true,
     category: ["ui-ux", "behance"],
     tags: ["Travel", "Booking", "App"],
     description:
@@ -87,6 +96,29 @@ export const projects: Project[] = [
   },
 
   // Other Projects from Behance
+  {
+    id: "metrolink-branding",
+    title: "Metrolink Outsourcing Services",
+    pinned: true,
+    category: ["branding", "logo"],
+    tags: ["Branding", "Corporate Identity", "Logo Design"],
+    description: "A premium brand identity created for Metrolink Outsourcing Services, designed to reflect trust, growth, and professional excellence through clean geometry and a refined gold-black palette.",
+    image: "/metrolink-cover.jpg",
+    bgColor: "bg-[#000000]",
+    behanceUrl: "https://www.behance.net/gallery/240053139/Metrolink-Outsourcing-Services-Logo-Identity",
+    challenge: "To create a brand identity that embodies professional excellence and trust while symbolizing expansive growth and partnership.",
+    solution: "Developed a sophisticated visual identity centered around a golden bird motif with clean geometry and a refined serif typeface, utilizing a luxurious gold and black color palette to establish a strong corporate presence.",
+    results: ["Established premium brand image", "Unified visual identity", "Versatile application across media"],
+    tools: ["Illustrator", "Photoshop"],
+    timeline: "2024",
+    role: "Brand Designer",
+    gallery: [
+      "/metrolink-process-1.jpg",
+      "/metrolink-process-2.jpg",
+      "/metrolink-colors.jpg",
+      "/metrolink-mockups.jpg",
+    ],
+  },
   {
     id: "vr-football-gaming",
     title: "Immersive VR Football Gaming",
@@ -138,14 +170,21 @@ export const projects: Project[] = [
     behanceUrl: "https://www.behance.net/gallery/224808223/AI-Powered-Job-Portal-App-for-Job-Seekers-Recruiters",
   },
   {
-    id: "gadgets-ecommerce",
-    title: "Gadgets E-Commerce",
-    category: ["ui-ux", "behance"],
-    tags: ["E-Commerce", "Gadgets"],
-    description: "Shopping for a Gadgets & Accessories E-Commerce App.",
-    image: "/gadgets-shop.png",
-    bgColor: "bg-[#0F0F0F]",
-    behanceUrl: "https://www.behance.net/gallery/224833971/Shopping-for-a-Gadgets-Accessories-E-Commerce-App",
+    id: "brotomotive-website",
+    title: "Brotomotive – Auto Repair",
+    pinned: true,
+    category: ["website"],
+    tags: ["Auto Repair", "Web Design", "Local Business"],
+    description: "A professional, responsive website designed to connect vehicle owners with reliable auto repair and maintenance services. It serves as a digital hub for Brotomotive, offering clear service details and easy contact options.",
+    image: "/brotomotive-laptop-mockup.png",
+    bgColor: "bg-[#1a1a1a]",
+    websiteUrl: "https://www.brotomotive.com.au/",
+    challenge: "Brotomotive needed a digital presence to clearly communicate their comprehensive auto repair services to local customers. The goal was to build trust and make it easy for users to find service information and book appointments.",
+    solution: "Developed a lightweight, high-performance website using semantic HTML, CSS, and Vanilla JavaScript. The design prioritizes information hierarchy and mobile responsiveness, ensuring that users can quickly access location details, services, and contact forms from any device.",
+    results: ["Professional online presence", "Optimized mobile experience", "Fast loading speeds"],
+    tools: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    timeline: "2024",
+    role: "Web Designer & Developer",
   },
 ]
 

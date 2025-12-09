@@ -2,9 +2,10 @@
 
 import { AnimateOnScroll } from "./animate-on-scroll"
 import { AnimatedCounter } from "./animated-counter"
+import { projects } from "@/lib/projects-data"
 
 const stats = [
-  { number: 50, suffix: "+", label: "Projects Delivered", description: "Across multiple industries" },
+  { number: projects.length, suffix: "+", label: "Projects Delivered", description: "Across multiple industries" },
   { number: 6, suffix: "+", label: "Years Experience", description: "Professional design work" },
 ]
 
