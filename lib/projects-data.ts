@@ -132,6 +132,27 @@ export const projects: Project[] = [
 
   // Other Projects from Behance
   {
+    id: "vishva-kshetra",
+    title: "Vishva Kshetra Interiors",
+    category: ["website", "branding", "logo", "brochure"],
+    tags: ["Interior Design", "Branding", "Web Design", "Brochure"],
+    description: "A complete branding identity and website design for Vishva Kshetra, an interior designing firm. The project included crafting a unique logo, designing professional brochures, and building a responsive website to showcase their portfolio.",
+    image: "/vishva-kshetra-branding.jpg",
+    bgColor: "bg-[#252525]",
+    websiteUrl: "https://theme-interior-designer.netlify.app/",
+    behanceUrl: "https://www.behance.net/gallery/205156817/VS-Branding-Brand-Identity",
+    challenge: "To establish a distinct brand identity for a new interior design firm that conveys professionalism, creativity, and architectural precision.",
+    solution: "Created a minimalist line-art logo depicting a house structure with interior elements. This visual language was extended to a professional brochure layout and a clean, gallery-focused website to display their work effectively.",
+    results: [
+      "Cohesive Brand Identity",
+      "Professional Brochure Design",
+      "Portfolio Website Launch",
+    ],
+    tools: ["Illustrator", "Photoshop", "HTML/CSS"],
+    timeline: "2022",
+    role: "Brand & Web Designer",
+  },
+  {
     id: "metrolink-branding",
     title: "Metrolink Outsourcing Services",
     pinned: true,
