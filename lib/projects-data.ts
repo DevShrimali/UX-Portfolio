@@ -28,6 +28,32 @@ export interface Project {
 export const projects: Project[] = [
   // Creative / Featured Projects
   {
+    id: "msquare-cleaning",
+    title: "MSquare Cleaning Services",
+    category: ["website", "branding", "logo"],
+    tags: ["Web Design", "Cleaning Services", "Branding", "UI/UX"],
+    description: "A professional brand identity and website design for MSquare Cleaning Services, a premier cleaning company in Australia. The project involved creating a fresh, trustworthy visual identity and a user-friendly digital platform to showcase their wide range of services—from residential and window cleaning to commercial office maintenance.",
+    image: "/msquare/cover.png",
+    bgColor: "bg-[#0F172A]",
+    websiteUrl: "https://msquarecleaningservices.com/",
+    behanceUrl: "https://www.behance.net/gallery/240115255/Cleaning-Services-Brand-Identity-Logo",
+    challenge: "MSquare needed to establish a strong digital presence in a highly competitive market. The challenge was to communicate their core values—reliability, meticulous quality, and an eco-friendly approach—while streamlining the booking process for diverse services like End of Lease, Oven, and Builders cleaning.",
+    solution: "We designed a cohesive brand identity and a responsive website that emphasizes trust and clarity. The site features a detailed service catalog, an intuitive 'Get a Quote' flow to capture leads effectively, and transparent information to build confidence. Visually, we utilized a clean color palette and consistent typography to reflect their commitment to spotless results and professional reliability.",
+    results: [
+      "Streamlined Booking/Quote System",
+      "Integrated 7+ Service Categories",
+      "Enhanced Brand Trust & Visibility",
+      "Mobile-Optimized User Experience",
+    ],
+    tools: ["Figma", "Illustrator", "Next.js", "Tailwind CSS"],
+    timeline: "2024",
+    role: "Brand & Web Designer",
+    gallery: [
+      "/msquare/mockup-1.jpg",
+      "/msquare/mockup-2.jpg",
+    ],
+  },
+  {
     id: "furniture-decor-app",
     title: "Furnique - Furniture Store",
     category: ["ui-ux", "behance"],
