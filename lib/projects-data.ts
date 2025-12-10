@@ -6,6 +6,7 @@ export interface Project {
   category: ProjectCategory[]
   tags: string[]
   description: string
+  shortDescription?: string
   image: string
   bgColor: string
   // Optional external links
@@ -28,11 +29,35 @@ export interface Project {
 export const projects: Project[] = [
   // Creative / Featured Projects
   {
+    id: "fintech-app-ux",
+    title: "Fintech UX: Making Money Simple",
+    pinned: true,
+    category: ["ui-ux", "behance"],
+    tags: ["Fintech", "UX Research", "Mobile App", "Finance"],
+    description: "This case study presents a complete UX design for a fintech app, showing how user research, intuitive flows, and clean UI come together to make finance easy, secure, and accessible. It walks through mockups, screens, and user flows to highlight how design choices solve real user problems — simplifying tasks like payments, transfers, and account management — and ultimately deliver a smooth, trustworthy experience for users.",
+    shortDescription: "Sending money should be as fun as high-fiving! See how I made it super easy?",
+    image: "/fintech-ux/cover.jpg",
+    bgColor: "bg-[#0B1525]",
+    behanceUrl: "https://www.behance.net/gallery/203498267/UX-Case-Study-Fintech-App",
+    challenge: "Simplify tasks like payments, transfers, and account management and solve real user problems in finance.",
+    solution: "A complete UX design showing how user research, intuitive flows, and clean UI come together to make finance easy, secure, and accessible.",
+    results: [
+      "Smooth, trustworthy experience",
+      "Simplified payments & transfers",
+      "Accessible finance management",
+    ],
+    tools: ["Figma", "Prototyping"],
+    timeline: "2023",
+    role: "UI/UX Designer",
+    gallery: [],
+  },
+  {
     id: "msquare-cleaning",
-    title: "MSquare Cleaning Services",
+    title: "Cleaning Brand: A Visual Sparkle",
     category: ["website", "branding", "logo"],
     tags: ["Web Design", "Cleaning Services", "Branding", "UI/UX"],
     description: "A professional brand identity and website design for MSquare Cleaning Services, a premier cleaning company in Australia. The project involved creating a fresh, trustworthy visual identity and a user-friendly digital platform to showcase their wide range of services—from residential and window cleaning to commercial office maintenance.",
+    shortDescription: "A website that sparkles just like the clean houses this team fixes! Want to see the shine?",
     image: "/msquare/cover.png",
     bgColor: "bg-[#0F172A]",
     websiteUrl: "https://msquarecleaningservices.com/",
@@ -55,11 +80,12 @@ export const projects: Project[] = [
   },
   {
     id: "furniture-decor-app",
-    title: "Furnique - Furniture Store",
+    title: "Furniture App: Shop Dream Homes",
     category: ["ui-ux", "behance"],
     tags: ["E-Commerce", "Web Design", "Furniture"],
     description:
       "A modern and minimal web experience designed for seamless furniture and home décor shopping. Focusing on clean UI, strong visual hierarchy, and personalized product recommendations.",
+    shortDescription: "Hunting for the coolest chair just got like a fun game! Ready to design your dream room?",
     image: "/furniture-cover-new.png",
     bgColor: "bg-[#0B1525]",
     behanceUrl: "https://www.behance.net/gallery/240056139/Furniture-Home-Dcor-Shopping-Experience",
@@ -82,12 +108,13 @@ export const projects: Project[] = [
   },
   {
     id: "travel-booking-app",
-    title: "Flight Ticket Booking App",
+    title: "Travel App: Fly Without Stress",
     pinned: true,
     category: ["ui-ux", "behance"],
     tags: ["Travel", "Booking", "App"],
     description:
       "A seamless and intuitive flight ticket booking experience designed to simplify complex steps like searching, seat selection, and payment into a clean, guided user journey.",
+    shortDescription: "Booking a flight is now as easy as picking a vacation spot! Ready to fly away?",
     image: "/flight-booking-cover-hq.jpg",
     bgColor: "bg-[#0F172A]",
     behanceUrl: "https://www.behance.net/gallery/240040967/Flight-Ticket-Booking-App-UIUX-Case-Study",
@@ -105,11 +132,12 @@ export const projects: Project[] = [
   },
   {
     id: "healthcare-mobile-app",
-    title: "Patient-Centric Healthcare App",
+    title: "Health App: Care in Your Pocket",
     category: ["ui-ux", "behance"],
     tags: ["Healthcare", "Medical", "App", "Telemedicine"],
     description: "A secure and efficient healthcare app designed to simplify patient care. Focuses on fast logins, instant doctor search, and real-time medical access.",
-    image: "/healthcare-app.png",
+    shortDescription: "Talking to a doctor is now as fast as texting a friend! Want to see how it works?",
+    image: "/healthcare-app/cover.jpg",
     bgColor: "bg-[#0B1221]",
     behanceUrl: "https://www.behance.net/gallery/224890781/Healthcare-Mobile-App-UIUX-Case-Study",
     challenge: "Patients often struggle with complex appointment booking systems and fragmented medical records. The goal was to create a unified platform that offers secure access, fast doctor discovery, and effortless communication.",
@@ -133,10 +161,11 @@ export const projects: Project[] = [
   // Other Projects from Behance
   {
     id: "vishva-kshetra",
-    title: "Vishva Kshetra Interiors",
+    title: "Interior Brand: Designing Elegance",
     category: ["website", "branding", "logo", "brochure"],
     tags: ["Interior Design", "Branding", "Web Design", "Brochure"],
     description: "A complete branding identity and website design for Vishva Kshetra, an interior designing firm. The project included crafting a unique logo, designing professional brochures, and building a responsive website to showcase their portfolio.",
+    shortDescription: "I turned a simple drawing of a house into a beautiful brand! Curious to see the magic?",
     image: "/vishva-kshetra-branding.jpg",
     bgColor: "bg-[#252525]",
     websiteUrl: "https://theme-interior-designer.netlify.app/",
@@ -154,11 +183,12 @@ export const projects: Project[] = [
   },
   {
     id: "metrolink-branding",
-    title: "Metrolink Outsourcing Services",
+    title: "Corporate Identity: Building Trust",
     pinned: true,
     category: ["branding", "logo"],
     tags: ["Branding", "Corporate Identity", "Logo Design"],
     description: "A premium brand identity created for Metrolink Outsourcing Services, designed to reflect trust, growth, and professional excellence through clean geometry and a refined gold-black palette.",
+    shortDescription: "I made a shiny golden bird to show how strong this team is! Want to see the gold?",
     image: "/metrolink-cover.jpg",
     bgColor: "bg-[#000000]",
     behanceUrl: "https://www.behance.net/gallery/240053139/Metrolink-Outsourcing-Services-Logo-Identity",
@@ -177,10 +207,11 @@ export const projects: Project[] = [
   },
   {
     id: "vr-football-gaming",
-    title: "VR Football League",
+    title: "VR Football: The Future of Play",
     category: ["ui-ux", "behance"],
     tags: ["VR", "Gaming", "Immersive", "UI Design"],
     description: "An immersive Virtual Reality football gaming experience allowing players to train, play, and compete. Features realistic training modes, diverse game modes, and a dynamic UI.",
+    shortDescription: "Imagine playing football inside your computer! Want to see what the future of sports looks like?",
     image: "/vr-football/cover.jpg",
     bgColor: "bg-[#111]",
     behanceUrl: "https://www.behance.net/gallery/224975159/Immersive-VR-Football-Gaming-App-UIUX-Case-Study",
@@ -203,10 +234,11 @@ export const projects: Project[] = [
   },
   {
     id: "financial-services-app",
-    title: "PayEasy - Financial App",
+    title: "Banking App: Secure and Simple",
     category: ["ui-ux", "behance"],
     tags: ["Fintech", "Finance", "App", "React Native"],
     description: "A secure and user-friendly mobile banking application designed to simplify finance on the go. Features seamless fund transfers, bill payments, and robust security protocols.",
+    shortDescription: "A money app that knows it's you just by your fingerprint! Want to see the secret security?",
     image: "/financial-app/cover.png",
     bgColor: "bg-[#141414]",
     behanceUrl: "https://www.behance.net/gallery/224883413/Financial-Services-Mobile-App-UIUX-Case-Study",
@@ -229,10 +261,11 @@ export const projects: Project[] = [
   },
   {
     id: "agri-inspection-system",
-    title: "Agri-Tech Quality Control System",
+    title: "AgriTech AI: Smart Quality Control",
     category: ["ui-ux", "behance"],
     tags: ["AgriTech", "AI", "Dashboard", "SaaS"],
     description: "AI-Powered Agriculture Quality Control System designed to optimize inspection processes. Features real-time defect detection, detailed analytics, and live monitoring to reduce manual effort.",
+    shortDescription: "A robot eye that picks out the best fruit for you! Curious how the smart camera works?",
     image: "/agri-tech/cover.jpg",
     bgColor: "bg-[#0F0F0F]",
     behanceUrl: "https://www.behance.net/gallery/224976715/Computer-Vision-Based-Inspection-System-for-Agriculture",
@@ -256,10 +289,11 @@ export const projects: Project[] = [
   },
   {
     id: "ai-healthcare-chatbot",
-    title: "MediAssist - AI Health Chatbot",
+    title: "AI Chatbot: Your Health Buddy",
     category: ["ui-ux", "behance"],
     tags: ["AI", "Healthcare", "Chatbot", "Mobile App"],
     description: "An AI-powered healthcare assistant designed to provide instant medical support, symptom checking, and seamless appointment scheduling for patients.",
+    shortDescription: "A robot friend that helps you feel better instantly! Want to meet your new health buddy?",
     image: "/ai-chatbot/cover.png",
     bgColor: "bg-[#111]",
     behanceUrl: "https://www.behance.net/gallery/234177525/AI-Chatbot-for-Healthcare-Support",
@@ -282,10 +316,11 @@ export const projects: Project[] = [
   },
   {
     id: "job-portal-app",
-    title: "JobNow - AI Job Portal",
+    title: "Job Portal: AI Career Matchmaker",
     category: ["ui-ux", "behance"],
     tags: ["Recruitment", "AI", "Mobile App"],
     description: "AI-Powered Job Portal App designed for smart hiring and career growth. JobNow connects candidates and employers with a simplified, user-friendly interface.",
+    shortDescription: "Finding a job is now as easy as swiping on your favorite game! Ready to find a winner?",
     image: "/job-portal-cover-new.png",
     bgColor: "bg-[#141414]",
     behanceUrl: "https://www.behance.net/gallery/224808223/AI-Powered-Job-Portal-App-for-Job-Seekers-Recruiters",
@@ -309,11 +344,12 @@ export const projects: Project[] = [
   },
   {
     id: "brotomotive-website",
-    title: "Brotomotive – Auto Repair",
+    title: "Auto Repair: Web Driving Sales",
     pinned: true,
     category: ["website"],
     tags: ["Auto Repair", "Web Design", "Local Business"],
     description: "A professional, responsive website designed to connect vehicle owners with reliable auto repair and maintenance services. It serves as a digital hub for Brotomotive, offering clear service details and easy contact options.",
+    shortDescription: "A website for car heroes who save the day when engines break! Want to see under the hood?",
     image: "/brotomotive-laptop-mockup.png",
     bgColor: "bg-[#1a1a1a]",
     websiteUrl: "https://www.brotomotive.com.au/",

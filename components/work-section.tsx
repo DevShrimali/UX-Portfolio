@@ -63,7 +63,7 @@ export function WorkSection() {
                   {project.title}
                 </h2>
                 <p className="text-gray-300 text-sm md:text-lg max-w-xl leading-relaxed mb-6 line-clamp-2 md:line-clamp-none">
-                  {project.description}
+                  {project.shortDescription || project.description}
                 </p>
                 <span className="inline-flex items-center gap-2 px-6 py-3 bg-[#ddf2ff] dark:bg-white text-[#33a3ff] dark:text-black font-bold text-sm rounded-full group-hover:bg-[#33a3ff] group-hover:text-white dark:group-hover:bg-accent dark:group-hover:text-black transition-colors">
                   View Case Study <ArrowUpRight className="w-4 h-4" />
@@ -114,7 +114,7 @@ export function WorkSection() {
 
                 {/* Description */}
                 <p className="text-muted-foreground text-sm leading-relaxed mb-0 line-clamp-3">
-                  {project.description}
+                  {project.shortDescription || project.description}
                 </p>
 
 
