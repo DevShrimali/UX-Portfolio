@@ -230,6 +230,7 @@ export const projects: Project[] = [
       "/vr-football/gallery-1.jpg",
       "/vr-football/gallery-2.jpg",
       "/vr-football/gallery-3.jpg",
+      "https://youtu.be/w8lNGT98gzk",
     ],
   },
   {
@@ -340,6 +341,7 @@ export const projects: Project[] = [
       "/job-portal/gallery-2.jpg",
       "/job-portal/gallery-3.jpg",
       "/job-portal/gallery-4.jpg",
+      "https://youtu.be/Niv34S3n0jg",
     ],
   },
   {
