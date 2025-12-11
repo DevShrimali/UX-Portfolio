@@ -119,7 +119,7 @@ export function ConnectSection() {
 
           {/* Dribbble */}
           <SocialCard
-            href="https://dribbble.com/devshrimali"
+            href="https://dribbble.com/dev-shrimali"
             icon={Dribbble}
             label="Dribbble"
             subLabel="Design Shots"

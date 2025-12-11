@@ -97,7 +97,7 @@ export function Navbar() {
               <BehanceIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://dribbble.com/devshrimali"
+              href="https://dribbble.com/dev-shrimali"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:opacity-50 transition-opacity"
@@ -199,7 +199,7 @@ export function Navbar() {
             <BehanceIcon className="w-6 h-6" />
           </a>
           <a
-            href="https://dribbble.com/devshrimali"
+            href="https://dribbble.com/dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"

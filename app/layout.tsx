@@ -110,8 +110,8 @@ export default function RootLayout({
                 "https://www.linkedin.com/in/dev-shrimali",
                 "https://twitter.com/devshrimali",
                 "https://github.com/devshrimali",
-                "https://dribbble.com/devshrimali",
-                "https://www.behance.net/devshrimali"
+                "https://dribbble.com/dev-shrimali",
+                "https://www.behance.net/dev-shrimali"
               ],
               alumniOf: "University Name",
               worksFor: {

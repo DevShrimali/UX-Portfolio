@@ -27,11 +27,11 @@ export function HeroSection() {
         <div className="hidden md:block w-1/2 h-full" />
 
         {/* Right Image Container */}
-        <div className="w-full md:w-1/2 h-full relative overflow-hidden pointer-events-auto">
+        <div className="w-full md:w-1/2 h-full relative overflow-hidden pointer-events-auto flex items-end justify-end">
           <img
             src="/dev-pro.png"
             alt="INTERFACE_V1.0"
-            className={`w-full h-full object-contain md:object-cover object-bottom md:object-top opacity-100 md:opacity-90 mix-blend-overlay hover:mix-blend-normal transition-all duration-500 ${isLoaded ? "scale-100" : "scale-110"
+            className={`w-full h-[90%] md:h-[90%] object-contain md:object-cover md:object-[center_top] opacity-100 md:opacity-90 mix-blend-overlay hover:mix-blend-normal transition-all duration-500 mt-10 md:mt-0 ${isLoaded ? "scale-100" : "scale-110"
               }`}
             style={{ transition: "transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), mix-blend-mode 0.5s" }}
           />
@@ -56,12 +56,12 @@ export function HeroSection() {
 
           <div className="overflow-hidden">
             <h1
-              className={`text-5xl md:text-8xl lg:text-[9rem] font-bold leading-[0.9] font-[family-name:var(--font-syne)] mb-8 mix-blend-difference text-foreground ${isLoaded ? "animate-fade-in-up" : "opacity-0"
+              className={`text-5xl md:text-7xl lg:text-8xl xl:text-[9rem] font-bold leading-[0.9] font-[family-name:var(--font-syne)] mb-8 mix-blend-difference text-foreground ${isLoaded ? "animate-fade-in-up" : "opacity-0"
                 }`}
               style={{ animationDelay: "0.4s" }}
             >
               UI/UX <br />
-              <span className="outline-text">DESIGNER</span>
+              <span className="outline-text text-4xl md:text-6xl lg:text-7xl xl:text-[9rem]">DESIGNER</span>
             </h1>
           </div>
 
@@ -70,8 +70,7 @@ export function HeroSection() {
               }`}
             style={{ animationDelay: "0.6s" }}
           >
-            I&apos;m Dev, a UI/UX Designer creating user-centered digital products for web and mobile. I&apos;ve
-            designed solutions across e-commerce, healthcare, fintech, and AI-powered platforms.
+            I&apos;m Dev, a UI/UX Designer building intuitive digital products for web and mobile. I create scalable interfaces shaped by user insights and purposeful interaction design. My work spans e-commerce, fintech, healthcare, and AI-driven platforms.
           </p>
 
           <div

@@ -64,7 +64,7 @@ export function Footer() {
           </a>
           <span className="text-muted hidden md:inline">|</span>
           <a
-            href="https://dribbble.com/devshrimali"
+            href="https://dribbble.com/dev-shrimali"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-foreground transition-colors flex items-center gap-2"

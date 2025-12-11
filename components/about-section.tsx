@@ -15,17 +15,13 @@ export function AboutSection() {
         <div className="w-full md:w-2/3">
           <AnimateOnScroll animation="fade-in-up" delay={0.1}>
             <h2 className="text-3xl md:text-5xl font-[family-name:var(--font-syne)] font-bold leading-tight mb-8">
-              I&apos;m Dev, a UI/UX Designer bridging the gap between{" "}
-              <span className="text-muted-foreground">complex problems</span> and{" "}
-              <span className="text-accent">simple solutions.</span>
+              I design <span className="text-muted-foreground">user-centered products</span> where <span className="text-accent">clarity, usability, and meaningful detail</span> come together.
             </h2>
           </AnimateOnScroll>
 
           <AnimateOnScroll animation="fade-in-up" delay={0.2}>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              With over 6 years of experience, I specialize in designing scalable user-centered products for Fintech,
-              HealthTech, and E-commerce. Based in Ahmedabad, India, I focus on user research, design systems, and
-              high-fidelity prototyping to deliver impactful digital experiences.
+              With 6+ years of experience, I work as a design architect and visual storyteller, crafting high-performing digital products that balance strategy, creativity, and technical understanding. My expertise blends UI/UX design with front-end awareness, enabling me to translate complex requirements into structured design systems, refined user flows, and engaging interfaces. Skilled in Figma, Adobe Creative Suite, and modern web technologies, I conduct insight-driven research, create purposeful interactions, and develop motion graphics that enhance product usability. I stay aligned with evolving design practices while remaining grounded in timeless user experience principles—designing digital journeys that feel intuitive, human, and cohesive across platforms.
             </p>
           </AnimateOnScroll>
         </div>
