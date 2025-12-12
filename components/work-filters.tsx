@@ -15,6 +15,7 @@ const filterCategories: { key: ProjectCategory | "all"; label: string }[] = [
   { key: "website", label: "Websites" },
   { key: "github", label: "GitHub" },
   { key: "behance", label: "Behance" },
+  { key: "hobby", label: "Hobby Projects" },
 ]
 
 export function WorkFilters({ projects }: { projects: Project[] }) {
@@ -43,8 +44,8 @@ export function WorkFilters({ projects }: { projects: Project[] }) {
               key={cat.key}
               onClick={() => setActiveFilter(cat.key)}
               className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-all ${activeFilter === cat.key
-                  ? "bg-accent text-background"
-                  : "bg-card border border-white/10 text-gray-400 hover:text-white hover:border-white/30"
+                ? "bg-accent text-background"
+                : "bg-card border border-white/10 text-gray-400 hover:text-white hover:border-white/30"
                 }`}
             >
               {cat.label}

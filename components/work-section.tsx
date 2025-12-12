@@ -4,9 +4,11 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { projects } from "@/lib/projects-data"
 
-const featuredProjects = projects.slice(0, 3)
+const visibleProjects = projects.filter((p) => !p.category.includes("hobby"))
 
-const otherProjects = projects.slice(3, 9)
+const featuredProjects = visibleProjects.slice(0, 3)
+
+const otherProjects = visibleProjects.slice(3, 9)
 
 export function WorkSection() {
   return (
