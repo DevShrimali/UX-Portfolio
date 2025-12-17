@@ -25,7 +25,6 @@ export default function HomePage() {
     <main>
       <HeroSection />
       <AboutSection />
-      <ImpactHighlights />
       <ServicesSection />
       <ProcessSection />
       <WorkSection />
