@@ -60,7 +60,7 @@ export function ConnectSection() {
               </div>
             </div>
             <div className="z-10 mt-12 md:mt-0">
-              <h4 className="text-3xl md:text-5xl font-[family-name:var(--font-syne)] font-bold mb-4">Start a Project</h4>
+              <h4 className="text-3xl md:text-5xl font-[family-name:var(--font-syne)] font-bold mb-4">Ready to Scale?</h4>
               <a href={`mailto:${email}`} className="text-lg md:text-2xl opacity-90 hover:opacity-100 hover:underline decoration-2 underline-offset-4 break-all font-medium">
                 {email}
               </a>

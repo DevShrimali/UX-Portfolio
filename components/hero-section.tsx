@@ -56,12 +56,12 @@ export function HeroSection() {
 
           <div className="overflow-hidden">
             <h1
-              className={`text-5xl md:text-7xl lg:text-8xl xl:text-[9rem] font-bold leading-[0.9] font-[family-name:var(--font-syne)] mb-8 mix-blend-difference text-foreground ${isLoaded ? "animate-fade-in-up" : "opacity-0"
+              className={`text-4xl md:text-7xl lg:text-8xl xl:text-[9rem] font-bold leading-[0.9] font-[family-name:var(--font-syne)] mb-8 mix-blend-difference text-foreground ${isLoaded ? "animate-fade-in-up" : "opacity-0"
                 }`}
               style={{ animationDelay: "0.4s" }}
             >
               UI/UX <br />
-              <span className="outline-text text-4xl md:text-6xl lg:text-7xl xl:text-[9rem]">DESIGNER</span>
+              <span className="outline-text text-3xl md:text-6xl lg:text-7xl xl:text-[9rem]">DESIGNER</span>
             </h1>
           </div>
 
@@ -70,7 +70,7 @@ export function HeroSection() {
               }`}
             style={{ animationDelay: "0.6s" }}
           >
-            I&apos;m Dev, a UI/UX Designer building intuitive digital products for web and mobile. I create scalable interfaces shaped by user insights and purposeful interaction design. My work spans e-commerce, fintech, healthcare, and AI-driven platforms.
+            Simplifying user journeys in fintech & healthcare products. I create scalable interfaces shaped by user insights and purposeful interaction design.
           </p>
 
           <div
@@ -81,7 +81,7 @@ export function HeroSection() {
               href="#work"
               className="magnetic-btn px-6 md:px-8 py-3 md:py-4 bg-primary text-primary-foreground rounded-full font-bold uppercase tracking-wider text-xs md:text-sm hover:bg-accent hover:scale-105 transition-all"
             >
-              View Selected Projects
+              See Case Studies
             </Link>
 
             <Link

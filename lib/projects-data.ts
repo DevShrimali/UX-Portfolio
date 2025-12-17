@@ -20,6 +20,10 @@ export interface Project {
   tools?: string[]
   timeline?: string
   role?: string
+  // Extended case study fields
+  research?: string // Research & insights
+  iterations?: string // Design iterations & decisions
+  responsibilities?: string // My role & responsibilities (detailed)
   // Gallery images
   gallery?: string[]
   // Pinned status for top projects

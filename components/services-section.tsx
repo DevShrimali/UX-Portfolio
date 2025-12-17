@@ -73,7 +73,7 @@ export function ServicesSection() {
   }, [])
 
   return (
-    <section id="services" className="py-24 bg-secondary dark:bg-[color-mix(in_oklab,var(--accent)_5%,transparent)] border-b border-border overflow-hidden">
+    <section id="services" className="py-24 bg-secondary dark:bg-[color-mix(in_oklab,var(--accent)_5%,transparent)] border-b border-border">
       <div className="px-6 md:px-20 lg:px-40">
         <AnimateOnScroll animation="fade-in-up">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -85,35 +85,72 @@ export function ServicesSection() {
             </div>
           </div>
         </AnimateOnScroll>
-      </div>
 
-      <div
-        ref={scrollRef}
-        className="flex gap-6 overflow-x-hidden whitespace-nowrap px-0 pt-4 pb-12"
-      >
-        {/* Render services multiple times for seamless infinite scroll */}
-        {[...services, ...services, ...services].map((service, index) => (
-          <div
-            key={`${service.title}-${index}`}
-            className="inline-block flex-shrink-0 w-[280px] md:w-[320px] group p-6 md:p-8 border border-border rounded-2xl bg-card card-hover cursor-pointer whitespace-normal"
-          >
-            <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mb-6 group-hover:bg-[#33a3ff] group-hover:text-white dark:group-hover:bg-accent dark:group-hover:text-black transition-all duration-300">
-              <service.icon className="w-6 h-6" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          {/* 1. Product & UX Strategy */}
+          <div className="space-y-6">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+              <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold font-[family-name:var(--font-syne)] mb-3">{service.title}</h3>
-            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{service.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {service.capabilities.map((cap) => (
-                <span
-                  key={cap}
-                  className="px-3 py-1 text-xs bg-muted rounded-full text-muted-foreground group-hover:bg-primary/10 transition-colors"
-                >
-                  {cap}
-                </span>
+            <h3 className="text-xl font-bold font-[family-name:var(--font-syne)]">Product & UX Strategy</h3>
+            <ul className="space-y-3">
+              {["User research & usability testing", "Problem framing & requirement analysis", "User flows, journey mapping & IA", "Accessibility & equity-focused design"].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                  {item}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        ))}
+
+          {/* 2. UI & Interaction Design */}
+          <div className="space-y-6">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+              <Palette className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold font-[family-name:var(--font-syne)]">UI & Interaction Design</h3>
+            <ul className="space-y-3">
+              {["High-fidelity UI for mobile & web", "Scalable design systems & libraries", "Interaction design & micro-interactions", "Visual hierarchy, typography & layout"].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 3. Collaboration & Delivery */}
+          <div className="space-y-6">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+              <Layers className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold font-[family-name:var(--font-syne)]">Collaboration & Delivery</h3>
+            <ul className="space-y-3">
+              {["End-to-end design ownership", "Close developer collaboration", "Front-end awareness (HTML/CSS/JS)", "Client communication & alignment"].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 4. Tools & Platforms */}
+          <div className="space-y-6">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-2">
+              <Monitor className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold font-[family-name:var(--font-syne)]">Tools & Platforms</h3>
+            <ul className="space-y-3">
+              {["Figma (UI, prototyping, systems)", "Adobe Creative Suite (visual/motion)", "Miro & Notion (workshops/docs)"].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )

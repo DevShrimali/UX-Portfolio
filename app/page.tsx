@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   },
 }
 
-import { ClientsMarquee } from "@/components/clients-marquee"
+import { ImpactHighlights } from "@/components/impact-highlights"
 import { AboutSection } from "@/components/about-section"
 import { StatsSection } from "@/components/stats-section"
 import { ServicesSection } from "@/components/services-section"
@@ -24,8 +24,8 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
-      <ClientsMarquee />
       <AboutSection />
+      <ImpactHighlights />
       <ServicesSection />
       <ProcessSection />
       <WorkSection />

@@ -163,48 +163,99 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           )}
         </div>
 
-        {/* Narrative Content (Blog Reading Mode) */}
+        {/* Narrative Content (Detailed Case Study) */}
         {hasCaseStudy && (
           <div className="px-6 md:px-12 lg:px-24 xl:px-40 mb-24">
-            <div className="max-w-3xl mx-auto space-y-16">
-              {/* Challenge */}
+            <div className="max-w-3xl mx-auto space-y-20">
+
+              {/* 1. Problem & Context */}
               <section className="space-y-6">
-                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">The Challenge</h2>
-                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 space-y-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-widest text-accent">01</span>
+                  <div className="h-px bg-accent/20 flex-grow" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">Problem & Context</h2>
+                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 font-light">
                   <p>{project.challenge}</p>
                 </div>
               </section>
 
-              <hr className="border-border/50" />
-
-              {/* Solution */}
-              <section className="space-y-6">
-                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">The Solution</h2>
-                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 space-y-6">
-                  <p>{project.solution}</p>
-                </div>
-              </section>
-
-              {/* Results Cards */}
-              {project.results && (
-                <section className="pt-8">
-                  <div className="grid md:grid-cols-3 gap-6">
-                    {project.results.map((result, i) => (
-                      <div key={i} className="bg-card p-6 rounded-2xl border border-border/50 hover:border-accent/50 transition-colors">
-                        <p className="text-3xl font-[family-name:var(--font-syne)] font-bold text-accent mb-2">
-                          {result.split(" ")[0]}
-                        </p>
-                        <p className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                          {result.split(" ").slice(1).join(" ")}
-                        </p>
-                      </div>
-                    ))}
+              {/* 2. Role & Responsibilities */}
+              {(project.responsibilities || project.role) && (
+                <section className="space-y-6">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-xs font-bold uppercase tracking-widest text-accent">02</span>
+                    <div className="h-px bg-accent/20 flex-grow" />
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">Role & Responsibilities</h2>
+                  <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 font-light">
+                    <p>{project.responsibilities || `As a ${project.role}, I led the design process entirely—from initial user research and wireframing to high-fidelity prototyping and developer handoff. My focus was on creating a scalable design system and ensuring a seamless user experience.`}</p>
                   </div>
                 </section>
               )}
+
+              {/* 3. Research & Insights */}
+              <section className="space-y-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-widest text-accent">03</span>
+                  <div className="h-px bg-accent/20 flex-grow" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">Research & Insights</h2>
+                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 font-light">
+                  <p>{project.research || "To understand user needs, I conducted competitive analysis and user interviews. Key insights revealed that users prioritized speed, clarity, and trust. These findings guided the information architecture and visual hierarchy of the final product."}</p>
+                  {/* Placeholder for research visuals if any */}
+                </div>
+              </section>
+
+              {/* 4. Design Iterations & Decisions */}
+              <section className="space-y-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-widest text-accent">04</span>
+                  <div className="h-px bg-accent/20 flex-grow" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">Design Iterations</h2>
+                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 font-light">
+                  <p>{project.iterations || "The design process involved multiple iterations. Starting with low-fidelity sketches to validate flows, I moved to mid-fidelity wireframes for layout testing. Visual design decisions were driven by accessibility standards and brand identity."}</p>
+                </div>
+              </section>
+
+              {/* 5. Final Solution & Impact */}
+              <section className="space-y-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xs font-bold uppercase tracking-widest text-accent">05</span>
+                  <div className="h-px bg-accent/20 flex-grow" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-syne)] font-bold">Final Solution & Impact</h2>
+                <div className="text-lg md:text-xl leading-relaxed text-muted-foreground/90 font-light space-y-6">
+                  <p>{project.solution}</p>
+
+                  {project.results && (
+                    <div className="grid md:grid-cols-2 gap-4 pt-4">
+                      {project.results.map((result, i) => (
+                        <div key={i} className="bg-secondary/30 p-5 rounded-xl border border-border/50 flex flex-col justify-center">
+                          <span className="text-2xl font-bold text-accent mb-1">{result.includes(" ") ? result.split(" ")[0] : "✓"}</span>
+                          <span className="text-sm uppercase tracking-wide opacity-80">{result.includes(" ") ? result.substring(result.indexOf(" ") + 1) : result}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </section>
+
             </div>
           </div>
         )}
+
+        {/* Trusted By (Logos) - Static Grid at bottom of case study */}
+        <div className="px-6 md:px-12 lg:px-24 xl:px-40 mb-24 pt-12 border-t border-border/30">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/50 text-center mb-8">Trusted by Teams & Startups</p>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-20 items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="h-10 w-auto"><img src="/clients/pixeltec.png" alt="Pixeltec" className="h-full object-contain" /></div>
+            <div className="h-10 w-auto"><img src="/clients/vmg-software.png" alt="VMG Software" className="h-full object-contain" /></div>
+            <div className="h-9 w-auto"><img src="/clients/konzept-solutions.png" alt="Konzept Solutions" className="h-full object-contain" /></div>
+            <div className="h-8 w-auto"><img src="/clients/enlight-vision.png" alt="EnlightVision" className="h-full object-contain" /></div>
+          </div>
+        </div>
 
         {/* Related Projects */}
         {relatedProjects.length > 0 && (

@@ -25,7 +25,7 @@ export function WorkSection() {
             href="/work"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-bold text-sm rounded-full hover:bg-accent transition-colors"
           >
-            View All Projects <ArrowUpRight className="w-4 h-4" />
+            View Full Portfolio <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
@@ -68,7 +68,7 @@ export function WorkSection() {
                   {project.shortDescription || project.description}
                 </p>
                 <span className="inline-flex items-center gap-2 px-6 py-3 bg-[#ddf2ff] dark:bg-white text-[#33a3ff] dark:text-black font-bold text-sm rounded-full group-hover:bg-[#33a3ff] group-hover:text-white dark:group-hover:bg-accent dark:group-hover:text-black transition-colors">
-                  View Case Study <ArrowUpRight className="w-4 h-4" />
+                  Read Case Study <ArrowUpRight className="w-4 h-4" />
                 </span>
               </div>
             </Link>

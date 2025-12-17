@@ -7,32 +7,32 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion"
 const processSteps = [
   {
     number: "01",
-    title: "Empathize",
-    description: "Deep dive into user needs through behavioral analysis and empathy mapping.",
+    title: "Discover",
+    description: "Understand the problem through stakeholder discussions, user research, and requirement analysis.",
     icon: Search,
   },
   {
     number: "02",
     title: "Define",
-    description: "Synthesizing research to construct precise problem statements and user personas.",
+    description: "Translate insights into clear problem statements, user flows, and information architecture.",
     icon: Target,
   },
   {
     number: "03",
-    title: "Ideate",
-    description: "Divergent thinking sessions to generate solution architectures and feature sets.",
-    icon: Lightbulb,
-  },
-  {
-    number: "04",
-    title: "Prototype",
-    description: "Iterative development of low-to-high fidelity interactive models.",
+    title: "Design",
+    description: "Create wireframes, high-fidelity interfaces, and scalable design systems focused on usability and clarity.",
     icon: PenTool,
   },
   {
+    number: "04",
+    title: "Validate",
+    description: "Test designs through usability reviews and iterations to ensure they are intuitive, equitable, and useful.",
+    icon: Lightbulb,
+  },
+  {
     number: "05",
-    title: "Test",
-    description: "Rigorous usability testing and validation loops for data-driven refinement.",
+    title: "Deliver",
+    description: "Collaborate closely with developers to ensure accurate handoff and smooth implementation.",
     icon: FlaskConical,
   },
 ]
@@ -43,10 +43,13 @@ export function ProcessSection() {
   return (
     <section id="process" className="py-24 bg-background overflow-hidden relative">
       <div className="px-6 md:px-20 lg:px-40 mb-12">
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2">03 / Process & Stack</h3>
-        <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-syne)]">
-          Workflow <span className="text-accent">Protocol</span>
+        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-2">03 / Process & Workflow</h3>
+        <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-syne)] mb-6">
+          How I <span className="text-accent">Work</span>
         </h2>
+        <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+          I follow a flexible, outcome-driven design process that adapts to product goals, timelines, and team constraints. Each stage is grounded in user insight and aligned with business objectives.
+        </p>
       </div>
 
       <div className="px-6 md:px-20 lg:px-40 mb-20 bg-transparent">
