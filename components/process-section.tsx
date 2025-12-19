@@ -10,30 +10,35 @@ const processSteps = [
     title: "Discover",
     description: "Understand the problem through stakeholder discussions, user research, and requirement analysis.",
     icon: Search,
+    image: "/process/discover.png",
   },
   {
     number: "02",
     title: "Define",
     description: "Translate insights into clear problem statements, user flows, and information architecture.",
     icon: Target,
+    image: "/process/define.png",
   },
   {
     number: "03",
     title: "Design",
     description: "Create wireframes, high-fidelity interfaces, and scalable design systems focused on usability and clarity.",
     icon: PenTool,
+    image: "/process/design.png",
   },
   {
     number: "04",
     title: "Validate",
     description: "Test designs through usability reviews and iterations to ensure they are intuitive, equitable, and useful.",
     icon: Lightbulb,
+    image: "/process/validate.png",
   },
   {
     number: "05",
     title: "Deliver",
     description: "Collaborate closely with developers to ensure accurate handoff and smooth implementation.",
     icon: FlaskConical,
+    image: "/process/deliver.png",
   },
 ]
 
@@ -63,9 +68,9 @@ export function ProcessSection() {
                   layout
                   onClick={() => setActiveStep(index)}
                   onMouseEnter={() => setActiveStep(index)}
-                  className={`relative border overflow-hidden cursor-pointer group flex flex-col justify-end backdrop-blur-sm rounded-3xl ${isActive
-                    ? "border-accent/50 bg-accent/5 flex-[3]"
-                    : "border-border hover:border-primary/20 flex-1 bg-card"
+                  className={`relative border overflow-hidden cursor-pointer group flex flex-col justify-end rounded-3xl ${isActive
+                    ? "border-accent/50 flex-[3]"
+                    : "border-border hover:border-primary/20 flex-1"
                     }`}
                   initial={false}
                   animate={{
@@ -78,12 +83,24 @@ export function ProcessSection() {
                     damping: 30
                   }}
                 >
+                  {/* Background Image */}
+                  <div className="absolute inset-0 z-0">
+                    <img
+                      src={step.image}
+                      alt=""
+                      className={`w-full h-full object-cover transition-all duration-700 ${isActive ? "opacity-100 scale-100" : "opacity-30 grayscale scale-110"
+                        }`}
+                    />
+                    <div className={`absolute inset-0 transition-colors duration-500 ${isActive ? "bg-black/60" : "bg-black/80"
+                      }`} />
+                  </div>
+
                   {/* Background Number */}
                   <motion.span
                     layout="position"
-                    className={`absolute font-bold font-[family-name:var(--font-syne)] leading-none select-none pointer-events-none transition-colors duration-500 ${isActive
+                    className={`absolute font-bold font-[family-name:var(--font-syne)] leading-none select-none pointer-events-none transition-colors duration-500 z-10 ${isActive
                       ? "-right-4 top-4 text-8xl text-accent/10"
-                      : "left-4 top-4 text-4xl text-foreground/5"
+                      : "left-4 top-4 text-4xl text-white/10"
                       }`}
                   >
                     {step.number}
@@ -92,7 +109,7 @@ export function ProcessSection() {
                   {/* Icon */}
                   <motion.div
                     layout="position"
-                    className={`absolute top-8 right-8 z-10 transition-colors duration-300 ${isActive ? "text-accent" : "text-muted-foreground"
+                    className={`absolute top-8 right-8 z-10 transition-colors duration-300 ${isActive ? "text-accent" : "text-white/50"
                       }`}
                   >
                     <step.icon className="w-8 h-8" />
@@ -107,7 +124,7 @@ export function ProcessSection() {
                           className="w-1.5 h-1.5 bg-accent rounded-full"
                         />
                       )}
-                      <span className={`text-[10px] font-mono uppercase tracking-widest ${isActive ? "text-accent" : "text-muted-foreground"
+                      <span className={`text-[10px] font-mono uppercase tracking-widest ${isActive ? "text-accent" : "text-white/60"
                         }`}>
                         Step_{step.number}
                       </span>
@@ -115,7 +132,7 @@ export function ProcessSection() {
 
                     <motion.h3
                       layout="position"
-                      className={`font-bold font-[family-name:var(--font-syne)] mb-4 text-foreground whitespace-nowrap origin-left ${isActive ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"
+                      className={`font-bold font-[family-name:var(--font-syne)] mb-4 whitespace-nowrap origin-left ${isActive ? "text-3xl md:text-4xl text-white" : "text-xl md:text-2xl text-white/80"
                         }`}
                     >
                       {step.title}
@@ -129,7 +146,7 @@ export function ProcessSection() {
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.3, delay: 0.1 }}
                         >
-                          <p className="text-muted-foreground leading-relaxed max-w-md hidden md:block">
+                          <p className="text-gray-300 leading-relaxed max-w-md hidden md:block">
                             {step.description}
                           </p>
                         </motion.div>
@@ -138,7 +155,7 @@ export function ProcessSection() {
 
                     {/* Mobile Description */}
                     {isActive && (
-                      <p className="text-muted-foreground leading-relaxed max-w-md md:hidden mt-2 text-sm">
+                      <p className="text-gray-300 leading-relaxed max-w-md md:hidden mt-2 text-sm">
                         {step.description}
                       </p>
                     )}

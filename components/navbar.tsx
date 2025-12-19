@@ -125,7 +125,7 @@ export function Navbar() {
           <ThemeToggle />
 
           <Link
-            href="https://drive.google.com/file/d/13tq82Ju293V6cpKx9NS5kK8YQ0N5EcTU/view?usp=sharing"
+            href="/document/Dev-UX-Designer.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden xl:inline-flex items-center gap-2 text-xs font-bold border border-foreground/20 px-6 py-3 rounded-full hover:bg-foreground hover:text-background transition-all uppercase tracking-widest text-foreground"
