@@ -179,6 +179,17 @@ export function Navbar() {
           >
             Contact Me
           </Link>
+
+          <Link
+            href="/document/Dev-UX-Designer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMenu}
+            className="flex items-center gap-2 text-sm font-bold border border-foreground/20 px-8 py-4 rounded-full hover:bg-foreground hover:text-background transition-all uppercase tracking-widest text-foreground mt-4"
+          >
+            <Download className="w-4 h-4" />
+            Resume
+          </Link>
         </nav>
 
         <div className="flex gap-8 mt-16 sm:hidden">

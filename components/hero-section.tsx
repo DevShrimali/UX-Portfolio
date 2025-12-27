@@ -2,6 +2,7 @@
 import { NoiseBackground } from "./noise-background"
 import { ArrowDownRight, ArrowDown } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
 export function HeroSection() {
@@ -28,13 +29,16 @@ export function HeroSection() {
 
         {/* Right Image Container */}
         <div className="w-full md:w-1/2 h-full relative overflow-hidden pointer-events-auto flex items-end justify-end">
-          <img
-            src="/dev-pro.png"
-            alt="INTERFACE_V1.0"
-            className={`w-full h-[90%] md:h-[90%] object-contain md:object-cover md:object-[center_top] opacity-100 md:opacity-90 mix-blend-overlay hover:mix-blend-normal transition-all duration-500 mt-10 md:mt-0 ${isLoaded ? "scale-100" : "scale-110"
-              }`}
-            style={{ transition: "transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), mix-blend-mode 0.5s" }}
-          />
+          <div className={`relative w-full h-[90%] md:h-[90%] mt-10 md:mt-0 transition-transform duration-1000 ${isLoaded ? "scale-100" : "scale-110"}`}>
+            <Image
+              src="/dev-pro.png"
+              alt="INTERFACE_V1.0"
+              fill
+              priority
+              className="object-contain md:object-cover md:object-[center_top] opacity-100 md:opacity-90 mix-blend-overlay hover:mix-blend-normal transition-all duration-500"
+              style={{ transition: "mix-blend-mode 0.5s" }}
+            />
+          </div>
           {/* Gradient fade to integrate image with background */}
           <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background/20 md:to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
@@ -86,6 +90,7 @@ export function HeroSection() {
 
             <Link
               href="#work"
+              aria-label="Scroll to work section"
               className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#ddf2ff] dark:bg-accent flex items-center justify-center text-[#33a3ff] dark:text-accent-foreground hover:bg-[#33a3ff] hover:text-white dark:hover:bg-accent/80 dark:hover:text-accent-foreground hover:scale-110 hover:rotate-90 transition-all duration-300"
             >
               <ArrowDownRight className="w-5 h-5 md:w-6 md:h-6" />

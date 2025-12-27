@@ -1,7 +1,7 @@
 
 "use client"
 
-import { Linkedin, Mail, Youtube, Dribbble, Github, MessageCircle, ArrowUpRight, Copy, Check } from "lucide-react"
+import { Linkedin, Mail, Youtube, Dribbble, Github, MessageCircle, ArrowUpRight, Copy, Check, LucideIcon } from "lucide-react"
 import { AnimateOnScroll } from "./animate-on-scroll"
 import { BehanceIcon } from "./behance-icon"
 import { useState } from "react"
@@ -24,7 +24,7 @@ export function ConnectSection() {
         <div>
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">06 / Connect</h3>
           <h2 className="text-5xl md:text-7xl font-[family-name:var(--font-syne)] font-bold uppercase leading-none">
-            Let's <br /> <span className="text-muted-foreground/30">Work Together</span>
+            Get <br /> <span className="text-muted-foreground/30">In Touch</span>
           </h2>
         </div>
         <p className="md:max-w-xs text-lg text-muted-foreground font-medium">
@@ -141,7 +141,7 @@ function SocialCard({
   className,
 }: {
   href: string
-  icon: any
+  icon: React.ElementType
   label: string
   subLabel: string
   color: string

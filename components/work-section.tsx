@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { projects } from "@/lib/projects-data"
 
@@ -40,8 +41,10 @@ export function WorkSection() {
               className={`block w-[95%] md:w-[85%] h-[60vh] md:h-[75vh] ${project.bgColor} border border-border rounded-[2rem] md:rounded-[3rem] overflow-hidden relative group shadow-2xl`}
             >
               {/* Image Background */}
-              <img
+              <Image
                 src={project.image || "/placeholder.svg"}
+                fill
+                sizes="(max-width: 768px) 100vw, 85vw"
                 className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
                 alt={`${project.title} Project`}
               />
@@ -91,9 +94,11 @@ export function WorkSection() {
             >
               {/* Image Container */}
               <div className="relative h-[240px] w-full overflow-hidden">
-                <img
+                <Image
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>

@@ -9,7 +9,6 @@ import { DribbbleIcon } from "./dribbble-icon"
 export function Footer() {
   return (
     <footer
-      id="contact"
       className="py-24 md:py-32 px-6 md:px-20 lg:px-40 bg-background relative overflow-hidden text-center border-t border-border"
     >
       {/* Background decorations form CTA */}
