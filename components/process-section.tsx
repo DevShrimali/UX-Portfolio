@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Search, Target, Lightbulb, PenTool, FlaskConical, ArrowRight } from "lucide-react"
+import { Search, Target, Lightbulb, PenTool, FlaskConical, ArrowRight, ChevronUp, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import Image from "next/image"
 
@@ -58,18 +58,27 @@ export function ProcessSection() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
+  const handleNext = () => {
+    setActiveStep((prev) => (prev + 1) % processSteps.length)
+  }
+
+  const handlePrev = () => {
+    setActiveStep((prev) => (prev - 1 + processSteps.length) % processSteps.length)
+  }
+
   return (
-    <section id="process" className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden" ref={containerRef}>
+    <section id="process" className="py-20 bg-secondary/30 relative overflow-hidden" ref={containerRef}>
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
-      <div className="container px-6 md:px-20 lg:px-40 mx-auto relative z-10">
+      {/* Content Container - Aligned with Work/Hero sections */}
+      <div className="w-full px-6 md:px-20 lg:px-40 relative z-10 flex flex-col justify-center min-h-[80vh]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-24"
+          className="mb-12"
         >
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground mb-4">
             03 / Process & Workflow
@@ -78,13 +87,31 @@ export function ProcessSection() {
             How I <span className="text-primary">Work</span>
           </h2>
           <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
-            A strategic approach to digital product design, ensuring every pixel utilizes data-backed insights and creative innovation.
+            A strategic approach to digital product design, ensuring every pixel utilizes data-backed insights.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 items-start relative">
+          {/* Controls - Centered vertically in sticky view */}
+          <div className="hidden lg:flex flex-col gap-4 sticky top-[45vh] lg:col-span-1 z-20 -mt-12">
+            <button
+              onClick={handlePrev}
+              className="w-12 h-12 rounded-full border border-border bg-background/80 backdrop-blur-sm hover:bg-muted flex items-center justify-center transition-all duration-300 group shadow-sm hover:shadow-md hover:scale-105"
+              aria-label="Previous Step"
+            >
+              <ChevronUp className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="w-12 h-12 rounded-full border border-border bg-background/80 backdrop-blur-sm hover:bg-muted flex items-center justify-center transition-all duration-300 group shadow-sm hover:shadow-md hover:scale-105"
+              aria-label="Next Step"
+            >
+              <ChevronDown className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+            </button>
+          </div>
+
           {/* Left Column - Navigation List */}
-          <div className="flex flex-col gap-4 relative">
+          <div className="flex flex-col gap-3 relative lg:col-span-5">
             {processSteps.map((step, index) => {
               const isActive = activeStep === index
               return (
@@ -101,26 +128,26 @@ export function ProcessSection() {
                     border
                   `}
                 >
-                  {/* Active Indicator Line - Adjusted to fit better */}
+                  {/* Active Indicator Line */}
                   {isActive && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="absolute left-1 top-8 bottom-8 w-1 bg-primary rounded-full z-20"
+                      className="absolute left-1 top-6 bottom-6 w-1 bg-primary rounded-full z-20"
                     />
                   )}
 
-                  <div className="p-6 md:p-8 flex gap-6 items-start pl-8 md:pl-10">
+                  <div className="p-5 md:p-6 flex gap-5 items-start pl-8 md:pl-10">
                     {/* Icon Container */}
                     <div className={`
-                        flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-500
+                        flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-500
                         ${isActive ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}
                     `}>
-                      <step.icon className="w-6 h-6" />
+                      <step.icon className="w-5 h-5" />
                     </div>
 
                     <div className="flex-grow">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className={`text-xl font-bold font-[family-name:var(--font-syne)] transition-colors duration-300 ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className={`text-lg font-bold font-[family-name:var(--font-syne)] transition-colors duration-300 ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                           {step.title}
                         </h3>
                         <span className="text-xs font-mono text-muted-foreground/50">{step.number}</span>
@@ -134,13 +161,13 @@ export function ProcessSection() {
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                           >
-                            <p className="text-muted-foreground leading-relaxed mb-6 pt-2 text-sm md:text-base pr-4">
+                            <p className="text-muted-foreground leading-relaxed mb-4 pt-1 text-sm pr-4 line-clamp-2">
                               {step.description}
                             </p>
 
                             <div className="flex flex-wrap gap-2">
                               {step.tags.map(tag => (
-                                <span key={tag} className="text-[10px] md:text-xs font-medium px-3 py-1 rounded-full bg-secondary text-secondary-foreground">
+                                <span key={tag} className="text-[10px] font-medium px-2.5 py-0.5 rounded-full bg-secondary text-secondary-foreground">
                                   {tag}
                                 </span>
                               ))}
@@ -150,9 +177,10 @@ export function ProcessSection() {
                       </AnimatePresence>
                     </div>
 
-                    {/* Arrow for inactive state hint */}
                     {!isActive && (
-                      <ArrowRight className="w-5 h-5 text-muted-foreground/30 self-center" />
+                      <div className="self-center opacity-0 md:opacity-100 transition-opacity">
+                        <ArrowRight className="w-4 h-4 text-muted-foreground/30" />
+                      </div>
                     )}
                   </div>
                 </motion.div>
@@ -161,10 +189,10 @@ export function ProcessSection() {
           </div>
 
           {/* Right Column - Visual Showcase (Sticky) */}
-          <div className="hidden lg:block relative h-[600px] sticky top-32">
+          <div className="hidden lg:block relative h-[500px] sticky top-24 lg:col-span-6">
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-border shadow-2xl bg-background">
-              {/* iPhone Dynamic Island / Notion notch lookalike for decoration */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-2xl z-20 opacity-20" />
+              {/* iPhone Dynamic Island Decoration */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-b-xl z-20 opacity-20" />
 
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
@@ -175,10 +203,7 @@ export function ProcessSection() {
                   transition={{ duration: 0.5, ease: "circOut" }}
                   className="absolute inset-0 w-full h-full bg-background"
                 >
-                  {/* Fallback color/gradient if image fails or for styling */}
                   <div className={`absolute inset-0 opacity-10 ${processSteps[activeStep].color}`} />
-
-                  {/* Actual Image */}
                   <div className="relative w-full h-full">
                     <Image
                       src={processSteps[activeStep].image}
@@ -189,29 +214,27 @@ export function ProcessSection() {
                       className="object-cover"
                       priority
                     />
-                    {/* Gradient Overlay for text readability if we add text over image later */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
                   </div>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Floating Elements / UI Overlay mockups over the image */}
-              <div className="absolute bottom-8 left-8 right-8 z-10">
+              <div className="absolute bottom-6 left-6 right-6 z-10">
                 <motion.div
                   key={`overlay-${activeStep}`}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-background/80 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-lg inline-flex items-center gap-4"
+                  className="bg-background/80 backdrop-blur-md p-3 rounded-2xl border border-white/20 shadow-lg inline-flex items-center gap-3"
                 >
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${processSteps[activeStep].color} text-white`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${processSteps[activeStep].color} text-white`}>
                     {(() => {
                       const Icon = processSteps[activeStep].icon;
-                      return <Icon className="w-5 h-5" />;
+                      return <Icon className="w-4 h-4" />;
                     })()}
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider font-bold">Phase {processSteps[activeStep].number}</p>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Phase {processSteps[activeStep].number}</p>
                     <p className="text-sm font-semibold">{processSteps[activeStep].title}</p>
                   </div>
                 </motion.div>
