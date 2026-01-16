@@ -5,6 +5,7 @@ import Link from "next/link"
 import { AnimateOnScroll } from "./animate-on-scroll"
 import { BehanceIcon } from "./behance-icon"
 import { DribbbleIcon } from "./dribbble-icon"
+import { FigmaIcon } from "./figma-icon"
 
 export function Footer() {
   return (
@@ -69,6 +70,15 @@ export function Footer() {
             className="hover:text-foreground transition-colors flex items-center gap-2"
           >
             <DribbbleIcon className="w-4 h-4" /> Dribbble
+          </a>
+          <span className="text-muted hidden md:inline">|</span>
+          <a
+            href="https://www.figma.com/@itsdevshrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors flex items-center gap-2"
+          >
+            <FigmaIcon className="w-4 h-4" /> Figma
           </a>
           <span className="text-muted hidden md:inline">|</span>
           <a

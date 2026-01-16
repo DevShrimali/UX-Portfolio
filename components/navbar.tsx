@@ -6,6 +6,7 @@ import { Menu, X, Linkedin, Github, Youtube, Download } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { BehanceIcon } from "./behance-icon"
 import { DribbbleIcon } from "./dribbble-icon"
+import { FigmaIcon } from "./figma-icon"
 
 import { ThemeToggle } from "./theme-toggle"
 
@@ -103,6 +104,14 @@ export function Navbar() {
               className="text-foreground hover:opacity-50 transition-opacity"
             >
               <DribbbleIcon className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.figma.com/@itsdevshrimali"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:opacity-50 transition-opacity"
+            >
+              <FigmaIcon className="w-5 h-5" />
             </a>
             <a
               href="https://github.com/DevShrimali"
@@ -216,6 +225,14 @@ export function Navbar() {
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <DribbbleIcon className="w-6 h-6" />
+          </a>
+          <a
+            href="https://www.figma.com/@itsdevshrimali"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <FigmaIcon className="w-6 h-6" />
           </a>
           <a
             href="https://github.com/DevShrimali"
