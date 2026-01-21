@@ -4,6 +4,7 @@
 import { Linkedin, Mail, Youtube, Dribbble, Github, MessageCircle, ArrowUpRight, Copy, Check, LucideIcon } from "lucide-react"
 import { AnimateOnScroll } from "./animate-on-scroll"
 import { BehanceIcon } from "./behance-icon"
+import { FigmaIcon } from "./figma-icon"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 
@@ -97,14 +98,24 @@ export function ConnectSection() {
             className="col-span-1"
           />
 
-          {/* YouTube (Wide) */}
+          {/* YouTube */}
           <SocialCard
             href="https://www.youtube.com/@dev-shrimali"
             icon={Youtube}
             label="YouTube"
             subLabel="Video Content"
             color="bg-[#ff0000]"
-            className="col-span-1 md:col-span-2"
+            className="col-span-1"
+          />
+
+          {/* Figma */}
+          <SocialCard
+            href="https://www.figma.com/@itsdevshrimali"
+            icon={FigmaIcon}
+            label="Figma"
+            subLabel="Design Files"
+            color="bg-[#A259FF]" // Figma Purple
+            className="col-span-1"
           />
 
           {/* GitHub */}

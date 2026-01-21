@@ -1,6 +1,7 @@
 "use client"
 import { NoiseBackground } from "./noise-background"
 import { ArrowDownRight, ArrowDown } from "lucide-react"
+import { GoogleCertifiedBadge } from "./google-certified-badge"
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
@@ -48,6 +49,15 @@ export function HeroSection() {
       {/* 4. Content - Above All (z-30) */}
       <div className="relative z-30 h-[65vh] md:h-full flex flex-col justify-center px-6 md:px-20 lg:px-40 pointer-events-none">
         <div className="max-w-4xl pointer-events-auto">
+          <div className="mb-6">
+            <div
+              className={`inline-block ${isLoaded ? "animate-fade-in-up" : "opacity-0"}`}
+              style={{ animationDelay: "0.1s" }}
+            >
+              <GoogleCertifiedBadge />
+            </div>
+          </div>
+
           <div className="overflow-hidden mb-2">
             <h2
               className={`text-xs md:text-sm font-bold font-mono text-muted-foreground uppercase tracking-[0.2em] ${isLoaded ? "animate-fade-in-up" : "opacity-0"
