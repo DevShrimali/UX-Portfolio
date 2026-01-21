@@ -125,7 +125,7 @@ export function Navbar() {
           <ThemeToggle />
 
           <Link
-            href="/document/Dev-UX-Designer.pdf"
+            href="/UI-UX-Dev-Shrimali-2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden xl:inline-flex items-center gap-2 text-xs font-bold border border-foreground/20 px-6 py-3 rounded-full hover:bg-foreground hover:text-background transition-all uppercase tracking-widest text-foreground"
@@ -181,7 +181,7 @@ export function Navbar() {
           </Link>
 
           <Link
-            href="/document/Dev-UX-Designer.pdf"
+            href="/UI-UX-Dev-Shrimali-2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
