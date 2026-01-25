@@ -110,7 +110,7 @@ export function ConnectSection() {
 
           {/* Figma */}
           <SocialCard
-            href="https://www.figma.com/@itsdevshrimali"
+            href="https://www.figma.com/@devux"
             icon={FigmaIcon}
             label="Figma"
             subLabel="Design Files"

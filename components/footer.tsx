@@ -73,7 +73,7 @@ export function Footer() {
           </a>
           <span className="text-muted hidden md:inline">|</span>
           <a
-            href="https://www.figma.com/@itsdevshrimali"
+            href="https://www.figma.com/@devux"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-foreground transition-colors flex items-center gap-2"

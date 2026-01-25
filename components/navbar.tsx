@@ -106,7 +106,7 @@ export function Navbar() {
               <DribbbleIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://www.figma.com/@itsdevshrimali"
+              href="https://www.figma.com/@devux"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground hover:opacity-50 transition-opacity"
@@ -227,7 +227,7 @@ export function Navbar() {
             <DribbbleIcon className="w-6 h-6" />
           </a>
           <a
-            href="https://www.figma.com/@itsdevshrimali"
+            href="https://www.figma.com/@devux"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
