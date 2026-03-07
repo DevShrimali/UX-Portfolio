@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   },
 }
 
-import { ImpactHighlights } from "@/components/impact-highlights"
 import { AboutSection } from "@/components/about-section"
 import { StatsSection } from "@/components/stats-section"
 import { ServicesSection } from "@/components/services-section"

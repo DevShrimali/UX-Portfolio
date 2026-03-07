@@ -8,7 +8,6 @@ import { Footer } from "@/components/footer"
 import { CustomCursor } from "@/components/custom-cursor"
 
 import { SmoothScroller } from "@/components/smooth-scroller"
-import { BackgroundMusic } from "@/components/background-music"
 import { SoundEffects } from "@/components/sound-effects"
 import { ThemeProvider } from "@/components/theme-provider"
 import { JsonLd } from "@/components/json-ld"
@@ -94,7 +93,6 @@ export default function RootLayout({
           <SmoothScroller />
           <CustomCursor />
           <Navbar />
-          <BackgroundMusic />
           <SoundEffects />
           {children}
           <Footer />
