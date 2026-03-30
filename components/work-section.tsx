@@ -5,11 +5,7 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { projects } from "@/lib/projects-data"
 
-const visibleProjects = projects.filter((p) => !p.category.includes("hobby"))
-
-const featuredProjects = visibleProjects.slice(0, 3)
-
-const otherProjects = visibleProjects.slice(3, 9)
+const featuredProjects = projects.slice(0, 3)
 
 export function WorkSection() {
   return (
@@ -79,66 +75,7 @@ export function WorkSection() {
         ))}
       </div>
 
-      {/* Additional Projects List - Updated cards with images */}
-      <div className="px-6 md:px-20 lg:px-40 mt-32">
-        <h4 className="text-2xl font-[family-name:var(--font-syne)] font-bold mb-12 border-b border-border pb-4">
-          More Projects
-        </h4>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {otherProjects.map((project) => (
-            <Link
-              key={project.id}
-              href={`/work/${project.id}`}
-              scroll={true}
-              className="group bg-card rounded-[24px] overflow-hidden border border-border hover:border-primary/20 transition-all flex flex-col"
-            >
-              {/* Image Container */}
-              <div className="relative h-[240px] w-full overflow-hidden">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
 
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.slice(0, 2).map(tag => (
-                    <span key={tag} className="px-3 py-1 bg-muted text-muted-foreground text-[10px] font-bold uppercase tracking-wider rounded-md">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Title */}
-                <h5 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-3 text-foreground">
-                  {project.title}
-                </h5>
-
-                {/* Description */}
-                <p className="text-muted-foreground text-sm leading-relaxed mb-0 line-clamp-3">
-                  {project.shortDescription || project.description}
-                </p>
-
-
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link
-            href="/work"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-bold rounded-full hover:bg-accent transition-colors"
-          >
-            View All Projects <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
     </section>
   )
 }
