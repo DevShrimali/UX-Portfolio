@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function Hero() {
@@ -8,8 +8,7 @@ export default function Hero() {
   const bottomRightRef = useRef<HTMLDivElement>(null);
   const starRef = useRef<SVGSVGElement>(null);
 
-  const words = ["Wow", "Perfect", "Awesome", "Great"];
-  const [wordIndex, setWordIndex] = useState(0);
+  const wowText = "Empathize";
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -19,11 +18,7 @@ export default function Hero() {
     if (prefersReduced || !wowRef.current) return;
 
     const chars = wowRef.current.querySelectorAll(".wow-char");
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setWordIndex((prev) => (prev + 1) % words.length);
-      },
-    });
+    const tl = gsap.timeline();
 
     tl.fromTo(
       chars,
@@ -34,22 +29,15 @@ export default function Hero() {
         scale: 1,
         stagger: 0.08,
         duration: 0.3,
+        delay: 0.5,
         ease: "power2.out",
       }
-    ).to(chars, {
-      opacity: 0,
-      x: 10,
-      scale: 0.95,
-      stagger: -0.04, // erase backwards
-      duration: 0.2,
-      delay: 2.0,
-      ease: "power2.in",
-    });
+    );
 
     return () => {
       tl.kill();
     };
-  }, [wordIndex]);
+  }, []);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -107,8 +95,6 @@ export default function Hero() {
     return () => { tween.kill(); };
   }, []);
 
-  const wowText = words[wordIndex];
-
   return (
     <section
       id="welcome"
@@ -159,7 +145,7 @@ export default function Hero() {
               className="font-black text-white leading-[0.9] md:leading-[0.85] tracking-tighter break-keep whitespace-nowrap inline-flex items-center gap-[2vw]"
               style={{ fontSize: "clamp(2.5rem, 11.5vw, 12vw)" }}
             >
-              I make
+              Every
               <svg
                 ref={starRef}
                 xmlns="http://www.w3.org/2000/svg"
@@ -179,14 +165,14 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* Line 2: "People / say" left */}
+          {/* Line 2: "Start / with" left */}
           <div className="flex items-end w-full px-4 sm:px-4 md:px-8 mt-[-1vw]">
             <span
               className="font-black text-white leading-[0.9] md:leading-[0.85] tracking-tighter break-keep"
               style={{ fontSize: "clamp(2.5rem, 11.5vw, 12vw)" }}
             >
-              people<br />
-              <span className="inline-block pl-[6vw] sm:pl-[8vw] md:pl-[12vw]">say</span>
+              start<br />
+              <span className="inline-block pl-[6vw] sm:pl-[8vw] md:pl-[12vw]">with</span>
             </span>
           </div>
         </div>

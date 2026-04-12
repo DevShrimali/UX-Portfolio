@@ -61,7 +61,7 @@ const projects = [
     category: "SaaS Platform",
     desc: "Unified B2B Operations Dashboard designed to streamline complex business transactions.",
     tags: ["B2B", "Dashboard UI", "SaaS"],
-    image: "https://www.devux.in/532shots_so.png",
+    image: "/project%20assets/532shots_so.png",
   },
   {
     id: 4,
@@ -69,7 +69,7 @@ const projects = [
     category: "Brand Identity",
     desc: "A visual sparkle: comprehensive brand identity and logo design for MSquare Cleaning Services.",
     tags: ["Branding", "Visual Design", "Logo Design"],
-    image: "https://www.devux.in/msquare/cover.png",
+    image: "/project%20assets/msquare/cover.png",
   },
 ];
 
