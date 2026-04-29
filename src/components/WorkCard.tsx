@@ -15,6 +15,7 @@ export type Project = {
   image: string;
   video?: string;
   year?: string;
+  slug?: string;
 };
 
 function getYtId(url: string) {

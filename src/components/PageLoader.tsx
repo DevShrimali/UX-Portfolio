@@ -20,55 +20,63 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
       transformOrigin: "center center",
     });
 
-    // Counter 0 → 100 over ~2.4s
-    let frame = 0;
-    const totalFrames = 90;
-    const interval = setInterval(() => {
-      frame++;
-      setCount(Math.min(Math.round((frame / totalFrames) * 100), 100));
-      if (frame >= totalFrames) clearInterval(interval);
-    }, 26);
-
-    const tl = gsap.timeline();
-
     // Fade brand in
-    tl.fromTo(
+    gsap.fromTo(
       brandRef.current,
       { opacity: 0, y: 24 },
       { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
     );
 
-    // Wait, then fade brand out and split
-    tl.to(brandRef.current, {
-      opacity: 0,
-      y: -20,
-      duration: 0.4,
-      ease: "power2.in",
-      delay: 1.8,
-    });
+    let progress = 0;
+    
+    // Animate exit function
+    const triggerExit = () => {
+      const tl = gsap.timeline();
+      tl.to(brandRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.in",
+      });
 
-    tl.to(topRef.current, {
-      yPercent: -100,
-      duration: 0.85,
-      ease: "power3.inOut",
-    }, "-=0.05");
+      tl.to(topRef.current, {
+        yPercent: -100,
+        duration: 0.85,
+        ease: "power3.inOut",
+      }, "-=0.05");
 
-    tl.to(bottomRef.current, {
-      yPercent: 100,
-      duration: 0.85,
-      ease: "power3.inOut",
-    }, "<");
+      tl.to(bottomRef.current, {
+        yPercent: 100,
+        duration: 0.85,
+        ease: "power3.inOut",
+      }, "<");
 
-    tl.call(() => {
-      spin.kill();
-      clearInterval(interval);
-      onComplete();
-    });
+      tl.call(() => {
+        spin.kill();
+        onComplete();
+      });
+    };
+
+    const interval = setInterval(() => {
+      const isReady = document.readyState === "complete";
+
+      if (progress < 99) {
+        progress += Math.random() * 3 + 1;
+        if (progress >= 99) progress = 99;
+        setCount(Math.floor(progress));
+      } else {
+        if (isReady) {
+          clearInterval(interval);
+          setCount(100);
+          setTimeout(triggerExit, 200);
+        }
+      }
+    }, 40);
 
     return () => {
       spin.kill();
       clearInterval(interval);
-      tl.kill();
+      gsap.killTweensOf([brandRef.current, topRef.current, bottomRef.current]);
     };
   }, [onComplete]);
 
@@ -112,10 +120,13 @@ export default function PageLoader({ onComplete }: { onComplete: () => void }) {
       {/* Percentage — bottom left, big editorial font */}
       <div className="absolute bottom-8 left-8 z-10 pointer-events-none">
         <span
-          className="text-white leading-none select-none"
-          style={{ fontSize: "clamp(12rem, 36vw, 30rem)", fontWeight: 400, opacity: 0.12, letterSpacing: "-0.04em" }}
+          className="text-white leading-none select-none flex items-baseline"
+          style={{ fontWeight: 400, opacity: 0.12, letterSpacing: "-0.04em" }}
         >
-          {String(count).padStart(2, "0")}
+          <span style={{ fontSize: "clamp(12rem, 36vw, 30rem)" }}>
+            {String(count).padStart(2, "0")}
+          </span>
+          <span style={{ fontSize: "clamp(4rem, 12vw, 10rem)", marginLeft: "0.5rem" }}>%</span>
         </span>
       </div>
     </div>

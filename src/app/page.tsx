@@ -21,6 +21,15 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 /* ─── DATA ─── */
 const projects = [
   {
+    id: 12,
+    title: "TransactOS",
+    category: "SaaS Platform",
+    desc: "Unified B2B Operations Dashboard designed to streamline complex business transactions.",
+    tags: ["B2B", "Dashboard UI", "SaaS"],
+    image: "/project%20assets/532shots_so.png",
+    slug: "transact-os",
+  },
+  {
     id: 1,
     title: "Loan App",
     category: "Fintech Platform",
@@ -28,6 +37,7 @@ const projects = [
     tags: ["UI/UX Case Study", "Motion Showcase", "Mobile"],
     image: "/project-1.jpg",
     video: "https://www.youtube.com/embed/VGJqwOx-qAY",
+    slug: "fintech-app",
   },
   {
     id: 11,
@@ -36,6 +46,7 @@ const projects = [
     desc: "A comprehensive UX/UI case study for a plant-based meal planning application.",
     tags: ["UX/UI Case Study", "Mobile App", "Health"],
     image: "/Cover.png",
+    slug: "plant-based-meal-plan",
   },
   {
     id: 2,
@@ -45,6 +56,7 @@ const projects = [
     tags: ["UI Design", "E-Commerce", "Web"],
     image: "/project-2.jpg",
     video: "https://www.youtube.com/embed/78bCyDFaxsE",
+    slug: "grocery-e-commerce",
   },
   {
     id: 3,
@@ -54,14 +66,7 @@ const projects = [
     tags: ["UI Design", "UX Flow", "Web"],
     image: "/project-3.jpg",
     video: "https://www.youtube.com/embed/4RxCHb3m8M4",
-  },
-  {
-    id: 12,
-    title: "TransactOS",
-    category: "SaaS Platform",
-    desc: "Unified B2B Operations Dashboard designed to streamline complex business transactions.",
-    tags: ["B2B", "Dashboard UI", "SaaS"],
-    image: "/project%20assets/532shots_so.png",
+    slug: "job-portal-ai",
   },
   {
     id: 4,
@@ -70,6 +75,7 @@ const projects = [
     desc: "A visual sparkle: comprehensive brand identity and logo design for MSquare Cleaning Services.",
     tags: ["Branding", "Visual Design", "Logo Design"],
     image: "/project%20assets/msquare/cover.png",
+    slug: "cleaning-brand-msquare",
   },
 ];
 
@@ -750,6 +756,14 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const handleLoaderComplete = useCallback(() => setLoading(false), []);
 
+  useEffect(() => {
+    if (sessionStorage.getItem("hasVisited")) {
+      setLoading(false);
+    } else {
+      sessionStorage.setItem("hasVisited", "true");
+    }
+  }, []);
+
   return (
     <>
       {loading && <PageLoader onComplete={handleLoaderComplete} />}
@@ -858,7 +872,7 @@ export default function Home() {
                   href="/work"
                   className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/15 text-[11px] uppercase tracking-[0.2em] text-neutral-400 hover:border-[#bef264] hover:text-[#bef264] transition-all duration-300"
                 >
-                  View all 10 projects
+                  View All Projects
                   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-2 group-hover:translate-x-1 transition-transform duration-200">
                     <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

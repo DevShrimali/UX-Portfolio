@@ -2,8 +2,8 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
-import { FiArrowLeft, FiExternalLink, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { FaBehance } from "react-icons/fa6";
+import { FiArrowLeft, FiExternalLink, FiX, FiChevronLeft, FiChevronRight, FiLayers } from "react-icons/fi";
+import { FaBehance, FaGooglePlay } from "react-icons/fa6";
 
 /* ─── FULL PROJECT DATA (15 projects, all local assets) ─── */
 const projects = [
@@ -21,6 +21,7 @@ const projects = [
     tools: ["Figma", "React", "Vercel", "HTML/CSS"],
     websiteUrl: "https://transact-os.vercel.app/",
     behanceUrl: "https://figma-design-dev.vercel.app/",
+    behanceLabel: "Information architecture",
     challenge: "Operations teams, finance managers, and admins don't share the same tools or language. Inventory lives in one system, transactions in another, user access somewhere else entirely. This fragmentation causes errors, delays, and critical blind spots in day-to-day operations.",
     responsibilities: "I led end-to-end product design — from stakeholder interviews and information architecture, through user flow mapping, wireframing, and final high-fidelity UI. I also built the front-end prototype for live validation with enterprise users.",
     research: "Interviewed 8 ops, admin and finance professionals across 3 companies. Key finding: 100% switched between 3+ tools daily. Pain points centred on context-switching and lack of cross-module visibility — neither a UX nor a data problem, but a structural architecture problem.",
@@ -51,11 +52,11 @@ const projects = [
   },
   {
     id: 3, slug: "event-ticket-booking",
-    title: "Event & Ticket Booking App",
-    subtitle: "Discover Events. Book Instantly.",
-    category: "Events / Booking",
-    tags: ["Events", "Booking", "Mobile App"],
-    description: "A mobile app for discovering events, booking tickets, and managing digital passes — all without switching platforms.",
+    title: "Flight Ticket Booking App",
+    subtitle: "UI/UX Case Study",
+    category: "Travel / Booking",
+    tags: ["Flight Booking", "Travel", "Mobile App"],
+    description: "A comprehensive UI/UX case study for a flight ticket booking application, streamlining flight discovery, seat selection, and checkout.",
     image: "/project%20assets/flight-booking-cover-hq.jpg",
     gallery: [
       "/project%20assets/travel-app-gallery-1.png",
@@ -66,12 +67,12 @@ const projects = [
     role: "User Flow Design, UI Design, Interaction Patterns, Developer Handoff",
     tools: ["Figma", "Miro", "Illustrator"],
     behanceUrl: "https://www.behance.net/gallery/240040967/Flight-Ticket-Booking-App-UIUX-Case-Study",
-    challenge: "Users needed a faster way to browse events, secure tickets, and manage bookings — but existing solutions required jumping between discovery, payment, and management in separate apps.",
-    responsibilities: "End-to-end UX from discovery flows to ticket management. Designed the booking funnel, seat selection, digital pass system, and developer handoff docs.",
-    research: "Competitive analysis of 6 event apps. Key insight: users abandon at payment when uncertainty strikes — unclear pricing, hidden fees, poor confirmation feedback. Checkout clarity was the biggest opportunity.",
-    solution: "Streamlined a 4-screen booking flow with clear event details, transparent pricing, secure payment, and instant digital ticket delivery. A unified app for the full event lifecycle.",
+    challenge: "Users needed a faster way to search flights, compare prices, and manage bookings — but existing solutions often had cluttered interfaces, hidden fees, and complex multi-step checkouts.",
+    responsibilities: "End-to-end UX from flight discovery flows to boarding pass management. Designed the search funnel, interactive seat selection, digital boarding pass system, and developer handoff docs.",
+    research: "Competitive analysis of 6 flight booking apps. Key insight: users abandon at payment when uncertainty strikes — hidden baggage fees, unclear pricing, poor confirmation feedback. Checkout clarity was the biggest opportunity.",
+    solution: "Streamlined a unified booking flow with clear flight details, transparent pricing, secure payment, and instant digital boarding pass delivery. A seamless app for the full travel experience.",
     skills: ["User Research", "User Flows", "Wireframing", "UI Design", "Prototyping", "Dev Handoff"],
-    results: ["Streamlined browsing flow", "Secure payment experience", "Digital ticket access"],
+    results: ["Streamlined search flow", "Transparent pricing experience", "Digital boarding pass access"],
   },
   {
     id: 4, slug: "auto-repair-brotomotive",
@@ -211,22 +212,23 @@ const projects = [
   },
   {
     id: 10, slug: "sports-news-app",
-    title: "Sports News App",
-    subtitle: "Daily Engagement Game Feature",
+    title: "Sports Condensed",
+    subtitle: "60-Word Fast Sports News & Gamification",
     category: "Sports",
-    tags: ["Sports", "Gamification", "Mobile App"],
-    description: "A sports news app with a daily interactive game feature to dramatically improve engagement and 7-day retention.",
+    tags: ["Sports News", "Gamification", "Mobile App"],
+    description: "A mobile app delivering sharp, 60-word sports news with a personalized feed, swipe-to-read UX, and an engaging 'Player of the Day' trivia game.",
     image: "/project%20assets/sport%20news/cover.png",
     gallery: [],
     year: "2023",
     role: "Feature Ideation, UX Flows, UI Design, Interaction Logic",
     tools: ["Figma", "Prototyping"],
-    challenge: "After initial content consumption, daily active usage dropped steeply — users had no compelling reason to return. First-open rates were strong; 7-day retention was near zero.",
-    responsibilities: "Ideated and designed the full game feature from concept to prototype. Defined mechanics, flows, visual design, and social sharing patterns.",
-    research: "Retention data showed 90% of users who didn't return within 48 hours never came back. Habit loop analysis pointed to a missing daily trigger — an entry point that created curiosity and competition.",
-    solution: "Designed a 'Guess the Player' game: progressive hints, 60-second timer, streak tracking, and social sharing. A daily micro-challenge that gives users a specific, rewarding reason to open the app each morning.",
-    skills: ["Feature Design", "UX Flows", "Gamification", "UI Design", "Interaction Patterns"],
-    results: ["Increased daily engagement", "Habit loop creation", "Social sharing integration"],
+    appStoreUrl: "https://play.google.com/store/apps/details?id=com.sportscondensed.news&hl=en_IN&pli=1",
+    challenge: "Modern sports apps overwhelm users with bloated articles and clickbait, burying actual news. Additionally, news consumption alone often fails to build strong daily retention habits.",
+    responsibilities: "Led end-to-end UX/UI design. Designed the core 60-word personalized feed, intuitive swipe-to-read mechanics, and the gamified 'Player of the Day' (POTD) feature.",
+    research: "Analysis revealed users want fast, fact-packed news without filler. Habit loop analysis also highlighted that adding a daily trivia challenge drastically increases 7-day retention.",
+    solution: "Created a clutter-free, personalized feed with an infinite-scroll swipe mechanic. Integrated the 'Player of the Day' trivia game using progressive hints to create a rewarding daily reason to return.",
+    skills: ["UX Strategy", "Interaction Design", "Gamification", "UI Design"],
+    results: ["Reduced reading time to < 10 mins", "Increased 7-day retention", "Streamlined personalized feeds"],
   },
   {
     id: 11, slug: "vr-gaming-experience",
@@ -371,6 +373,47 @@ const projects = [
     solution: "Designed a unified finance management app with a clear KPI dashboard (income, spend, savings), smart UPI payment flows, category-based expense tracking, and a secure money movement experience — all in one clean interface.",
     skills: ["UI Design", "UX Strategy", "User Flows", "Dashboard Design", "Interaction Design", "Prototyping"],
     results: ["Unified Finance Dashboard", "Smart UPI Payment Flow", "KPI-driven Spending Insights", "Secure Money Tracking"],
+  },
+  {
+    id: 17, slug: "plant-based-meal-plan",
+    title: "Plant-Based Meal Planning App",
+    subtitle: "UX/UI Case Study",
+    category: "Healthcare / Wellness",
+    tags: ["UX/UI Design", "Health", "Mobile App"],
+    description: "A plant-based meal planning application designed to help users discover healthy recipes, track nutrition, and plan meals effortlessly.",
+    image: "/project%20assets/Everygreen-Cover.png",
+    gallery: [],
+    year: "2024",
+    role: "UI/UX Designer",
+    tools: ["Figma", "Illustrator"],
+    behanceUrl: "https://www.behance.net/gallery/246522999/Plant-Based-Meal-Planning-App-UXUI-Case-Study",
+    challenge: "Users struggled to transition to a plant-based diet due to lack of recipe variety, difficult meal planning, and confusing nutritional tracking. They needed a unified solution.",
+    responsibilities: "Designed the end-to-end user experience including onboarding, meal discovery, planner interface, and grocery list integration.",
+    research: "Conducted interviews with 15 individuals attempting a plant-based diet. 80% reported that meal planning and finding reliable recipes were the biggest hurdles to maintaining the diet.",
+    solution: "Created an intuitive app featuring personalized recipe recommendations, an automated weekly meal planner, and a smart grocery list generator that simplifies plant-based living.",
+    skills: ["User Research", "Wireframing", "UI Design", "Prototyping"],
+    results: ["Streamlined meal planning", "Automated grocery lists", "Personalized recipe engine"],
+  },
+  {
+    id: 18, slug: "grocery-e-commerce",
+    title: "Grocery E-Commerce Platform",
+    subtitle: "Seamless Online Shopping",
+    category: "E-Commerce",
+    tags: ["E-Commerce", "Web Design", "App"],
+    description: "A comprehensive grocery e-commerce platform enhancing the online shopping experience with smart inventory, fast checkout, and personalized recommendations.",
+    image: "/project%20assets/placeholder.jpg",
+    gallery: [],
+    videoUrl: "https://www.youtube.com/embed/78bCyDFaxsE",
+    year: "2024",
+    role: "Product Designer",
+    tools: ["Figma", "Prototyping"],
+    behanceUrl: "wip",
+    challenge: "Shoppers found online grocery platforms clunky, with poor search functionality and tedious checkout processes leading to high cart abandonment rates.",
+    responsibilities: "Led the redesign of the core shopping experience, focusing on product discovery, cart management, and a streamlined checkout flow.",
+    research: "Analyzed cart abandonment data which revealed a 60% drop-off during the multi-step checkout. Users also reported difficulty finding specific staple items quickly.",
+    solution: "Introduced a one-page checkout, predictive search, and personalized re-order lists based on past purchases, drastically reducing the time needed to complete a weekly shop.",
+    skills: ["UX Strategy", "E-Commerce UX", "UI Design", "Interaction Design"],
+    results: ["Reduced cart abandonment", "Faster checkout times", "Improved product discovery"],
   },
 ];
 
@@ -622,7 +665,7 @@ export default function CaseStudyPage() {
       <article className="max-w-6xl mx-auto px-6 md:px-12">
 
         {/* ════════════════════════ HEADER ════════════════════════ */}
-        <header className="pt-20 pb-16 md:pt-32 md:pb-24">
+        <header className="pt-20 pb-10 md:pt-32 md:pb-14">
           <div className="flex flex-wrap gap-2 mb-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#bef264] bg-[#bef264]/8 border border-[#bef264]/20 px-3 py-1 rounded-full">
               {project.category}
@@ -648,30 +691,41 @@ export default function CaseStudyPage() {
                 <FiExternalLink size={13} /> Live Site
               </a>
             )}
+            {"appStoreUrl" in project && (project as any).appStoreUrl && (
+              <a href={(project as any).appStoreUrl} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1A73E8] text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-[#2083FF] transition-colors">
+                <FaGooglePlay size={13} /> Get it on Play Store
+              </a>
+            )}
             {"behanceUrl" in project && (project as any).behanceUrl && (
-              <a href={(project as any).behanceUrl} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0057ff] text-white text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-[#0046cc] transition-colors">
-                <FaBehance size={13} /> Behance Case Study
+              <a 
+                href={(project as any).behanceUrl === "wip" ? "#" : (project as any).behanceUrl} 
+                target={(project as any).behanceUrl === "wip" ? "_self" : "_blank"} 
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  if ((project as any).behanceUrl === "wip") {
+                    e.preventDefault();
+                    alert("Work in progress");
+                  }
+                }}
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-[0.15em] transition-colors ${
+                  (project as any).behanceLabel === "Information architecture"
+                    ? "bg-neutral-900 border border-white/20 text-white hover:bg-[#bef264] hover:text-black hover:border-[#bef264]"
+                    : "bg-[#0057ff] text-white hover:bg-[#0046cc]"
+                }`}
+              >
+                {(project as any).behanceLabel === "Information architecture" ? (
+                  <FiLayers size={13} className="shrink-0" />
+                ) : (
+                  <FaBehance size={13} className="shrink-0" />
+                )}
+                <span className="truncate max-w-[200px]">{(project as any).behanceLabel || "Behance Case Study"}</span>
               </a>
             )}
           </div>
         </header>
 
-        {/* ════════════════════════ META GRID ════════════════════════ */}
-        <div className="grid grid-cols-2 md:grid-cols-4 border border-white/8 rounded-2xl divide-x divide-y md:divide-y-0 divide-white/8 mb-20">
-          {[
-            { label: "Role", value: project.role },
-            { label: "Year", value: project.year },
-            { label: "Tools", value: project.tools.join(", ") },
-            { label: "Category", value: project.category },
-          ].map(({ label, value }) => (
-            <div key={label} className="p-6">
-              <p className="text-[9px] uppercase tracking-[0.2em] text-neutral-600 mb-2">{label}</p>
-              <p className="text-sm font-medium text-white leading-snug">{value}</p>
-            </div>
-          ))}
-        </div>
-
+        {/* META GRID HAS BEEN MOVED BELOW GALLERY */}
         {/* ════════════════════════ HERO: VIDEO or IMAGE ════════════════════════ */}
         {videoUrl ? (
           <VideoCover videoUrl={videoUrl} title={project.title} />
@@ -721,6 +775,21 @@ export default function CaseStudyPage() {
             onClose={() => setLightboxIndex(null)}
           />
         )}
+
+        {/* ════════════════════════ META GRID ════════════════════════ */}
+        <div className="grid grid-cols-2 md:grid-cols-4 border border-white/8 rounded-2xl divide-x divide-y md:divide-y-0 divide-white/8 mb-20">
+          {[
+            { label: "Role", value: project.role },
+            { label: "Year", value: project.year },
+            { label: "Tools", value: project.tools.join(", ") },
+            { label: "Category", value: project.category },
+          ].map(({ label, value }) => (
+            <div key={label} className="p-6">
+              <p className="text-[9px] uppercase tracking-[0.2em] text-neutral-600 mb-2">{label}</p>
+              <p className="text-sm font-medium text-white leading-snug">{value}</p>
+            </div>
+          ))}
+        </div>
 
         {/* ════════════════════════ CASE STUDY NARRATIVE ════════════════════════ */}
         <div className="max-w-3xl mx-auto space-y-28 mb-32">

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiGrid, FiList, FiArrowRight } from "react-icons/fi";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -38,10 +38,10 @@ const allProjects = [
   },
   {
     id: 3, slug: "event-ticket-booking",
-    title: "Event & Club Ticket Booking App",
-    category: "Events",
-    desc: "A clean, intuitive flight and event ticket booking experience with smart search, seat selection, and one-tap checkout.",
-    tags: ["UX/UI Case Study", "Mobile App", "Booking"],
+    title: "Flight Ticket Booking App — UI/UX Case Study",
+    category: "Travel",
+    desc: "A comprehensive UI/UX case study for a flight ticket booking application, streamlining flight discovery, seat selection, and checkout.",
+    tags: ["UX/UI Case Study", "Mobile App", "Travel"],
     image: "/project%20assets/flight-booking-cover-hq.jpg",
     year: "2024",
   },
@@ -102,10 +102,10 @@ const allProjects = [
   },
   {
     id: 10, slug: "sports-news-app",
-    title: "Sports News App",
+    title: "Sports Condensed",
     category: "Sports",
-    desc: "Daily Engagement Game Feature — A sports news application with an interactive daily game to boost user engagement and retention.",
-    tags: ["Mobile App", "Sports", "Gamification"],
+    desc: "A mobile app delivering 60-word fast sports news, personalized feeds, and an engaging 'Player of the Day' daily trivia game.",
+    tags: ["Mobile App", "Sports News", "Gamification"],
     image: "/project%20assets/sport%20news/cover.png",
     year: "2023",
   },
@@ -167,10 +167,29 @@ const allProjects = [
     video: "https://www.youtube.com/embed/2F0TF7iKCgs",
     year: "2025",
   },
+  {
+    id: 17, slug: "plant-based-meal-plan",
+    title: "Plant-Based Meal Planning App",
+    category: "Healthcare",
+    desc: "A plant-based meal planning application designed to help users discover healthy recipes, track nutrition, and plan meals effortlessly.",
+    tags: ["UX/UI Design", "Health", "Mobile App"],
+    image: "/project%20assets/Everygreen-Cover.png",
+    year: "2024",
+  },
+  {
+    id: 18, slug: "grocery-e-commerce",
+    title: "Grocery E-Commerce Platform",
+    category: "E-Commerce",
+    desc: "A comprehensive grocery e-commerce platform enhancing the online shopping experience with smart inventory, fast checkout, and personalized recommendations.",
+    tags: ["E-Commerce", "Web Design", "App"],
+    image: "/project%20assets/placeholder.jpg",
+    video: "https://www.youtube.com/embed/78bCyDFaxsE",
+    year: "2024",
+  },
 ];
 
 
-const categories = ["All", "Fintech", "Healthcare", "SaaS", "E-Commerce", "Brand Identity", "Web Design", "Events", "Sports", "Gaming", "AgriTech"];
+const categories = ["All", "Fintech", "Healthcare", "SaaS", "E-Commerce", "Brand Identity", "Web Design", "Travel", "Sports", "Gaming", "AgriTech"];
 
 /* ─── helpers ─── */
 function loopUrl(id: string) {
@@ -180,6 +199,7 @@ function loopUrl(id: string) {
 import WorkCard from "@/components/WorkCard";
 export default function WorkPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -231,48 +251,119 @@ export default function WorkPage() {
           </p>
         </div>
 
-        {/* Filter pills */}
-        <div className="anim flex flex-wrap gap-3 mt-10">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`px-5 py-2 rounded-full text-[11px] uppercase tracking-[0.15em] font-medium border transition-all duration-300 cursor-pointer ${
-                activeFilter === cat
-                  ? "bg-[#bef264] text-black border-[#bef264]"
-                  : "bg-transparent text-neutral-400 border-white/10 hover:border-white/30 hover:text-white"
-              }`}
-            >
-              {cat}
-              {cat !== "All" && (
-                <span className="ml-2 opacity-50">
-                  {allProjects.filter((p) => p.category === cat).length}
-                </span>
-              )}
-            </button>
-          ))}
+        {/* Filter pills and View Toggle */}
+        <div className="anim flex flex-col lg:flex-row lg:items-center justify-between gap-6 mt-10">
+          <div className="flex flex-wrap gap-3 flex-1">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`px-5 py-2 rounded-full text-[11px] uppercase tracking-[0.15em] font-medium border transition-all duration-300 cursor-pointer ${
+                  activeFilter === cat
+                    ? "bg-[#bef264] text-black border-[#bef264]"
+                    : "bg-transparent text-neutral-400 border-white/10 hover:border-white/30 hover:text-white"
+                }`}
+              >
+                {cat}
+                {cat !== "All" && (
+                  <span className="ml-2 opacity-50">
+                    {allProjects.filter((p) => p.category === cat).length}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
 
-          {/* Live count */}
-          <span className="ml-auto self-center text-[11px] text-neutral-600 uppercase tracking-widest">
-            {filtered.length} project{filtered.length !== 1 ? "s" : ""}
-          </span>
+          <div className="flex items-center justify-between lg:justify-end gap-6 w-full lg:w-auto">
+            {/* Live count */}
+            <span className="text-[11px] text-neutral-600 uppercase tracking-widest shrink-0">
+              {filtered.length} project{filtered.length !== 1 ? "s" : ""}
+            </span>
+
+            {/* View Toggle */}
+            <div className="flex items-center gap-1 border border-white/10 rounded-full p-1 bg-neutral-950/50 shrink-0">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`p-2 rounded-full transition-colors ${
+                  viewMode === "grid" ? "bg-[#bef264] text-black" : "text-neutral-500 hover:text-white hover:bg-white/5"
+                }`}
+                aria-label="Grid View"
+              >
+                <FiGrid size={15} />
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={`p-2 rounded-full transition-colors ${
+                  viewMode === "list" ? "bg-[#bef264] text-black" : "text-neutral-500 hover:text-white hover:bg-white/5"
+                }`}
+                aria-label="List View"
+              >
+                <FiList size={15} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ── Grid ── */}
+      {/* ── Grid / List ── */}
       <div className="px-6 md:px-12 py-12 md:py-16">
-        <div
-          key={activeFilter}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-        >
-          {filtered.map((project, i) => (
-             <Link key={project.id} href={`/work/${project.slug}`} className="block w-full h-full transform transition-transform duration-300 outline-none">
-               <WorkCard project={project} index={i} />
-             </Link>
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
+        {filtered.length > 0 ? (
+          viewMode === "grid" ? (
+            <div
+              key={`${activeFilter}-grid`}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            >
+              {filtered.map((project, i) => (
+                 <Link key={project.id} href={`/work/${project.slug}`} className="block w-full h-full transform transition-transform duration-300 outline-none">
+                   <WorkCard project={project} index={i} />
+                 </Link>
+              ))}
+            </div>
+          ) : (
+            <div key={`${activeFilter}-list`} className="flex flex-col border-t border-white/10">
+              {filtered.map((project, index) => {
+                const ytId = project.video ? getYtId(project.video) : null;
+                const thumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : project.image;
+                return (
+                <Link
+                  key={project.id}
+                  href={`/work/${project.slug}`}
+                  className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-white/10 hover:border-white/30 transition-colors gap-6"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10 flex-1">
+                    <div className="relative w-full md:w-56 aspect-[16/10] rounded-xl overflow-hidden shrink-0 border border-white/10 bg-[#0a0a0a]">
+                       {project.video && ytId ? (
+                         <ProjectVideo ytId={ytId} thumbSrc={thumb} alt={project.title} delay={index * 2000} />
+                       ) : (
+                         <img src={thumb} alt={project.title} className="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500" />
+                       )}
+                       <div className="absolute inset-0 z-10" />
+                    </div>
+                    <div className="flex-1 flex flex-col items-start gap-3 md:gap-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#bef264]">{project.category}</span>
+                        <span className="w-1 h-1 rounded-full bg-white/20 hidden md:block" />
+                        <span className="text-[10px] uppercase tracking-[0.1em] text-neutral-500 hidden md:block">{project.year}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold tracking-tight text-white group-hover:text-white transition-colors">{project.title.split(" — ")[0]}</h3>
+                      <p className="text-sm text-neutral-400 line-clamp-2 md:line-clamp-1 max-w-2xl">{project.desc}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between md:justify-end gap-6 md:w-32 shrink-0">
+                    <div className="flex md:hidden items-center gap-2">
+                       <span className="text-[10px] uppercase tracking-[0.1em] text-neutral-500">{project.year}</span>
+                    </div>
+                    <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-colors">
+                      <FiArrowRight size={20} className="text-white group-hover:text-black transition-colors" />
+                    </div>
+                  </div>
+                </Link>
+                );
+              })}
+            </div>
+          )
+        ) : (
           <div className="text-center py-32 text-neutral-600 text-sm uppercase tracking-widest">
             No projects in this category yet.
           </div>
