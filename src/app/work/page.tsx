@@ -18,15 +18,6 @@ import ProjectVideo from "@/components/ProjectVideo";
 
 const allProjects = [
   {
-    id: 99, slug: "logo-design-showcase",
-    title: "Brand Logo Showcase — Identity & Marks",
-    category: "Brand Identity",
-    desc: "A curated collection of premium logo designs and visual brand marks created for startups and enterprises.",
-    tags: ["Branding", "Logo Design", "Visual Identity"],
-    image: "/brand-logos/Yowza-logo.png",
-    year: "2025",
-  },
-  {
     id: 1, slug: "transact-os",
     title: "TransactOS — Unified B2B Operations Dashboard",
     category: "SaaS",
@@ -194,6 +185,15 @@ const allProjects = [
     image: "/project%20assets/placeholder.jpg",
     video: "https://www.youtube.com/embed/78bCyDFaxsE",
     year: "2024",
+  },
+  {
+    id: 99, slug: "logo-design-showcase",
+    title: "Brand Logo Showcase — Identity & Marks",
+    category: "Brand Identity",
+    desc: "A curated collection of premium logo designs and visual brand marks created for startups and enterprises.",
+    tags: ["Branding", "Logo Design", "Visual Identity"],
+    image: "/brand-logos/Yowza-logo.png",
+    year: "2025",
   },
 ];
 

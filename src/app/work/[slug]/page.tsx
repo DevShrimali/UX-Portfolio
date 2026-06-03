@@ -741,7 +741,7 @@ export default function CaseStudyPage() {
                 <img
                   src={logo.file}
                   alt={logo.name}
-                  className="w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
 
                 {/* Hover expand overlay */}
