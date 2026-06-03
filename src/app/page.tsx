@@ -21,6 +21,15 @@ if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 /* ─── DATA ─── */
 const projects = [
   {
+    id: 99,
+    title: "Brand Logo Showcase",
+    category: "Brand Identity",
+    desc: "A curated collection of premium logo designs and visual brand marks created for startups and enterprises.",
+    tags: ["Branding", "Logo Design", "Visual Identity"],
+    image: "/brand-logos/Yowza-logo.png",
+    slug: "logo-design-showcase",
+  },
+  {
     id: 12,
     title: "TransactOS",
     category: "SaaS Platform",

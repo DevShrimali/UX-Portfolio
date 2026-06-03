@@ -8,6 +8,39 @@ import { FaBehance, FaGooglePlay } from "react-icons/fa6";
 /* ─── FULL PROJECT DATA (15 projects, all local assets) ─── */
 const projects = [
   {
+    id: 99, slug: "logo-design-showcase",
+    title: "Brand Logo Showcase",
+    subtitle: "Identity & Marks Showcase",
+    category: "Brand Identity / Logo Design",
+    tags: ["Branding", "Logo Design", "Visual Identity", "Vector Graphics"],
+    description: "A presentation of premium logo marks and visual identities designed for modern startups, agencies, and enterprises.",
+    image: "/brand-logos/Yowza-logo.png",
+    gallery: [
+      "/brand-logos/Yowza-logo.png",
+      "/brand-logos/Avron-bgs.png",
+      "/brand-logos/BC-R.png",
+      "/brand-logos/Janny-point.png",
+      "/brand-logos/Metrolink.png",
+      "/brand-logos/Shehnai.png",
+      "/brand-logos/kp.png",
+      "/brand-logos/lone-app.png",
+      "/brand-logos/msq.png",
+      "/brand-logos/old-automotive.png",
+      "/brand-logos/raise-fitness",
+      "/brand-logos/rj-build.png",
+      "/brand-logos/vishwashetra.png",
+    ],
+    year: "2025",
+    role: "Visual & Identity Designer",
+    tools: ["Figma", "Adobe Illustrator", "Photoshop"],
+    challenge: "Creating memorable, scale-resilient, and concept-driven marks that represent a company's core values in a fraction of a second, across print and digital surfaces.",
+    responsibilities: "Designed the core concept, custom typography, color theory applications, and responsive layout scaling for all 13 brand identities.",
+    research: "Analysed market trends and brand landscapes. Balanced geometric symmetry with thematic storytelling to ensure uniqueness and high brand recall.",
+    solution: "Developed an array of visual systems, including playful custom wordmarks, minimalist monograms, structural line art, and calligraphic symbols.",
+    skills: ["Visual Design", "Logo Design", "Brand Systems", "Color Theory", "Vector Art"],
+    results: ["13 unique identities", "100% vector scalability", "Multi-surface adaptability", "High brand recognition"],
+  },
+  {
     id: 1, slug: "transact-os",
     title: "TransactOS",
     subtitle: "Unified B2B Operations Dashboard",
@@ -615,6 +648,22 @@ function VideoCover({ videoUrl, title }: { videoUrl: string; title: string }) {
 }
 
 
+const logosMetadata = [
+  { name: "Yowza", file: "/brand-logos/Yowza-logo.png", category: "SaaS Platform", concept: "Playful monogram combining 'Y' and a speech bubble." },
+  { name: "Avron", file: "/brand-logos/Avron-bgs.png", category: "Corporate Services", concept: "Minimalist geometric identity signaling growth and structure." },
+  { name: "BC-R", file: "/brand-logos/BC-R.png", category: "Automotive Tech", concept: "Interlinked bold monogram expressing speed and precision." },
+  { name: "Janny Point", file: "/brand-logos/Janny-point.png", category: "Consulting", concept: "Dynamic arrow-point emblem conveying direction and strategy." },
+  { name: "Metrolink", file: "/brand-logos/Metrolink.png", category: "Logistics & Transport", concept: "Connected geometric lines representing seamless transit routes." },
+  { name: "Shehnai", file: "/brand-logos/Shehnai.png", category: "Event Management", concept: "Elegant calligraphy motif reflecting festive cultural music." },
+  { name: "KP", file: "/brand-logos/kp.png", category: "Real Estate", concept: "Symmetrical typography forming an architectural logomark." },
+  { name: "Lone App", file: "/brand-logos/lone-app.png", category: "Fintech Startup", concept: "Modern abstract icon evoking trust and singularity." },
+  { name: "MSquare", file: "/brand-logos/msq.png", category: "Professional Services", concept: "Clean double-M geometry representing cleanliness and order." },
+  { name: "Old Automotive", file: "/brand-logos/old-automotive.png", category: "Restoration Services", concept: "Vintage script mark embodying heritage and craftsmanship." },
+  { name: "Raise Fitness", file: "/brand-logos/raise-fitness", category: "Health & Fitness", concept: "Forward-leaning active symbol denoting strength and elevation." },
+  { name: "RJ Build", file: "/brand-logos/rj-build.png", category: "Construction & Dev", concept: "Bold blocks forming 'R' and 'J' to signify stable foundations." },
+  { name: "Vishvashetra", file: "/brand-logos/vishwashetra.png", category: "Interior Design", concept: "Refined linear emblem detailing layout and spatial luxury." },
+];
+
 export default function CaseStudyPage() {
   const { slug } = useParams();
   const project = getProject(String(slug));
@@ -640,6 +689,177 @@ export default function CaseStudyPage() {
     document.title = `${project.title} — ${project.subtitle} | Dev Shrimali`;
     return () => { document.title = "Dev Shrimali — Senior UI/UX Designer"; };
   }, [project.title, project.subtitle]);
+
+  if (project.slug === "logo-design-showcase") {
+    return (
+      <main className="min-h-screen bg-[#0a0a0a] text-white">
+        {/* Sticky Subnav */}
+        <div className="sticky top-0 z-40 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <Link href="/work" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-neutral-500 hover:text-white transition-colors group">
+              <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" size={13} />
+              Back to Work
+            </Link>
+            <span className="text-[10px] uppercase tracking-[0.15em] text-[#bef264]">
+              Special Project · {String(project.id).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
+
+        <article className="max-w-6xl mx-auto px-6 md:px-12">
+          {/* Header */}
+          <header className="pt-20 pb-12 md:pt-32 md:pb-16 text-center max-w-4xl mx-auto">
+            <div className="flex justify-center gap-2 mb-6">
+              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#bef264] bg-[#bef264]/8 border border-[#bef264]/20 px-3 py-1 rounded-full">
+                {project.category}
+              </span>
+              {project.tags.map((tag) => (
+                <span key={tag} className="text-[9px] uppercase tracking-[0.1em] px-2.5 py-1 border border-white/10 text-neutral-500 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.02] mb-6">
+              {project.title}
+            </h1>
+            <p className="text-lg md:text-xl text-neutral-400 font-light mb-8 max-w-3xl mx-auto leading-relaxed">
+              {project.description}
+            </p>
+
+          </header>
+
+          {/* Clean Logo Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+            {logosMetadata.map((logo, i) => (
+              <div
+                key={logo.name}
+                onClick={() => setLightboxIndex(i)}
+                className="relative border border-white/10 rounded-2xl overflow-hidden aspect-[4/3] w-full flex items-center justify-center bg-neutral-900 group hover:border-[#bef264]/45 hover:shadow-[0_12px_30px_rgba(190,242,100,0.05)] cursor-zoom-in transition-all duration-300"
+              >
+                {/* Image */}
+                <img
+                  src={logo.file}
+                  alt={logo.name}
+                  className="w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-[1.04]"
+                />
+
+                {/* Hover expand overlay */}
+                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-center justify-center">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                    Zoom Mark
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {lightboxIndex !== null && (
+            <Lightbox
+              images={project.gallery as string[]}
+              startIndex={lightboxIndex}
+              onClose={() => setLightboxIndex(null)}
+            />
+          )}
+
+          {/* ════════════════════════ META GRID ════════════════════════ */}
+          <div className="grid grid-cols-2 md:grid-cols-4 border border-white/8 rounded-2xl divide-x divide-y md:divide-y-0 divide-white/8 mb-20">
+            {[
+              { label: "Role", value: project.role },
+              { label: "Year", value: project.year },
+              { label: "Tools", value: project.tools.join(", ") },
+              { label: "Category", value: project.category },
+            ].map(({ label, value }) => (
+              <div key={label} className="p-6">
+                <p className="text-[9px] uppercase tracking-[0.2em] text-neutral-600 mb-2">{label}</p>
+                <p className="text-sm font-medium text-white leading-snug">{value}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Case Narrative (Simplified & Clean) */}
+          <div className="max-w-3xl mx-auto space-y-24 mb-32">
+            <section>
+              <SectionLabel n="01" title="Philosophy & Approach" />
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Visual Clarity & Meaning</h2>
+              <p className="text-base md:text-lg text-neutral-400 leading-[1.8] mb-6">
+                Logo design is the distillation of a brand's essence into a singular, memorable graphic mark. Every curve, typographic angle, and color choice carries conceptual weight. My approach emphasizes geometric precision, functional versatility, and concept-driven storytelling.
+              </p>
+              <p className="text-base md:text-lg text-neutral-400 leading-[1.8]">
+                Whether designing a monogram like Yowza or structural layouts like Vishvashetra, the target is always to build identities that remain highly legible at 16px on a mobile screen and visually striking on large-scale signage.
+              </p>
+            </section>
+
+            <section>
+              <SectionLabel n="02" title="Responsive Adaptability" />
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">The Grid & Geometry</h2>
+              <p className="text-base md:text-lg text-neutral-400 leading-[1.8] mb-6">
+                A premium logo should adapt seamlessly to any medium. During the design process, each mark is refined using precise vector grids to ensure proportional integrity.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                <div className="border border-white/5 rounded-xl p-6 bg-white/[0.01]">
+                  <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-2">01. Scalability</h4>
+                  <p className="text-xs text-neutral-400 leading-relaxed">Ensuring details aren't lost when scaled down. Testing marks as favicons, app icons, and horizontal header structures.</p>
+                </div>
+                <div className="border border-white/5 rounded-xl p-6 bg-white/[0.01]">
+                  <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-2">02. Contrast Testing</h4>
+                  <p className="text-xs text-neutral-400 leading-relaxed">Validating designs in high-contrast formats. Ensuring the mark works perfectly in pure black and white before introducing color palettes.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          {/* ════════════════════════ RELATED PROJECTS ════════════════════════ */}
+          {related.length > 0 && (
+            <div className="border-t border-white/8 pt-20 pb-28">
+              <div className="flex items-end justify-between mb-12">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-600 mb-2">More work</p>
+                  <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Next Projects</h2>
+                </div>
+                <Link href="/work" className="text-[11px] uppercase tracking-[0.15em] text-neutral-500 hover:text-[#bef264] transition-colors hidden md:block">
+                  View all →
+                </Link>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                {related.map((rel) => (
+                  <Link key={rel.id} href={`/work/${rel.slug}`} className="group block">
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl mb-4 bg-neutral-900 border border-white/6">
+                      <img
+                        src={rel.image}
+                        alt={rel.title}
+                        className="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                          View Case
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-[9px] uppercase tracking-[0.15em] text-[#bef264] mb-1">{rel.category}</p>
+                    <h3 className="text-base font-bold tracking-tight group-hover:text-[#bef264] transition-colors duration-300 leading-snug">{rel.title}</h3>
+                    <p className="text-xs text-neutral-600 mt-1">{rel.subtitle}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </article>
+
+        {/* Footer bar */}
+        <div className="border-t border-white/5 px-6 md:px-12 py-8">
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <Link href="/work" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-neutral-500 hover:text-white transition-colors group">
+              <FiArrowLeft size={13} className="group-hover:-translate-x-1 transition-transform" />
+              Back to Work
+            </Link>
+            <p className="text-[11px] uppercase tracking-widest text-neutral-700">© 2026 Dev Shrimali</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   /* ─── Research insights (split by sentence) ─── */
   const researchInsights = project.research

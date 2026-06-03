@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectVideo from "./ProjectVideo";
+import AnimatedLogoThumbnail from "./AnimatedLogoThumbnail";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,9 @@ export default function WorkCard({ project, index }: { project: Project; index: 
       {/* ── Media – edge to edge video ── */}
       <div className="relative aspect-[16/10] overflow-hidden rounded-[20px] bg-[#0a0a0a] border border-white/5 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-1.5 group-hover:shadow-[0_12px_40px_rgba(190,242,100,0.08)]">
         
-        {project.video && ytId ? (
+        {project.slug === "logo-design-showcase" ? (
+          <AnimatedLogoThumbnail />
+        ) : project.video && ytId ? (
           <ProjectVideo ytId={ytId} thumbSrc={thumb} alt={project.title} delay={4500 + index * 5000} />
         ) : (
           <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-80" />

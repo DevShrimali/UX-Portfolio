@@ -18,6 +18,15 @@ import ProjectVideo from "@/components/ProjectVideo";
 
 const allProjects = [
   {
+    id: 99, slug: "logo-design-showcase",
+    title: "Brand Logo Showcase — Identity & Marks",
+    category: "Brand Identity",
+    desc: "A curated collection of premium logo designs and visual brand marks created for startups and enterprises.",
+    tags: ["Branding", "Logo Design", "Visual Identity"],
+    image: "/brand-logos/Yowza-logo.png",
+    year: "2025",
+  },
+  {
     id: 1, slug: "transact-os",
     title: "TransactOS — Unified B2B Operations Dashboard",
     category: "SaaS",
@@ -197,6 +206,7 @@ function loopUrl(id: string) {
 }
 
 import WorkCard from "@/components/WorkCard";
+import AnimatedLogoThumbnail from "@/components/AnimatedLogoThumbnail";
 export default function WorkPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -332,7 +342,9 @@ export default function WorkPage() {
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10 flex-1">
                     <div className="relative w-full md:w-56 aspect-[16/10] rounded-xl overflow-hidden shrink-0 border border-white/10 bg-[#0a0a0a]">
-                       {project.video && ytId ? (
+                       {project.slug === "logo-design-showcase" ? (
+                         <AnimatedLogoThumbnail />
+                       ) : project.video && ytId ? (
                          <ProjectVideo ytId={ytId} thumbSrc={thumb} alt={project.title} delay={index * 2000} />
                        ) : (
                          <img src={thumb} alt={project.title} className="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500" />
