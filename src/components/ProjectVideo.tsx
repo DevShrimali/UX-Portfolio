@@ -3,6 +3,37 @@ import { useEffect, useRef, useState, useId } from "react";
 
 type Phase = "thumbnail" | "video" | "rest";
 
+/* Minimal typings for the YouTube IFrame API */
+interface YTPlayer {
+  getCurrentTime(): number;
+  getDuration(): number;
+  seekTo(seconds: number): void;
+  mute(): void;
+  playVideo(): void;
+  destroy?: () => void;
+}
+interface YTPlayerEvent {
+  target: YTPlayer;
+  data?: number;
+}
+interface YTNamespace {
+  Player: new (
+    elementId: string,
+    options: {
+      videoId: string;
+      playerVars: Record<string, number>;
+      events: {
+        onReady: (e: YTPlayerEvent) => void;
+        onStateChange: (e: YTPlayerEvent) => void;
+      };
+    }
+  ) => YTPlayer;
+}
+
+function getYT(): YTNamespace | undefined {
+  return (window as unknown as { YT?: YTNamespace }).YT;
+}
+
 export default function ProjectVideo({
   ytId,
   thumbSrc,
@@ -15,8 +46,9 @@ export default function ProjectVideo({
   delay?: number;
 }) {
   const [phase, setPhase] = useState<Phase>("thumbnail");
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<YTPlayer | null>(null);
   const mountedRef = useRef(true);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const uniq = useId().replace(/:/g, "");
   const containerId = `yt-${ytId}-${uniq}`;
@@ -33,7 +65,7 @@ export default function ProjectVideo({
         if (endPoll) { clearInterval(endPoll); endPoll = null; }
       };
 
-      const startPoll = (player: any) => {
+      const startPoll = (player: YTPlayer) => {
         stopPoll();
         endPoll = setInterval(() => {
           if (!mountedRef.current) { stopPoll(); return; }
@@ -53,11 +85,13 @@ export default function ProjectVideo({
                 startPoll(player);
               }, 4000);
             }
-          } catch (_) { stopPoll(); }
+          } catch { stopPoll(); }
         }, 500);
       };
 
-      playerRef.current = new (window as any).YT.Player(containerId, {
+      const YT = getYT();
+      if (!YT) return;
+      playerRef.current = new YT.Player(containerId, {
         videoId: ytId,
         playerVars: {
           autoplay: 1,
@@ -71,7 +105,7 @@ export default function ProjectVideo({
           start: 3, // skip first 3 seconds
         },
         events: {
-          onReady: (e: any) => {
+          onReady: (e) => {
             if (!mountedRef.current) return;
             e.target.mute();
             e.target.seekTo(3); // ensure we start at 3s
@@ -79,7 +113,7 @@ export default function ProjectVideo({
             setPhase("video");
             startPoll(e.target);
           },
-          onStateChange: (e: any) => {
+          onStateChange: (e) => {
             if (!mountedRef.current) return;
             // Force play if stalled
             if (e.data === -1 || e.data === 5) {
@@ -104,7 +138,7 @@ export default function ProjectVideo({
       });
     };
 
-    if ((window as any).YT?.Player) {
+    if (getYT()?.Player) {
       create();
     } else {
       // Load the API script once
@@ -115,7 +149,7 @@ export default function ProjectVideo({
       }
       // Poll until ready
       const poll = setInterval(() => {
-        if ((window as any).YT?.Player) {
+        if (getYT()?.Player) {
           clearInterval(poll);
           create();
         }
@@ -125,16 +159,30 @@ export default function ProjectVideo({
 
   useEffect(() => {
     mountedRef.current = true;
+    let thumbTimer: ReturnType<typeof setTimeout> | null = null;
 
-    // ① Show thumbnail for `delay` ms first, then load video
-    const thumbTimer = setTimeout(() => {
-      if (mountedRef.current) initPlayer();
-    }, delay);
+    // Only start the thumbnail→video countdown once the card is actually
+    // visible — otherwise a long grid boots a dozen hidden YouTube players.
+    const root = rootRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && thumbTimer === null) {
+          observer.disconnect();
+          thumbTimer = setTimeout(() => {
+            if (mountedRef.current) initPlayer();
+          }, delay);
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    if (root) observer.observe(root);
 
     return () => {
       mountedRef.current = false;
-      clearTimeout(thumbTimer);
-      if (playerRef.current?.destroy) playerRef.current.destroy();
+      observer.disconnect();
+      if (thumbTimer !== null) clearTimeout(thumbTimer);
+      playerRef.current?.destroy?.();
+      playerRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ytId]);
@@ -142,7 +190,7 @@ export default function ProjectVideo({
   const showThumb = phase === "thumbnail" || phase === "rest";
 
   return (
-    <>
+    <div ref={rootRef} className="absolute inset-0">
       {/* YouTube iframe container — always rendered but hidden during thumb phases */}
       <div
         className="pointer-events-none absolute inset-0 w-full h-full flex items-center justify-center transform scale-[1.15]"
@@ -156,13 +204,13 @@ export default function ProjectVideo({
         className="absolute inset-0 z-20 pointer-events-none"
         style={{ opacity: showThumb ? 1 : 0, transition: "opacity 0.5s ease" }}
       >
-        <img src={thumbSrc} alt={alt} className="w-full h-full object-cover" />
+        <img src={thumbSrc} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
 
         {/* Progress bar — only shown during rest phase */}
         {phase === "rest" && (
           <>
             <div
-              className="absolute bottom-0 left-0 h-[3px] bg-[#bef264]"
+              className="absolute bottom-0 left-0 h-[3px] bg-accent"
               style={{ animation: "projectProgress 4s linear forwards" }}
             />
             <style>{`
@@ -174,6 +222,6 @@ export default function ProjectVideo({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

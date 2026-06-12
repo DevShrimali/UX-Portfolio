@@ -63,7 +63,7 @@ export default function MarqueeStrip({
           <svg
             key={i}
             viewBox="0 0 256 256"
-            className="inline-block w-16 h-16 mx-6 text-[#bef264] align-middle"
+            className="inline-block w-16 h-16 mx-6 text-accent align-middle"
             fill="currentColor"
           >
             <path d={item.d} />

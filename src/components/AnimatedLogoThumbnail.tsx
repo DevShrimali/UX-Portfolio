@@ -13,7 +13,7 @@ const logoImages = [
   "/brand-logos/lone-app.png",
   "/brand-logos/msq.png",
   "/brand-logos/old-automotive.png",
-  "/brand-logos/raise-fitness",
+  "/brand-logos/raise-fitness.png",
   "/brand-logos/rj-build.png",
   "/brand-logos/vishwashetra.png",
 ];

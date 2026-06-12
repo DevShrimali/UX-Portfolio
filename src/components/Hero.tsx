@@ -98,7 +98,7 @@ export default function Hero() {
   return (
     <section
       id="welcome"
-      className="relative w-full min-h-[100svh] h-[100svh] overflow-hidden bg-[#0a0a0a]"
+      className="relative w-full min-h-[100svh] h-[100svh] overflow-hidden bg-surface"
     >
       {/* Background image */}
       <div className="absolute inset-0 z-[1]">
@@ -113,7 +113,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-[2] bg-black/40" />
 
       {/* Bottom gradient */}
-      <div className="absolute inset-0 z-[3] bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
+      <div className="absolute inset-0 z-[3] bg-gradient-to-t from-surface via-transparent to-transparent" />
 
       {/* Noise texture */}
       <div
@@ -130,6 +130,7 @@ export default function Hero() {
         <img
           src="/person.png"
           alt="Dev Shrimali"
+          fetchPriority="high"
           className="h-[65vh] sm:h-[75vh] md:h-[85vh] lg:h-[95vh] w-auto max-w-none object-contain object-bottom"
         />
       </div>
@@ -151,7 +152,7 @@ export default function Hero() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 256 256"
                 fill="none"
-                className="inline-block text-[#bef264]"
+                className="inline-block text-accent"
                 style={{ width: "clamp(1.8rem, 7vw, 8vw)", height: "clamp(1.8rem, 7vw, 8vw)" }}
               >
                 <path d="M 152 70.059 L 201.539 20.519 L 235.48 54.461 L 185.941 104 L 256 104 L 256 152 L 185.941 152 L 235.48 201.539 L 201.539 235.48 L 152 185.941 L 152 256 L 104 256 L 104 185.941 L 54.46 235.48 L 20.52 201.539 L 70.059 152 L 0 152 L 0 104 L 70.059 104 L 20.519 54.46 L 54.461 20.52 L 104 70.059 L 104 0 L 152 0 Z" fill="none" stroke="currentColor" strokeWidth="8" strokeLinejoin="round" />
@@ -183,7 +184,7 @@ export default function Hero() {
         <div className="absolute right-[5%] md:right-[5%] top-[68%] md:top-[60%] -translate-y-1/2 rotate-[-12deg] md:rotate-[-6deg]">
           <span
             ref={wowRef}
-            className="inline-flex text-[18vw] sm:text-[15vw] md:text-[14vw] text-[#bef264] leading-[0.85] tracking-tight"
+            className="inline-flex text-[18vw] sm:text-[15vw] md:text-[14vw] text-accent leading-[0.85] tracking-tight"
             style={{
               fontFamily: "var(--font-playball)",
               perspective: "600px",
@@ -211,11 +212,11 @@ export default function Hero() {
         </div>
         <div ref={bottomRightRef} className="text-right">
           <div className="h-[1px] w-8 md:w-12 bg-white/30 mb-2 md:mb-4 ml-auto"></div>
-          <p className="text-[11px] sm:text-xl md:text-3xl lg:text-5xl font-light">
-            Senior UI/UX Designer
+          <p className="text-[10px] sm:text-base md:text-xl lg:text-[28px] font-light text-white">
+            Senior Product Designer
           </p>
-          <p className="text-[11px] sm:text-xl md:text-3xl lg:text-5xl font-light text-neutral-400">
-            Fintech, SaaS &amp; Healthcare
+          <p className="text-[9px] sm:text-[13px] md:text-[15px] lg:text-[17px] font-light text-neutral-400 mt-1.5 uppercase tracking-[0.12em]">
+            Full-Lifecycle Product Design
           </p>
         </div>
       </div>

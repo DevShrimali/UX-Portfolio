@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playball } from "next/font/google";
 import "./globals.css";
+import TransitionProvider from "@/components/TransitionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +20,11 @@ const playball = Playball({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Shrimali — Senior UI/UX Designer | devux.in",
+  title: "Dev Shrimali — Senior Product Designer | devux.in",
   description:
-    "Portfolio of Dev Shrimali, a Senior UI/UX Designer with 7 years of experience crafting digital products across Fintech, Healthcare, and SaaS.",
+    "Portfolio of Dev Shrimali, a Senior Product Designer with 7 years of experience crafting digital products across Fintech, Healthcare, and SaaS.",
   keywords: [
-    "UI/UX Designer",
+    "Product Designer",
     "Dev Shrimali",
     "Fintech Design",
     "Healthcare UX",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
   },
   openGraph: {
-    title: "Dev Shrimali — Senior UI/UX Designer",
+    title: "Dev Shrimali — Senior Product Designer",
     description:
       "7 years designing intuitive digital products across Fintech, Healthcare, and SaaS.",
     type: "website",
@@ -51,11 +52,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('hasVisited')) {
+                  document.documentElement.classList.add('has-visited');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playball.variable} antialiased`}
       >
-        {children}
+        <TransitionProvider>{children}</TransitionProvider>
       </body>
     </html>
   );
 }
+

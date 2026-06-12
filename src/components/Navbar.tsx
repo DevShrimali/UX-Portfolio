@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useScroll, useMotionValueEvent, motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import gsap from "gsap";
+import { smoothScrollTo } from "@/components/SmoothScroll";
 
 const links = [
   { label: "Skills", href: "#what-i-do", section: "what-i-do" },
@@ -39,12 +40,10 @@ export default function Navbar() {
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
-  // Smooth scroll to section
+  // Smooth scroll to section through Lenis (native fallback inside helper)
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    smoothScrollTo(href);
   };
 
 
@@ -122,7 +121,7 @@ export default function Navbar() {
             ref={logoRef}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 256 256"
-            className="w-[14px] h-[14px] text-[#bef264] self-center"
+            className="w-[14px] h-[14px] text-accent self-center"
             fill="currentColor"
           >
             <path d="M 192 0 C 227.346 0 256 28.654 256 64 C 256 99.346 227.346 128 192 128 C 227.346 128 256 156.654 256 192 C 256 227.346 227.346 256 192 256 C 156.654 256 128 227.346 128 192 C 128 227.346 99.346 256 64 256 C 28.654 256 0 227.346 0 192 C 0 156.654 28.654 128 64 128 C 28.654 128 0 99.346 0 64 C 0 28.654 28.654 0 64 0 C 99.346 0 128 28.654 128 64 C 128 28.654 156.654 0 192 0 Z M 128 100 C 112.536 100 100 112.536 100 128 C 100 143.464 112.536 156 128 156 C 143.464 156 156 143.464 156 128 C 156 112.536 143.464 100 128 100 Z" />
@@ -144,7 +143,7 @@ export default function Navbar() {
                   onClick={(e) => scrollTo(e, link.href)}
                   className="relative flex items-center text-[11px] uppercase tracking-[0.2em] font-medium leading-none px-3 py-1 rounded-full hover:bg-white/5 transition-colors"
                 >
-                  <span className={isActive ? "text-[#bef264]" : "text-neutral-300 hover:text-white"}>
+                  <span className={isActive ? "text-accent" : "text-neutral-300 hover:text-white"}>
                     {link.label}
                   </span>
                 </a>

@@ -5,8 +5,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  /* Brand palette — change once, applies everywhere */
+  --color-accent: #bef264;
+  --color-surface: #0a0a0a;
+}
+
 html {
-  background-color: #0a0a0a;
+  background-color: var(--color-surface);
   color: #ffffff;
 }
 
@@ -17,8 +23,15 @@ body {
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(190, 242, 100, 0.25);
   color: #fff;
+}
+
+/* Visible keyboard focus, invisible for mouse users */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* Smooth scrollbar for dark theme */
@@ -38,3 +51,35 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+/* Decorative rotating background shapes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Respect reduced-motion globally for CSS animations/transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Preloader panels transition classes */
+.panel-top {
+  transform: translateY(0%);
+}
+.panel-bottom {
+  transform: translateY(0%);
+}
+html.has-visited .panel-top {
+  transform: translateY(-100%);
+}
+html.has-visited .panel-bottom {
+  transform: translateY(100%);
+}
+

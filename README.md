@@ -22,6 +22,15 @@ A premium, interactive, and high-performance portfolio website built to showcase
 - **Fully Responsive:** Optimized for both mobile and desktop experiences.
 - **Performance Optimized:** Built with modern Next.js features for maximum speed and SEO.
 
+## 🛠️ Recent Updates
+
+- **Performance-Optimized Media Loader:** YouTube videos/embeds in the project showcase are lazy-loaded via an `IntersectionObserver` wrapper (`ProjectVideo.tsx`), preventing heavy iframe bootstrapping on initial load and reducing CPU usage.
+- **GSAP Scroll Reveal Scoping:** Implemented a custom `useGsapReveal` hook that scopes `ScrollTrigger` instances within components and cleanly handles cleanup on unmount, fully respecting user reduced-motion preferences.
+- **Interactive Magnetic Elements:** Added a client-side `Magnetic` component utilizing GSAP elastic springs to wrap key call-to-actions, introducing premium tactile hover micro-interactions.
+- **Scrambled & Copyable Contact Details:** Integrated a `ScrambleEmail` component featuring a character-scrambling hover transition and instant email copying with visual success confirmation.
+- **Server/Client Boundary Refinement:** Separated the dynamic case study page `/work/[slug]` into a server-side route wrapper (`page.tsx` for build-time static path pre-rendering and dynamic SEO metadata generation) and a client-side presentation view (`CaseStudyClient.tsx`).
+- **Semantic Theme Architecture:** Migrated static colors to semantically defined CSS Custom Properties (e.g. `bg-surface`, `text-accent`) for consistent styling and simplified theme configuration.
+
 ## 📦 Getting Started
 
 First, install the dependencies:
@@ -40,13 +49,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to view th
 
 ## 📁 Project Structure
 
-- `src/app/` - Next.js App Router pages and layouts.
-- `src/components/` - Reusable UI components (Navbar, Hero, Custom Cards, PageLoader, etc.).
-- `src/hooks/` - Custom React hooks for dynamic interactions (e.g., mouse tracking).
-- `public/` - Static assets, project cover images, and resume documents.
+- `src/app/` - Next.js App Router pages, layouts, and dynamic case study routes.
+- `src/components/` - Reusable UI components (Navbar, Hero, Custom Cards, PageLoader, Magnetic, etc.).
+- `src/hooks/` - Custom React hooks for dynamic interactions (e.g., `useGsapReveal`).
+- `src/data/` - Static and structured data (e.g., project descriptions and case studies).
+- `public/` - Static assets, project cover images, and brand logos.
 
 ## 👨‍💻 Author
 
 **Dev Shrimali**
 - [GitHub](https://github.com/DevShrimali)
-- [LinkedIn](#) *(Update with your link)*
+- [LinkedIn](https://www.linkedin.com/in/dev-shrimali/)
+

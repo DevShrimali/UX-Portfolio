@@ -1,84 +1,23 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
 import Hero from "@/components/Hero";
-import Card3D from "@/components/Card3D";
 import CardDeck from "@/components/CardDeck";
 import FloatingBadge from "@/components/FloatingBadge";
 import MarqueeStrip from "@/components/MarqueeStrip";
 import ParallaxImage from "@/components/ParallaxImage";
-import PageLoader from "@/components/PageLoader";
+import Magnetic from "@/components/Magnetic";
+import { useGsapReveal } from "@/hooks/useGsapReveal";
+import { featuredProjects } from "@/data/projects";
 import { FaBehance, FaDribbble, FaFigma, FaGithub, FaYoutube, FaLinkedinIn } from "react-icons/fa6";
-import { LuBriefcase, LuGraduationCap } from "react-icons/lu";
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+import { LuBriefcase, LuGraduationCap, LuCheck, LuCopy } from "react-icons/lu";
 
 /* ─── DATA ─── */
-const projects = [
-  {
-    id: 12,
-    title: "TransactOS",
-    category: "SaaS Platform",
-    desc: "Unified B2B Operations Dashboard designed to streamline complex business transactions.",
-    tags: ["B2B", "Dashboard UI", "SaaS"],
-    image: "/project%20assets/532shots_so.png",
-    slug: "transact-os",
-  },
-  {
-    id: 1,
-    title: "Loan App",
-    category: "Fintech Platform",
-    desc: "Problem-solving product design for a loan application with a motion showcase.",
-    tags: ["UI/UX Case Study", "Motion Showcase", "Mobile"],
-    image: "/project-1.jpg",
-    video: "https://www.youtube.com/embed/VGJqwOx-qAY",
-    slug: "fintech-app",
-  },
-  {
-    id: 11,
-    title: "Plant-Based Meal Plan",
-    category: "Healthcare",
-    desc: "A comprehensive UX/UI case study for a plant-based meal planning application.",
-    tags: ["UX/UI Case Study", "Mobile App", "Health"],
-    image: "/Cover.png",
-    slug: "plant-based-meal-plan",
-  },
-  {
-    id: 2,
-    title: "Grocery E-Commerce",
-    category: "E-Commerce Website",
-    desc: "Fresh, fast, and modern online shopping experience.",
-    tags: ["UI Design", "E-Commerce", "Web"],
-    image: "/project-2.jpg",
-    video: "https://www.youtube.com/embed/78bCyDFaxsE",
-    slug: "grocery-e-commerce",
-  },
-  {
-    id: 3,
-    title: "Job Portal",
-    category: "Job Portal Website",
-    desc: "Minimal job search, apply flow, and modern listings.",
-    tags: ["UI Design", "UX Flow", "Web"],
-    image: "/project-3.jpg",
-    video: "https://www.youtube.com/embed/4RxCHb3m8M4",
-    slug: "job-portal-ai",
-  },
-  {
-    id: 4,
-    title: "Cleaning Brand",
-    category: "Brand Identity",
-    desc: "A visual sparkle: comprehensive brand identity and logo design for MSquare Cleaning Services.",
-    tags: ["Branding", "Visual Design", "Logo Design"],
-    image: "/project%20assets/msquare/cover.png",
-    slug: "cleaning-brand-msquare",
-  },
-];
-
 const services = [
   {
     num: "01",
@@ -114,19 +53,27 @@ const services = [
 
 const experience = [
   {
-    role: "UI / UX designer",
-    company: "EnlightVision Technologies Private Limited",
-    dates: "Aug 2024 — Present",
+    role: "Senior Product Designer",
+    company: "HoomanX Technologies",
+    dates: "Feb 2026 — Present",
     location: "Ahmedabad, Gujarat, India",
-    skills: "UserResearch, Communication & Collaboration, Visual Design, Interaction Design, Prototyping.",
+    skills: "Product Strategy, User Research, Design Systems, Interaction Design, Prototyping",
     current: true,
   },
   {
-    role: "UI / UX Designer",
+    role: "Senior UI/UX Designer",
+    company: "EnlightVision Technologies Private Limited",
+    dates: "Aug 2024 — Feb 2026",
+    location: "Ahmedabad, Gujarat, India",
+    skills: "User Research, Communication & Collaboration, Visual Design, Interaction Design, Prototyping",
+    current: false,
+  },
+  {
+    role: "Product Designer",
     company: "Konzept Solutions",
     dates: "Mar 2021 — Mar 2024",
     location: "Ahmedabad, Gujarat, India",
-    skills: "UserResearch, Communication & Collaboration, Wireframing, Adobe XD, Design Systems.",
+    skills: "User Research, Communication & Collaboration, Wireframing, Adobe XD, Design Systems",
     current: false,
   },
   {
@@ -134,7 +81,7 @@ const experience = [
     company: "VMG Software Solutions Pvt. Ltd.",
     dates: "Oct 2020 — Feb 2021",
     location: "Gandhinagar, Gujarat, India",
-    skills: "User Research, Communication & Collaboration, Web Design, Graphic Design.",
+    skills: "User Research, Communication & Collaboration, Web Design, Graphic Design",
     current: false,
   },
   {
@@ -142,7 +89,7 @@ const experience = [
     company: "Pixeltec Digital Wallpaper",
     dates: "Apr 2019 — Oct 2020",
     location: "Ahmedabad, Gujarat, India",
-    skills: "UserResearch, Visual Design, Print Design, Branding, Custom Wallpapers.",
+    skills: "User Research, Visual Design, Print Design, Branding, Custom Wallpapers",
     current: false,
   },
 ];
@@ -152,7 +99,7 @@ const education = [
     course: "Bachelor of Technology - BTech, Computer Science",
     institution: "U.V. Patel College of Engineering",
     dates: "2016 - 2018",
-    details: "Computer Science Engineering",
+    details: "",
   },
   {
     course: "High School Diploma, Computer Science",
@@ -182,25 +129,7 @@ const education = [
     course: "Zero To Mastery : Web Developer",
     institution: "Zero To Mastery Academy",
     dates: "Sep 2020",
-    details: "Skills: DesignThinking, UserResearch, HTML5, GitHub, React.js.",
-  }
-];
-
-const principles = [
-  {
-    num: "01",
-    title: "Empathy First",
-    desc: "Understanding the user is the foundation of every meaningful design decision.",
-  },
-  {
-    num: "02",
-    title: "Jakob's Law",
-    desc: "Users spend most of their time on other sites. They prefer your site to work the same way as sites they already know.",
-  },
-  {
-    num: "03",
-    title: "Seamless Handoff",
-    desc: "Great design is nothing without flawless execution. Ensuring close collaboration with developers is key.",
+    details: "Skills: Design Thinking, User Research, HTML5, GitHub, React.js.",
   },
 ];
 
@@ -238,23 +167,13 @@ const marqueeItems = [
 ];
 
 /* ─── SECTION LABEL COMPONENT ─── */
-function SectionLabel({
-  text,
-  color = "text-neutral-400",
-  lineColor = "bg-neutral-600",
-}: {
-  text: string;
-  color?: string;
-  lineColor?: string;
-}) {
+function SectionLabel({ text }: { text: string }) {
   return (
     <div className="w-full md:w-[200px] lg:w-[250px] shrink-0">
       <div className="sticky top-32">
         <ScrollReveal>
-          <p
-            className={`text-xs font-bold tracking-widest uppercase flex items-center gap-4 ${color}`}
-          >
-            <span className={`w-8 h-[1px] ${lineColor} block`} />
+          <p className="text-xs font-bold tracking-widest uppercase flex items-center gap-4 text-neutral-400">
+            <span className="w-8 h-[1px] bg-neutral-600 block" />
             {text}
           </p>
         </ScrollReveal>
@@ -265,20 +184,9 @@ function SectionLabel({
 
 /* ─── BIO WORD REVEAL ─── */
 function BioHeading() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const words = container.querySelectorAll(".bio-word");
+  const containerRef = useGsapReveal<HTMLDivElement>((container) => {
     gsap.fromTo(
-      words,
+      container.querySelectorAll(".bio-word"),
       { y: 60, opacity: 0, rotateX: -30 },
       {
         y: 0,
@@ -287,18 +195,10 @@ function BioHeading() {
         stagger: 0.08,
         duration: 1,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: container,
-          start: "top 85%",
-          once: true,
-        },
+        scrollTrigger: { trigger: container, start: "top 85%", once: true },
       }
     );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+  });
 
   const line1 = ["Hi,", "I'm", "Dev"];
   const line2 = ["I", "design"];
@@ -325,7 +225,7 @@ function BioHeading() {
           </span>
         ))}
         {line2accent.map((w, i) => (
-          <span key={`a${i}`} className={`${wordClass} text-[#bef264]`}>
+          <span key={`a${i}`} className={`${wordClass} text-accent`}>
             {w}
           </span>
         ))}
@@ -348,24 +248,20 @@ function BioHeading() {
 
 /* ─── EXPERIENCE TIMELINE ─── */
 function ExperienceTimeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-
+  const containerRef = useGsapReveal<HTMLDivElement>((container) => {
     gsap.fromTo(
       container.querySelectorAll(".exp-row"),
       { y: 28, opacity: 0 },
       {
-        y: 0, opacity: 1, stagger: 0.1, duration: 0.85, ease: "power3.out",
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.85,
+        ease: "power3.out",
         scrollTrigger: { trigger: container, start: "top 82%", once: true },
       }
     );
-    return () => { ScrollTrigger.getAll().forEach((t) => t.kill()); };
-  }, []);
+  });
 
   return (
     <div ref={containerRef} className="grid grid-cols-1 lg:grid-cols-2 gap-16 w-full">
@@ -379,28 +275,25 @@ function ExperienceTimeline() {
 
         <div className="flex flex-col">
           {experience.map((exp, i) => (
-            <div key={i} className="exp-row group py-7 border-b border-white/[0.06] last:border-0">
-              {/* Top row: role + badge */}
+            <div key={i} className="exp-row group py-7 border-b border-white/[0.06] last:border-0 transition-colors duration-300 hover:bg-white/[0.02] -mx-4 px-4 rounded-lg">
               <div className="flex items-center justify-between gap-4 mb-1">
                 <h4 className="text-[15px] font-semibold text-white tracking-tight">
                   {exp.role}
                 </h4>
                 {exp.current && (
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-[#bef264] bg-[#bef264]/[0.08] border border-[#bef264]/20 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.14em] text-accent bg-accent/[0.08] border border-accent/20 px-2.5 py-0.5 rounded-full">
                     Present
                   </span>
                 )}
               </div>
 
-              {/* Company + dates */}
               <div className="flex items-center justify-between gap-4 mb-4">
                 <p className="text-sm text-neutral-500">{exp.company}</p>
                 <p className="text-[11px] text-neutral-600 tracking-wide shrink-0">{exp.dates}</p>
               </div>
 
-              {/* Skills */}
               <p className="text-[12px] text-neutral-600 leading-relaxed">
-                {exp.skills.replace(/\.$/, "")}
+                {exp.skills}
               </p>
             </div>
           ))}
@@ -416,8 +309,7 @@ function ExperienceTimeline() {
 
         <div className="flex flex-col">
           {education.map((edu, i) => (
-            <div key={i} className="exp-row py-7 border-b border-white/[0.06] last:border-0">
-              {/* Title + year */}
+            <div key={i} className="exp-row py-7 border-b border-white/[0.06] last:border-0 transition-colors duration-300 hover:bg-white/[0.02] -mx-4 px-4 rounded-lg">
               <div className="flex items-start justify-between gap-6 mb-1">
                 <h4 className="text-[15px] font-semibold text-white tracking-tight leading-snug">
                   {edu.course}
@@ -425,11 +317,9 @@ function ExperienceTimeline() {
                 <p className="text-[11px] text-neutral-600 tracking-wide shrink-0 pt-0.5">{edu.dates}</p>
               </div>
 
-              {/* Institution */}
               <p className="text-sm text-neutral-500 mb-3">{edu.institution}</p>
 
-              {/* Detail (only if meaningful) */}
-              {edu.details && edu.details !== "Computer Science Engineering" && (
+              {edu.details && (
                 <p className="text-[12px] text-neutral-600 leading-relaxed">
                   {edu.details}
                 </p>
@@ -444,20 +334,9 @@ function ExperienceTimeline() {
 
 /* ─── SERVICE CARDS ─── */
 function ServiceCards() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = cardsRef.current;
-    if (!container) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const cards = container.querySelectorAll(".svc-card");
+  const cardsRef = useGsapReveal<HTMLDivElement>((container) => {
     gsap.fromTo(
-      cards,
+      container.querySelectorAll(".svc-card"),
       { rotateX: -20, y: 60, opacity: 0 },
       {
         rotateX: 0,
@@ -466,18 +345,10 @@ function ServiceCards() {
         stagger: 0.1,
         duration: 1,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: container,
-          start: "top 80%",
-          once: true,
-        },
+        scrollTrigger: { trigger: container, start: "top 80%", once: true },
       }
     );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+  });
 
   return (
     <div
@@ -485,11 +356,11 @@ function ServiceCards() {
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-16"
     >
       {services.map((svc) => (
-        <div key={svc.num} className="svc-card group border-t border-white/10 pt-6 cursor-default">
-          <span className="text-xs text-neutral-600 font-mono">
+        <div key={svc.num} className="svc-card group border-t border-white/10 pt-6 cursor-default transition-colors duration-500 hover:border-accent/40">
+          <span className="text-xs text-neutral-600 font-mono transition-colors duration-300 group-hover:text-accent">
             {svc.num}
           </span>
-          <h3 className="text-2xl md:text-3xl font-light tracking-tight mt-3 mb-4 transition-colors duration-300 group-hover:text-[#bef264]">
+          <h3 className="text-2xl md:text-3xl font-light tracking-tight mt-3 mb-4 transition-colors duration-300 group-hover:text-accent">
             {svc.title}
           </h3>
           <p className="text-sm text-neutral-400 leading-relaxed">
@@ -501,81 +372,11 @@ function ServiceCards() {
   );
 }
 
-/* ─── PRINCIPLES CARDS ─── */
-function PrinciplesCards() {
-  const cardsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = cardsRef.current;
-    if (!container) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const cards = container.querySelectorAll(".princ-card");
-    gsap.fromTo(
-      cards,
-      { rotateY: -8, opacity: 0 },
-      {
-        rotateY: 0,
-        opacity: 1,
-        stagger: 0.12,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: container,
-          start: "top 80%",
-          once: true,
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
-
-  return (
-    <div
-      ref={cardsRef}
-      className="grid grid-cols-1 md:grid-cols-3 gap-8"
-      style={{ perspective: "800px" }}
-    >
-      {principles.map((p) => (
-        <div
-          key={p.num}
-          className="princ-card p-10 border border-white/5 bg-black/20 hover:bg-neutral-900 transition-colors h-full"
-          style={{ transformStyle: "preserve-3d", willChange: "transform" }}
-        >
-          <span className="text-xs text-neutral-600 font-mono">{p.num}</span>
-          <h3 className="text-2xl font-bold tracking-tight mt-4 mb-4">
-            {p.title}
-          </h3>
-          <p className="text-sm text-neutral-400 leading-relaxed">{p.desc}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 /* ─── SKILLS BADGES ─── */
 function SkillsBadges() {
-  const badgesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = badgesRef.current;
-    if (!container) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const badges = container.querySelectorAll(".skill-badge");
+  const badgesRef = useGsapReveal<HTMLDivElement>((container) => {
     gsap.fromTo(
-      badges,
+      container.querySelectorAll(".skill-badge"),
       { scale: 0, opacity: 0 },
       {
         scale: 1,
@@ -583,25 +384,17 @@ function SkillsBadges() {
         stagger: 0.05,
         duration: 0.5,
         ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: container,
-          start: "top 85%",
-          once: true,
-        },
+        scrollTrigger: { trigger: container, start: "top 85%", once: true },
       }
     );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+  });
 
   return (
     <div ref={badgesRef} className="flex flex-wrap gap-3 mt-8">
       {skills.map((skill) => (
         <span
           key={skill}
-          className="skill-badge px-5 py-2.5 rounded-full border border-white/20 text-xs font-medium hover:bg-white hover:text-black transition-colors cursor-default"
+          className="skill-badge px-5 py-2.5 rounded-full border border-white/20 text-xs font-medium hover:bg-white hover:text-black hover:-translate-y-0.5 transition-all duration-200 cursor-default"
         >
           {skill}
         </span>
@@ -612,17 +405,7 @@ function SkillsBadges() {
 
 /* ─── FOOTER HEADING ─── */
 function FooterHeading() {
-  const headingRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const el = headingRef.current;
-    if (!el) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
+  const headingRef = useGsapReveal<HTMLHeadingElement>((el) => {
     gsap.fromTo(
       el,
       { rotateX: -20, y: 80, opacity: 0 },
@@ -632,18 +415,10 @@ function FooterHeading() {
         opacity: 1,
         duration: 1.2,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          once: true,
-        },
+        scrollTrigger: { trigger: el, start: "top 85%", once: true },
       }
     );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+  });
 
   return (
     <h2
@@ -658,20 +433,9 @@ function FooterHeading() {
 
 /* ─── FOOTER SOCIAL LINKS ─── */
 function FooterSocials() {
-  const listRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = listRef.current;
-    if (!container) return;
-
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const links = container.querySelectorAll("a");
+  const listRef = useGsapReveal<HTMLDivElement>((container) => {
     gsap.fromTo(
-      links,
+      container.querySelectorAll("a"),
       { y: 20, opacity: 0 },
       {
         y: 0,
@@ -679,18 +443,10 @@ function FooterSocials() {
         stagger: 0.1,
         duration: 0.8,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: container,
-          start: "top 90%",
-          once: true,
-        },
+        scrollTrigger: { trigger: container, start: "top 90%", once: true },
       }
     );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+  });
 
   return (
     <div ref={listRef} className="flex flex-col gap-4">
@@ -700,9 +456,9 @@ function FooterSocials() {
           href={s.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-white uppercase tracking-widest text-sm transition-colors flex items-center gap-3"
+          className="group text-neutral-400 hover:text-white uppercase tracking-widest text-sm transition-all duration-200 flex items-center gap-3 hover:translate-x-1"
         >
-          <s.icon className="text-base" />
+          <s.icon className="text-base transition-colors duration-200 group-hover:text-accent" />
           {s.label}
         </a>
       ))}
@@ -710,41 +466,79 @@ function FooterSocials() {
   );
 }
 
-/* ─── EMAIL SCRAMBLE ─── */
+/* ─── EMAIL: SCRAMBLE HOVER + COPY ─── */
+const EMAIL = "devloper.ds@gmail.com";
+
 function ScrambleEmail() {
   const emailRef = useRef<HTMLAnchorElement>(null);
-  const originalText = "devloper.ds@gmail.com";
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     const el = emailRef.current;
-    if (!el) return;
+    if (!el || intervalRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const chars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
     let iterations = 0;
-    const interval = setInterval(() => {
-      el.textContent = originalText
+    intervalRef.current = setInterval(() => {
+      el.textContent = EMAIL
         .split("")
-        .map((letter, index) => {
-          if (index < iterations) return originalText[index];
-          return chars[Math.floor(Math.random() * chars.length)];
-        })
+        .map((_, index) =>
+          index < iterations
+            ? EMAIL[index]
+            : chars[Math.floor(Math.random() * chars.length)]
+        )
         .join("");
       iterations += 1 / 3;
-      if (iterations >= originalText.length) {
-        clearInterval(interval);
-        el.textContent = originalText;
+      if (iterations >= EMAIL.length) {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = null;
+        el.textContent = EMAIL;
       }
     }, 30);
   };
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      /* clipboard unavailable — mailto link still works */
+    }
+  };
+
   return (
-    <a
-      ref={emailRef}
-      href="mailto:devloper.ds@gmail.com"
-      className="text-xl border-b border-white pb-2 hover:text-neutral-400 transition-colors inline-block mt-6"
-      onMouseEnter={handleMouseEnter}
-    >
-      {originalText}
-    </a>
+    <div className="flex items-center gap-4 mt-6">
+      <a
+        ref={emailRef}
+        href={`mailto:${EMAIL}`}
+        className="text-xl border-b border-white pb-2 hover:text-accent hover:border-accent transition-colors inline-block"
+        onMouseEnter={handleMouseEnter}
+      >
+        {EMAIL}
+      </a>
+      <button
+        onClick={handleCopy}
+        aria-label="Copy email address"
+        className="flex items-center justify-center w-9 h-9 rounded-full border border-white/15 text-neutral-400 hover:text-accent hover:border-accent/40 active:scale-90 transition-all duration-200"
+      >
+        {copied ? <LuCheck size={14} className="text-accent" /> : <LuCopy size={14} />}
+      </button>
+      <span
+        aria-live="polite"
+        className={`text-[10px] uppercase tracking-[0.15em] text-accent transition-opacity duration-300 ${copied ? "opacity-100" : "opacity-0"}`}
+      >
+        Copied
+      </span>
+    </div>
   );
 }
 
@@ -753,318 +547,236 @@ function ScrambleEmail() {
    ═══════════════════════════════════════════════════════════════════ */
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const handleLoaderComplete = useCallback(() => setLoading(false), []);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("hasVisited")) {
-      setLoading(false);
-    } else {
-      sessionStorage.setItem("hasVisited", "true");
-    }
-  }, []);
-
   return (
     <>
-      {loading && <PageLoader onComplete={handleLoaderComplete} />}
       <SmoothScroll>
         <Navbar />
 
         {/* ─── SECTION 1: HERO ─── */}
         <Hero />
 
-      {/* ─── SECTION 2: BIO ─── */}
-      <section
-        id="bio"
-        className="bg-black min-h-screen flex items-center px-8 pt-24 pb-32 md:pb-48"
-      >
-        <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
-          <SectionLabel
-            text="Welcome"
-            color="text-neutral-400"
-            lineColor="bg-neutral-600"
-          />
-          <div className="flex-1 max-w-7xl">
-            <BioHeading />
-            <div className="mt-16 max-w-2xl space-y-8">
-              <ScrollReveal>
-                <p className="text-sm md:text-base text-neutral-400 leading-relaxed">
-                  As a UX designer with 7 years of experience, I specialize in building scalable, structured experiences across fintech, healthcare, and SaaS.
-                </p>
-              </ScrollReveal>
-              <ScrollReveal delay={0.15}>
-                <p className="text-sm md:text-base text-neutral-400 leading-relaxed">
-                  Clear thinking. Thoughtful systems. Meaningful design.
-                </p>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 3: WHAT I DO ─── */}
-      <section
-        id="what-i-do"
-        className="relative min-h-screen bg-neutral-950 px-8 py-32 flex items-center overflow-hidden"
-      >
-        {/* Background animated shape */}
-        <div
-          className="absolute left-[-8%] top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.045]"
-          style={{ width: "clamp(300px, 45vw, 680px)", height: "clamp(300px, 45vw, 680px)" }}
+        {/* ─── SECTION 2: BIO ─── */}
+        <section
+          id="bio"
+          className="bg-black min-h-screen flex items-center px-8 pt-24 pb-32 md:pb-48"
         >
-          <svg
-            viewBox="0 0 256 256"
-            fill="white"
-            className="w-full h-full"
-            style={{ animation: "whatIdoShapeSpin 40s linear infinite reverse" }}
-          >
-            <path d="M 228 0 C 172.772 0 128 44.772 128 100 L 128 0 L 0 0 L 0 28 C 0 83.228 44.772 128 100 128 L 0 128 L 0 256 L 28 256 C 83.228 256 128 211.228 128 156 L 128 256 L 256 256 L 256 228 C 256 172.772 211.228 128 156 128 L 256 128 L 256 0 Z" />
-          </svg>
-        </div>
-
-        <style>{`
-          @keyframes whatIdoShapeSpin {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-          }
-        `}</style>
-
-        <div className="relative z-10 w-full flex flex-col md:flex-row gap-8 md:gap-16">
-          <SectionLabel
-            text="What I Do"
-            color="text-neutral-400"
-            lineColor="bg-neutral-600"
-          />
-          <div className="flex-1 max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
-                Design that connects user needs with real outcomes.
-              </h2>
-            </ScrollReveal>
-            <ServiceCards />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 4: SELECTED WORK ─── */}
-      <section id="selected-work" className="bg-black px-8 py-32">
-        <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
-          <SectionLabel
-            text="Selected Work"
-            color="text-neutral-400"
-            lineColor="bg-neutral-600"
-          />
-          <div className="flex-1 max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-5xl md:text-7xl font-bold tracking-tight">
-                Featured{" "}
-                <span className="text-[#bef264]">projects</span>
-              </h2>
-              <p className="text-neutral-400 text-lg md:text-xl max-w-3xl mb-16 mt-6">
-                A curated selection of projects spanning product strategy,
-                interface design, and design systems across multiple industries.
-              </p>
-            </ScrollReveal>
-            <CardDeck projects={projects} />
-            <ScrollReveal delay={0.2}>
-              <div className="mt-16 flex justify-center">
-                <Link
-                  href="/work"
-                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/15 text-[11px] uppercase tracking-[0.2em] text-neutral-400 hover:border-[#bef264] hover:text-[#bef264] transition-all duration-300"
-                >
-                  View All Projects
-                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-2 group-hover:translate-x-1 transition-transform duration-200">
-                    <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 5: TIMELINE (Work & Education) ─── */}
-      <section
-        id="experience"
-        className="bg-neutral-950 px-8 py-32 md:py-48 min-h-screen flex items-center"
-      >
-        <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
-          <SectionLabel
-            text="Experience"
-            color="text-neutral-400"
-            lineColor="bg-neutral-600"
-          />
-          <div className="flex-1 max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-16">
-                My <span className="text-[#bef264]">journey</span> so far
-              </h2>
-            </ScrollReveal>
-            <ExperienceTimeline />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 6: BEYOND PORTFOLIO ─── */}
-      <section
-        id="beyond-portfolio"
-        className="bg-black px-8 py-32 md:py-48 min-h-screen flex items-center"
-      >
-        <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
-          <SectionLabel
-            text="Beyond UX"
-            color="text-neutral-400"
-            lineColor="bg-neutral-600"
-          />
-          <div className="flex-1 max-w-7xl">
-            <ScrollReveal>
-              <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-16">
-                Beyond the{" "}
-                <span className="text-[#bef264]">portfolio</span>
-              </h2>
-            </ScrollReveal>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Left sub-column */}
-              <div>
-                <div className="relative">
-                  <ParallaxImage
-                    src="/hero-bg.jpg"
-                    alt="Dev Shrimali"
-                    className="aspect-[4/3] rounded-2xl"
-                  />
-                  <FloatingBadge
-                    label="@devshrimali"
-                    x="10%"
-                    y="15%"
-                    delay={0.2}
-                  />
-                  <FloatingBadge
-                    label="UX Designer"
-                    x="60%"
-                    y="75%"
-                    delay={0.4}
-                  />
-                  <FloatingBadge
-                    label="7 Years"
-                    x="5%"
-                    y="70%"
-                    delay={0.6}
-                  />
-                </div>
-                <div className="mt-10 space-y-6">
-                  <ScrollReveal>
-                    <p className="text-sm text-neutral-400 leading-relaxed">
-                      Outside of pixels and prototypes, I spend my time
-                      exploring design philosophy, mentoring junior designers,
-                      and staying curious about what makes great products
-                      resonate with people.
-                    </p>
-                  </ScrollReveal>
-                  <ScrollReveal delay={0.1}>
-                    <p className="text-sm text-neutral-400 leading-relaxed">
-                      I believe in intentional design — every decision, every
-                      interaction, every pixel should serve a purpose and bring
-                      clarity to complexity.
-                    </p>
-                  </ScrollReveal>
-                </div>
-              </div>
-
-              {/* Right sub-column */}
-              <div>
+          <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
+            <SectionLabel text="Welcome" />
+            <div className="flex-1 max-w-7xl">
+              <BioHeading />
+              <div className="mt-16 max-w-2xl space-y-8">
                 <ScrollReveal>
-                  <div className="space-y-8">
-                    {[
-                      {
-                        label: "BASED IN",
-                        value: "Ahmedabad, Gujarat, India",
-                      },
-                      {
-                        label: "EDUCATION",
-                        value:
-                          "B.Tech CS, U.V. Patel College / Zero To Mastery Academy",
-                      },
-                      {
-                        label: "INDUSTRIES",
-                        value:
-                          "Fintech, Healthcare, SaaS, E-commerce, Travel",
-                      },
-                      {
-                        label: "TOOLS",
-                        value:
-                          "Figma, Adobe XD, Illustrator, After Effects, Webflow, HTML, CSS",
-                      },
-                    ].map((item) => (
-                      <div
-                        key={item.label}
-                        className="border-b border-white/5 pb-6"
-                      >
-                        <p className="text-[10px] uppercase tracking-widest text-neutral-600 mb-2">
-                          {item.label}
-                        </p>
-                        <p className="text-sm text-neutral-300">
-                          {item.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                  <p className="text-sm md:text-base text-neutral-400 leading-relaxed">
+                    As a Product Designer with 7 years of experience, I specialize in building scalable, structured experiences across fintech, healthcare, and SaaS.
+                  </p>
                 </ScrollReveal>
-                <SkillsBadges />
+                <ScrollReveal delay={0.15}>
+                  <p className="text-sm md:text-base text-neutral-400 leading-relaxed">
+                    Clear thinking. Thoughtful systems. Meaningful design.
+                  </p>
+                </ScrollReveal>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ─── SECTION 7: MARQUEE STRIP ─── */}
-      <MarqueeStrip items={marqueeItems} speed={50} />
-
-      {/* Principles section removed temporarily */}
-
-      {/* ─── SECTION 9: FOOTER ─── */}
-      <footer
-        id="footer"
-        className="relative bg-black px-8 py-24 md:py-32 border-t border-white/5 overflow-hidden"
-      >
-        {/* Background animated shape */}
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.04]"
-          style={{ width: "clamp(360px, 55vw, 780px)", height: "clamp(360px, 55vw, 780px)" }}
+        {/* ─── SECTION 3: WHAT I DO ─── */}
+        <section
+          id="what-i-do"
+          className="relative min-h-screen bg-neutral-950 px-8 py-32 flex items-center overflow-hidden"
         >
-          <svg
-            viewBox="0 0 256 256"
-            fill="white"
-            className="w-full h-full"
-            style={{ animation: "footerShapeSpin 30s linear infinite" }}
+          {/* Background animated shape */}
+          <div
+            className="absolute left-[-8%] top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.045]"
+            style={{ width: "clamp(300px, 45vw, 680px)", height: "clamp(300px, 45vw, 680px)" }}
           >
-            <path d="M 152 70.059 L 201.539 20.519 L 235.48 54.461 L 185.941 104 L 256 104 L 256 152 L 185.941 152 L 235.48 201.539 L 201.539 235.48 L 152 185.941 L 152 256 L 104 256 L 104 185.941 L 54.46 235.48 L 20.52 201.539 L 70.059 152 L 0 152 L 0 104 L 70.059 104 L 20.519 54.46 L 54.461 20.52 L 104 70.059 L 104 0 L 152 0 Z" />
-          </svg>
-        </div>
-
-        <style>{`
-          @keyframes footerShapeSpin {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-          }
-        `}</style>
-
-        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-16">
-          {/* Left */}
-          <div>
-            <FooterHeading />
-            <ScrambleEmail />
+            <svg
+              viewBox="0 0 256 256"
+              fill="white"
+              className="w-full h-full"
+              style={{ animation: "spin 40s linear infinite reverse" }}
+            >
+              <path d="M 228 0 C 172.772 0 128 44.772 128 100 L 128 0 L 0 0 L 0 28 C 0 83.228 44.772 128 100 128 L 0 128 L 0 256 L 28 256 C 83.228 256 128 211.228 128 156 L 128 256 L 256 256 L 256 228 C 256 172.772 211.228 128 156 128 L 256 128 L 256 0 Z" />
+            </svg>
           </div>
 
-          {/* Right */}
-          <FooterSocials />
-        </div>
+          <div className="relative z-10 w-full flex flex-col md:flex-row gap-8 md:gap-16">
+            <SectionLabel text="What I Do" />
+            <div className="flex-1 max-w-7xl">
+              <ScrollReveal>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+                  Design that connects user needs with real outcomes.
+                </h2>
+              </ScrollReveal>
+              <ServiceCards />
+            </div>
+          </div>
+        </section>
 
-        {/* Bottom bar */}
-        <div className="relative z-10 mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between text-neutral-600 text-sm uppercase tracking-widest gap-4">
-          <p>© 2026 Dev Shrimali. All rights reserved.</p>
-          <p>Design with Empathy</p>
-        </div>
-      </footer>
-    </SmoothScroll>
+        {/* ─── SECTION 4: SELECTED WORK ─── */}
+        <section id="selected-work" className="bg-black px-8 py-32">
+          <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
+            <SectionLabel text="Selected Work" />
+            <div className="flex-1 max-w-7xl">
+              <ScrollReveal>
+                <h2 className="text-5xl md:text-7xl font-bold tracking-tight">
+                  Featured <span className="text-accent">projects</span>
+                </h2>
+                <p className="text-neutral-400 text-lg md:text-xl max-w-3xl mb-16 mt-6">
+                  A curated selection of projects spanning product strategy,
+                  interface design, and design systems across multiple industries.
+                </p>
+              </ScrollReveal>
+              <CardDeck projects={featuredProjects} />
+              <ScrollReveal delay={0.2}>
+                <div className="mt-16 flex justify-center">
+                  <Magnetic>
+                  <Link
+                    href="/work"
+                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/15 text-[11px] uppercase tracking-[0.2em] text-neutral-400 hover:border-accent hover:text-accent active:scale-95 transition-all duration-300"
+                  >
+                    View All Projects
+                    <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-2 group-hover:translate-x-1 transition-transform duration-200">
+                      <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                  </Magnetic>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 5: TIMELINE (Work & Education) ─── */}
+        <section
+          id="experience"
+          className="bg-neutral-950 px-8 py-32 md:py-48 min-h-screen flex items-center"
+        >
+          <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
+            <SectionLabel text="Experience" />
+            <div className="flex-1 max-w-7xl">
+              <ScrollReveal>
+                <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-16">
+                  My <span className="text-accent">journey</span> so far
+                </h2>
+              </ScrollReveal>
+              <ExperienceTimeline />
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 6: BEYOND PORTFOLIO ─── */}
+        <section
+          id="beyond-portfolio"
+          className="bg-black px-8 py-32 md:py-48 min-h-screen flex items-center"
+        >
+          <div className="w-full flex flex-col md:flex-row gap-8 md:gap-16">
+            <SectionLabel text="Beyond UX" />
+            <div className="flex-1 max-w-7xl">
+              <ScrollReveal>
+                <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-16">
+                  Beyond the <span className="text-accent">portfolio</span>
+                </h2>
+              </ScrollReveal>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                {/* Left sub-column */}
+                <div>
+                  <div className="relative">
+                    <ParallaxImage
+                      src="/hero-bg.jpg"
+                      alt="Dev Shrimali"
+                      className="aspect-[4/3] rounded-2xl"
+                    />
+                    <FloatingBadge label="@devshrimali" x="10%" y="15%" delay={0.2} />
+                    <FloatingBadge label="Product Designer" x="60%" y="75%" delay={0.4} />
+                    <FloatingBadge label="7 Years" x="5%" y="70%" delay={0.6} />
+                  </div>
+                  <div className="mt-10 space-y-6">
+                    <ScrollReveal>
+                      <p className="text-sm text-neutral-400 leading-relaxed">
+                        Outside of pixels and prototypes, I spend my time
+                        exploring design philosophy, mentoring junior designers,
+                        and staying curious about what makes great products
+                        resonate with people.
+                      </p>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.1}>
+                      <p className="text-sm text-neutral-400 leading-relaxed">
+                        I believe in intentional design — every decision, every
+                        interaction, every pixel should serve a purpose and bring
+                        clarity to complexity.
+                      </p>
+                    </ScrollReveal>
+                  </div>
+                </div>
+
+                {/* Right sub-column */}
+                <div>
+                  <ScrollReveal>
+                    <div className="space-y-8">
+                      {[
+                        { label: "BASED IN", value: "Ahmedabad, Gujarat, India" },
+                        { label: "EDUCATION", value: "B.Tech CS, U.V. Patel College / Zero To Mastery Academy" },
+                        { label: "INDUSTRIES", value: "Fintech, Healthcare, SaaS, E-commerce, Travel" },
+                        { label: "TOOLS", value: "Figma, Adobe XD, Illustrator, After Effects, Webflow, HTML, CSS" },
+                      ].map((item) => (
+                        <div key={item.label} className="border-b border-white/5 pb-6">
+                          <p className="text-[10px] uppercase tracking-widest text-neutral-600 mb-2">
+                            {item.label}
+                          </p>
+                          <p className="text-sm text-neutral-300">{item.value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollReveal>
+                  <SkillsBadges />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── SECTION 7: MARQUEE STRIP ─── */}
+        <MarqueeStrip items={marqueeItems} speed={50} />
+
+        {/* ─── SECTION 8: FOOTER ─── */}
+        <footer
+          id="footer"
+          className="relative bg-black px-8 py-24 md:py-32 border-t border-white/5 overflow-hidden"
+        >
+          {/* Background animated shape */}
+          <div
+            className="absolute right-[-10%] top-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.04]"
+            style={{ width: "clamp(360px, 55vw, 780px)", height: "clamp(360px, 55vw, 780px)" }}
+          >
+            <svg
+              viewBox="0 0 256 256"
+              fill="white"
+              className="w-full h-full"
+              style={{ animation: "spin 30s linear infinite" }}
+            >
+              <path d="M 152 70.059 L 201.539 20.519 L 235.48 54.461 L 185.941 104 L 256 104 L 256 152 L 185.941 152 L 235.48 201.539 L 201.539 235.48 L 152 185.941 L 152 256 L 104 256 L 104 185.941 L 54.46 235.48 L 20.52 201.539 L 70.059 152 L 0 152 L 0 104 L 70.059 104 L 20.519 54.46 L 54.461 20.52 L 104 70.059 L 104 0 L 152 0 Z" />
+            </svg>
+          </div>
+
+          <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-16">
+            {/* Left */}
+            <div>
+              <FooterHeading />
+              <ScrambleEmail />
+            </div>
+
+            {/* Right */}
+            <FooterSocials />
+          </div>
+
+          {/* Bottom bar */}
+          <div className="relative z-10 mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between text-neutral-600 text-sm uppercase tracking-widest gap-4">
+            <p>© 2026 Dev Shrimali. All rights reserved.</p>
+            <p>Design with Empathy</p>
+          </div>
+        </footer>
+      </SmoothScroll>
     </>
   );
 }
