@@ -6,14 +6,22 @@
 }
 
 @theme {
-  /* Brand palette — change once, applies everywhere */
-  --color-accent: #bef264;
-  --color-surface: #0a0a0a;
+  /* ── Soft-minimal palette: cream / burnt orange / espresso ──
+     Change once here, applies everywhere. */
+  --color-paper: #faf6ef;       /* page background */
+  --color-cream: #f1e9dc;       /* tinted section fill */
+  --color-card: #fffdf9;        /* raised cards */
+  --color-ink: #2b2118;         /* primary text (espresso) */
+  --color-muted: #8a7b6e;       /* secondary text (warm gray) */
+  --color-line: #e4dccd;        /* hairlines / borders */
+  --color-accent: #e8590c;      /* burnt orange */
+  --color-accent-soft: #f9e3d3; /* orange tint fills */
+  --color-surface: #2b2118;     /* dark blocks: footer, curtain */
 }
 
 html {
-  background-color: var(--color-surface);
-  color: #ffffff;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
 }
 
 body {
@@ -22,9 +30,14 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/* Display serif for headlines */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
 ::selection {
-  background: rgba(190, 242, 100, 0.25);
-  color: #fff;
+  background: rgba(232, 89, 12, 0.18);
+  color: var(--color-ink);
 }
 
 /* Visible keyboard focus, invisible for mouse users */
@@ -34,22 +47,22 @@ body {
   border-radius: 4px;
 }
 
-/* Smooth scrollbar for dark theme */
+/* Warm light scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--color-paper);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(43, 33, 24, 0.16);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(43, 33, 24, 0.3);
 }
 
 /* Decorative rotating background shapes */
@@ -82,4 +95,3 @@ html.has-visited .panel-top {
 html.has-visited .panel-bottom {
   transform: translateY(100%);
 }
-

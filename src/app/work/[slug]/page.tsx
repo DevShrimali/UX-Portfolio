@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import Header from "@/components/layout/Header";
+import CaseStudy from "@/components/case-study/CaseStudy";
 import { getProject, projects } from "@/data/projects";
-import CaseStudyClient from "./CaseStudyClient";
 
 /** Pre-render every case study at build time. */
 export function generateStaticParams() {
@@ -35,6 +37,13 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  if (!getProject(slug)) notFound();
-  return <CaseStudyClient />;
+  const project = getProject(slug);
+  if (!project) notFound();
+
+  return (
+    <SmoothScroll>
+      <Header />
+      <CaseStudy project={project} />
+    </SmoothScroll>
+  );
 }

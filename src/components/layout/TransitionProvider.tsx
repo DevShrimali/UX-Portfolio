@@ -36,32 +36,19 @@ export default function TransitionProvider({ children }: { children: React.React
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("hasVisited");
     if (!hasVisited) {
-      setIsInitialLoading(true);
-    } else {
-      // Sync GSAP state with the CSS class transforms
-      if (topPanelRef.current && bottomPanelRef.current) {
-        gsap.set(topPanelRef.current, { yPercent: -100 });
-        gsap.set(bottomPanelRef.current, { yPercent: 100 });
-      }
+      // Deferred so the state update lands after the hydration paint,
+      // avoiding a cascading render inside the effect body.
+      const t = setTimeout(() => setIsInitialLoading(true), 0);
+      return () => clearTimeout(t);
+    }
+    // Sync GSAP state with the CSS class transforms
+    if (topPanelRef.current && bottomPanelRef.current) {
+      gsap.set(topPanelRef.current, { yPercent: -100 });
+      gsap.set(bottomPanelRef.current, { yPercent: 100 });
     }
   }, []);
 
-  // Trigger preloader animations only after elements are mounted and refs are bound
-  useEffect(() => {
-    if (isInitialLoading && brandRef.current && numberRef.current) {
-      runInitialPreloader();
-    }
-  }, [isInitialLoading]);
-
-  // Slide open once NextJS has completed the route change/pathname change
-  useEffect(() => {
-    if (pendingOpenRef.current) {
-      pendingOpenRef.current = false;
-      slideCurtainOpen();
-    }
-  }, [pathname]);
-
-  const runInitialPreloader = () => {
+  function runInitialPreloader() {
     // Continuous rotation for star logo
     const spin = gsap.to(starRef.current, {
       rotation: 360,
@@ -127,9 +114,9 @@ export default function TransitionProvider({ children }: { children: React.React
         }
       }
     }, 40);
-  };
+  }
 
-  const triggerTransition = (href: string) => {
+  function triggerTransition(href: string) {
     if (isTransitioning || isInitialLoading) return;
     setIsTransitioning(true);
     
@@ -150,9 +137,9 @@ export default function TransitionProvider({ children }: { children: React.React
       pendingOpenRef.current = true;
       router.push(href);
     });
-  };
+  }
 
-  const slideCurtainOpen = () => {
+  function slideCurtainOpen() {
     const tl = gsap.timeline();
     // Slide top and bottom curtain panels open
     tl.to(topPanelRef.current, {
@@ -171,7 +158,23 @@ export default function TransitionProvider({ children }: { children: React.React
       setIsTransitioning(false);
       ScrollTrigger.refresh();
     });
-  };
+  }
+
+  // Trigger preloader animations only after elements are mounted and refs are bound
+  useEffect(() => {
+    if (isInitialLoading && brandRef.current && numberRef.current) {
+      runInitialPreloader();
+    }
+  }, [isInitialLoading]);
+
+  // Slide open once NextJS has completed the route change/pathname change
+  useEffect(() => {
+    console.log("pathname changed:", pathname, "pendingOpenRef:", pendingOpenRef.current);
+    if (pendingOpenRef.current) {
+      pendingOpenRef.current = false;
+      slideCurtainOpen();
+    }
+  }, [pathname]);
 
   // Intercept normal document clicks to internal links to handle route transitions
   useEffect(() => {
@@ -194,13 +197,15 @@ export default function TransitionProvider({ children }: { children: React.React
         !e.metaKey &&
         !e.ctrlKey
       ) {
+        console.log("Intercepted click to:", href);
         e.preventDefault();
+        e.stopPropagation();
         triggerTransition(href);
       }
     };
 
-    document.addEventListener("click", handleLinkClick);
-    return () => document.removeEventListener("click", handleLinkClick);
+    document.addEventListener("click", handleLinkClick, { capture: true });
+    return () => document.removeEventListener("click", handleLinkClick, { capture: true });
   }, [isTransitioning, isInitialLoading]);
 
   return (
@@ -244,7 +249,7 @@ export default function TransitionProvider({ children }: { children: React.React
               </svg>
 
               {/* Wordmark */}
-              <p className="text-white text-lg tracking-[0.4em] uppercase">
+              <p className="text-paper text-lg tracking-[0.4em] uppercase">
                 <span className="font-light">DEV</span>
                 <span className="font-bold">UX.</span>
               </p>
@@ -253,7 +258,7 @@ export default function TransitionProvider({ children }: { children: React.React
             {/* Percentage numbering overlay */}
             <div ref={numberRef} className="absolute bottom-8 left-8 z-10 pointer-events-none opacity-0">
               <span
-                className="text-white leading-none select-none flex items-baseline"
+                className="text-paper leading-none select-none flex items-baseline"
                 style={{ fontWeight: 400, opacity: 0.12, letterSpacing: "-0.04em" }}
               >
                 <span style={{ fontSize: "clamp(5rem, 12vw, 8rem)" }}>

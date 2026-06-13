@@ -138,7 +138,7 @@ export default function AnimatedLogoThumbnail() {
   }, [trigger, animType]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full overflow-hidden bg-black select-none pointer-events-none">
+    <div ref={containerRef} className="relative w-full h-full overflow-hidden bg-cream select-none pointer-events-none">
       {/* Outgoing Image */}
       <img
         ref={prevImgRef}

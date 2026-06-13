@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playball } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-import TransitionProvider from "@/components/TransitionProvider";
+import TransitionProvider from "@/components/layout/TransitionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,10 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const playball = Playball({
-  variable: "--font-playball",
-  weight: "400",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  axes: ["SOFT", "opsz"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -53,24 +55,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (sessionStorage.getItem('hasVisited')) {
-                  document.documentElement.classList.add('has-visited');
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
+        {/* Marks returning visitors before hydration so the transition
+            curtain doesn't flash shut on reload. */}
+        <Script src="/has-visited.js" strategy="beforeInteractive" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playball.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased`}
       >
         <TransitionProvider>{children}</TransitionProvider>
       </body>
     </html>
   );
 }
-
